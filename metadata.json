@@ -1,0 +1,6 @@
+{
+  "name": "Capacita SRT Salomão — Cuidado em Saúde Mental",
+  "description": "Curso completo prático e normativo para Cuidadores de Serviços de Residência Terapêutica (SRT Salomão - Blumenau/SC), baseado na Reforma Psiquiátrica e Luta Antimanicomial.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,323 @@
+import React, { useState, useEffect } from 'react';
+import { modulesData } from './data/modulesData';
+import { UserProgress } from './types/course';
+import { Sidebar } from './components/Sidebar';
+import { Header } from './components/Header';
+import { ModuleViewer } from './components/ModuleViewer';
+import { HandoverSimulator } from './components/Simulators/HandoverSimulator';
+import { DeescalationSimulator } from './components/Simulators/DeescalationSimulator';
+import { MedicationChecker } from './components/Simulators/MedicationChecker';
+import { NormsCompendium } from './components/NormsCompendium';
+import { ProgressDashboard } from './components/ProgressDashboard';
+import { CertificateModal } from './components/CertificateModal';
+import { BookOpen, CheckCircle2, FileText, ShieldAlert, Pill, Scale, LayoutDashboard } from 'lucide-react';
+
+const INITIAL_PROGRESS: UserProgress = {
+  completedModules: [],
+  quizScores: {},
+  essayAnswers: {},
+  essaySubmitted: {},
+  userName: 'Cuidador(a) de Saúde Mental',
+  userRole: 'Cuidador de Residência Terapêutica (SRT Tipo II)',
+  startDate: new Date().toLocaleDateString('pt-BR')
+};
+
+export default function App() {
+  const [userProgress, setUserProgress] = useState<UserProgress>(() => {
+    const saved = localStorage.getItem('capacita_srt_progress');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        return INITIAL_PROGRESS;
+      }
+    }
+    return INITIAL_PROGRESS;
+  });
+
+  const [activeTab, setActiveTab] = useState<'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard'>('modules');
+  const [selectedModuleId, setSelectedModuleId] = useState<number>(1);
+  const [showCertificateModal, setShowCertificateModal] = useState<boolean>(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    localStorage.setItem('capacita_srt_progress', JSON.stringify(userProgress));
+  }, [userProgress]);
+
+  const currentModule = modulesData.find((m) => m.id === selectedModuleId) || modulesData[0];
+
+  const handleQuizCompleted = (moduleId: number, score: number) => {
+    setUserProgress((prev) => {
+      const updatedScores = { ...prev.quizScores, [moduleId]: score };
+      const isEssayDone = prev.essaySubmitted[moduleId];
+      const newCompleted = isEssayDone && !prev.completedModules.includes(moduleId)
+        ? [...prev.completedModules, moduleId]
+        : prev.completedModules;
+
+      return {
+        ...prev,
+        quizScores: updatedScores,
+        completedModules: newCompleted,
+        completionDate: newCompleted.length === 5 ? new Date().toLocaleDateString('pt-BR') : prev.completionDate
+      };
+    });
+  };
+
+  const handleEssaySubmitted = (moduleId: number, answerText: string) => {
+    setUserProgress((prev) => {
+      const updatedAnswers = { ...prev.essayAnswers, [moduleId]: answerText };
+      const updatedSubmitted = { ...prev.essaySubmitted, [moduleId]: true };
+      const isQuizDone = prev.quizScores[moduleId] !== undefined;
+      const newCompleted = isQuizDone && !prev.completedModules.includes(moduleId)
+        ? [...prev.completedModules, moduleId]
+        : prev.completedModules;
+
+      return {
+        ...prev,
+        essayAnswers: updatedAnswers,
+        essaySubmitted: updatedSubmitted,
+        completedModules: newCompleted,
+        completionDate: newCompleted.length === 5 ? new Date().toLocaleDateString('pt-BR') : prev.completionDate
+      };
+    });
+  };
+
+  const handleUpdateUserName = (name: string) => {
+    setUserProgress((prev) => ({ ...prev, userName: name }));
+  };
+
+  const handleNextModule = () => {
+    if (selectedModuleId < 5) {
+      setSelectedModuleId(selectedModuleId + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handlePrevModule = () => {
+    if (selectedModuleId > 1) {
+      setSelectedModuleId(selectedModuleId - 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const completedPercent = Math.round((userProgress.completedModules.length / 5) * 100);
+
+  return (
+    <div className="min-h-screen bg-slate-100 text-slate-900 flex flex-col lg:flex-row font-sans antialiased">
+      {/* Sidebar Overlay on Mobile */}
+      {isMobileSidebarOpen && (
+        <div
+          onClick={() => setIsMobileSidebarOpen(false)}
+          className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-40 lg:hidden"
+        />
+      )}
+
+      {/* Sidebar Component (Desktop + Mobile Drawer) */}
+      <Sidebar
+        currentTab={activeTab}
+        selectedModuleId={selectedModuleId}
+        completedModules={userProgress.completedModules}
+        completedPercent={completedPercent}
+        onTabChange={(tab) => {
+          setActiveTab(tab);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        onSelectModule={(id) => {
+          setSelectedModuleId(id);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        onOpenCertificate={() => setShowCertificateModal(true)}
+        isMobileOpen={isMobileSidebarOpen}
+        onCloseMobile={() => setIsMobileSidebarOpen(false)}
+      />
+
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Top Header Bar */}
+        <Header
+          currentTab={activeTab}
+          onTabChange={(tab) => {
+            setActiveTab(tab);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          onOpenCertificate={() => setShowCertificateModal(true)}
+          onToggleMobileSidebar={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
+          completedPercent={completedPercent}
+        />
+
+        {/* Content Container */}
+        <main className="flex-1 max-w-6xl w-full mx-auto p-4 md:p-6 lg:p-8 space-y-6 pb-20 lg:pb-8">
+          {activeTab === 'modules' && (
+            <div className="space-y-6">
+              {/* Quick Module Selector Strip */}
+              <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between overflow-x-auto gap-2 scrollbar-none">
+                <div className="text-xs font-bold text-slate-500 uppercase tracking-wider shrink-0 px-2 flex items-center space-x-1.5">
+                  <BookOpen className="w-4 h-4 text-teal-600" />
+                  <span className="hidden sm:inline">Módulos Operacionais:</span>
+                  <span className="sm:hidden">Módulos:</span>
+                </div>
+                <div className="flex items-center space-x-2 overflow-x-auto">
+                  {modulesData.map((m) => {
+                    const isSelected = m.id === selectedModuleId;
+                    const isCompleted = userProgress.completedModules.includes(m.id);
+
+                    return (
+                      <button
+                        key={m.id}
+                        onClick={() => setSelectedModuleId(m.id)}
+                        className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap shrink-0 transition-all flex items-center space-x-1.5 ${
+                          isSelected
+                            ? 'bg-teal-600 text-white shadow-xs'
+                            : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                        }`}
+                      >
+                        {isCompleted && <CheckCircle2 className="w-3.5 h-3.5 text-teal-300" />}
+                        <span>{m.id}. {m.shortTitle}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Active Module Content */}
+              <ModuleViewer
+                module={currentModule}
+                userProgress={userProgress}
+                onQuizCompleted={handleQuizCompleted}
+                onEssaySubmitted={handleEssaySubmitted}
+                onNextModule={handleNextModule}
+                onPrevModule={handlePrevModule}
+                isFirstModule={selectedModuleId === 1}
+                isLastModule={selectedModuleId === 5}
+              />
+            </div>
+          )}
+
+          {activeTab === 'handover' && <HandoverSimulator />}
+          {activeTab === 'deescalation' && <DeescalationSimulator />}
+          {activeTab === 'meds' && <MedicationChecker />}
+          {activeTab === 'norms' && <NormsCompendium />}
+          {activeTab === 'dashboard' && (
+            <ProgressDashboard
+              modules={modulesData}
+              userProgress={userProgress}
+              onUpdateUserName={handleUpdateUserName}
+              onSelectModule={(id) => {
+                setSelectedModuleId(id);
+                setActiveTab('modules');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              onOpenCertificate={() => setShowCertificateModal(true)}
+            />
+          )}
+        </main>
+
+        {/* Footer */}
+        <footer className="bg-white border-t border-slate-200 py-6 text-slate-500 text-xs mt-auto">
+          <div className="max-w-6xl mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+            <div>
+              <p className="font-semibold text-slate-700">
+                Capacita SRT Salomão — Programa de Educação Profissional Continuada em Saúde Mental
+              </p>
+              <p className="text-[11px] text-slate-400 mt-0.5">
+                Modelo do Residencial Terapêutico Salomão (Blumenau/SC) • Em conformidade com a Reforma Psiquiátrica Brasileira (Lei 10.216/2001)
+              </p>
+            </div>
+            <div className="text-[11px] text-slate-400">
+              Sistemas da RAPS Blumenau / SUS • 40 Horas de Carga Horária Certificada
+            </div>
+          </div>
+        </footer>
+
+        {/* Bottom Mobile Floating Navigation Bar (< lg) */}
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-slate-900 border-t border-slate-800 p-2 z-30 flex items-center justify-around text-white shadow-lg">
+          <button
+            onClick={() => {
+              setActiveTab('modules');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className={`flex flex-col items-center py-1 px-2.5 rounded-lg text-[10px] transition-colors ${
+              activeTab === 'modules' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            <BookOpen className="w-4 h-4 mb-0.5" />
+            <span>Módulos</span>
+          </button>
+
+          <button
+            onClick={() => {
+              setActiveTab('handover');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className={`flex flex-col items-center py-1 px-2.5 rounded-lg text-[10px] transition-colors ${
+              activeTab === 'handover' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            <FileText className="w-4 h-4 mb-0.5" />
+            <span>SBAR</span>
+          </button>
+
+          <button
+            onClick={() => {
+              setActiveTab('deescalation');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className={`flex flex-col items-center py-1 px-2.5 rounded-lg text-[10px] transition-colors ${
+              activeTab === 'deescalation' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            <ShieldAlert className="w-4 h-4 mb-0.5" />
+            <span>Crise</span>
+          </button>
+
+          <button
+            onClick={() => {
+              setActiveTab('meds');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className={`flex flex-col items-center py-1 px-2.5 rounded-lg text-[10px] transition-colors ${
+              activeTab === 'meds' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            <Pill className="w-4 h-4 mb-0.5" />
+            <span>Remédios</span>
+          </button>
+
+          <button
+            onClick={() => {
+              setActiveTab('norms');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className={`flex flex-col items-center py-1 px-2.5 rounded-lg text-[10px] transition-colors ${
+              activeTab === 'norms' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            <Scale className="w-4 h-4 mb-0.5" />
+            <span>Normas</span>
+          </button>
+
+          <button
+            onClick={() => {
+              setActiveTab('dashboard');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className={`flex flex-col items-center py-1 px-2.5 rounded-lg text-[10px] transition-colors ${
+              activeTab === 'dashboard' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            <LayoutDashboard className="w-4 h-4 mb-0.5" />
+            <span>Painel</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Certificate Modal */}
+      {showCertificateModal && (
+        <CertificateModal
+          userProgress={userProgress}
+          onClose={() => setShowCertificateModal(false)}
+        />
+      )}
+    </div>
+  );
+}
