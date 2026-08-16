@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { UserProgress } from '../types/course';
-import { Award, Printer, X, ShieldCheck } from 'lucide-react';
+import { Award, Printer, X, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 interface CertificateModalProps {
   userProgress: UserProgress;
@@ -19,6 +19,8 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
 
   const completedCount = userProgress.completedModules.length;
   const isEligible = completedCount === 5;
+  const finalExamScore = userProgress.finalExamScore;
+  const isPassedExam = userProgress.finalExamPassed;
 
   return (
     <div className="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
@@ -37,7 +39,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
 
         {!isEligible && (
           <div className="p-4 bg-amber-50 border border-amber-200 rounded text-amber-900 text-xs space-y-1">
-            <strong>Atenção:</strong> Você concluiu {completedCount} de 5 módulos operacionais. O certificado abaixo é um modelo de pré-visualização. Finalize todos os módulos para registrar sua emissão definitiva.
+            <strong>Atenção:</strong> Você concluiu {completedCount} de 5 módulos operacionais. O certificado abaixo é um modelo de pré-visualização. Finalize todos os módulos e a Prova Final (20 Questões) para registrar sua emissão definitiva.
           </div>
         )}
 
@@ -63,7 +65,13 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
 
           <div className="py-6 text-center space-y-4 border-y border-slate-200">
             <p className="text-sm md:text-base text-slate-700 leading-relaxed font-sans">
-              Certificamos que <strong className="text-teal-800 text-lg md:text-xl underline decoration-teal-500">{userProgress.userName || 'Cuidador(a) de Saúde Mental'}</strong> concluiu com êxito a capacitação técnica e normativa continuada em:
+              Certificamos que <strong className="text-teal-800 text-lg md:text-xl underline decoration-teal-500">{userProgress.userName || 'Cuidador(a) de Saúde Mental'}</strong>
+              {userProgress.cpfOrRegistration ? (
+                <span className="text-slate-600 text-xs block font-semibold mt-0.5">
+                  CPF/Registro: {userProgress.cpfOrRegistration} • Função: {userProgress.userRole}
+                </span>
+              ) : null}
+              concluiu com êxito a capacitação técnica, ética e normativa continuada em:
             </p>
 
             <div className="py-2 text-xl font-bold text-slate-900 tracking-wide font-serif">
@@ -71,8 +79,17 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
             </div>
 
             <p className="text-xs md:text-sm text-slate-600 leading-relaxed max-w-2xl mx-auto">
-              Com fundamentação na Lei Federal nº 10.216/2001, Portarias GM/MS nº 106/2000, 3.088/2011, RDC 50 ANVISA, Protocolo SBAR de Comunicação e Técnica de Desescalada Verbal em Crises (Método Richmond).
+              Com fundamentação na Lei Federal nº 10.216/2001, Portarias GM/MS nº 106/2000, 3.088/2011, RDC 50 ANVISA, Protocolo SBAR de Comunicação Interdisciplinar, Técnica de Desescalada Verbal em Crises (Método Richmond / Projeto BETA) e Gestão Segura de Fármacos.
             </p>
+
+            {finalExamScore !== undefined && (
+              <div className="inline-flex items-center space-x-1.5 bg-teal-50 border border-teal-200 text-teal-900 px-3 py-1 rounded-full text-xs font-bold">
+                <CheckCircle2 className="w-3.5 h-3.5 text-teal-600" />
+                <span>
+                  Aprovado(a) na Prova Final Integradora com {finalExamScore} de 20 acertos ({Math.round((finalExamScore / 20) * 100)}%)
+                </span>
+              </div>
+            )}
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-xs">
@@ -82,11 +99,11 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
             </div>
             <div className="p-3 bg-slate-50 rounded border border-slate-200">
               <span className="text-slate-500 block text-[10px] font-bold uppercase">Módulos Concluídos</span>
-              <strong className="text-slate-800 text-sm">5 / 5 Módulos</strong>
+              <strong className="text-slate-800 text-sm">{completedCount} / 5 Módulos</strong>
             </div>
             <div className="p-3 bg-slate-50 rounded border border-slate-200">
-              <span className="text-slate-500 block text-[10px] font-bold uppercase">Data de Emissão</span>
-              <strong className="text-slate-800 text-sm">{userProgress.completionDate || '15/08/2026'}</strong>
+              <span className="text-slate-500 block text-[10px] font-bold uppercase">Data de Conclusão</span>
+              <strong className="text-slate-800 text-sm">{userProgress.completionDate || '16/08/2026'}</strong>
             </div>
             <div className="p-3 bg-slate-50 rounded border border-slate-200">
               <span className="text-slate-500 block text-[10px] font-bold uppercase">Registro Validação</span>

@@ -117,7 +117,7 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
             }`}
           >
             <HelpCircle className="w-4 h-4" />
-            <span>3. Teste de Fixação</span>
+            <span>3. Teste de Fixação (10Q)</span>
             {quizScore !== undefined && (
               <span className="ml-1 px-1.5 py-0.5 rounded bg-teal-100 text-teal-800 font-bold text-[10px]">
                 ✔ {quizScore}/{module.quiz.length}
@@ -134,10 +134,10 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
             }`}
           >
             <FileEdit className="w-4 h-4" />
-            <span>4. Prova de Conclusão</span>
+            <span>4. Estudo Dissertativo</span>
             {essaySubmitted && (
               <span className="ml-1 px-1.5 py-0.5 rounded bg-teal-100 text-teal-800 font-bold text-[10px]">
-                Enviada
+                Enviado
               </span>
             )}
           </button>
@@ -164,7 +164,7 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
                 <div className="bg-teal-50 border-l-4 border-teal-500 p-4 rounded-r-lg text-xs text-teal-900 space-y-1">
                   <div className="font-bold uppercase tracking-wider text-teal-800 flex items-center space-x-1.5">
                     <Lightbulb className="w-4 h-4 text-teal-600 shrink-0" />
-                    <span>Dica do Especialista:</span>
+                    <span>Princípio Antimanicomial Inegociável:</span>
                   </div>
                   <p className="italic text-slate-700 text-sm">{section.keyTakeaway}</p>
                 </div>
@@ -174,7 +174,7 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
                 <div className="p-4 bg-slate-50 border border-slate-200 rounded-lg space-y-2 text-xs text-slate-700">
                   <div className="font-bold text-teal-800 uppercase tracking-wider flex items-center space-x-1.5">
                     <CheckCircle2 className="w-4 h-4 text-teal-600" />
-                    <span>Dicas Práticas do Cotidiano do Cuidador:</span>
+                    <span>Dicas Práticas do Cotidiano do Cuidador (SRT Salomão):</span>
                   </div>
                   <ul className="space-y-1.5">
                     {section.practicalTips.map((tip, tIdx) => (
@@ -191,7 +191,7 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
                 <div className="p-4 bg-slate-100 border border-slate-200 rounded-lg text-xs text-slate-800 flex items-start space-x-3">
                   <ShieldCheck className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-teal-800 block mb-0.5">Destaque Normativo Obrigatório:</strong>
+                    <strong className="text-teal-800 block mb-0.5">Destaque Normativo Obrigatório (SUS / RAPS):</strong>
                     {section.normativeHighlight}
                   </div>
                 </div>
@@ -218,7 +218,7 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
             <div className="flex items-center justify-between pb-3 border-b border-slate-700">
               <h2 className="text-sm font-bold uppercase tracking-widest text-teal-400 flex items-center gap-2">
                 <FileSpreadsheet className="w-4 h-4" />
-                <span>Estudo de Caso Real #{module.id}</span>
+                <span>Estudo de Caso Prático #{module.id}</span>
               </h2>
               <span className="px-2.5 py-1 bg-slate-800 rounded text-[10px] text-slate-300 font-bold uppercase tracking-wider">Análise de Campo</span>
             </div>
@@ -237,7 +237,7 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
 
               <div className="bg-slate-800/80 p-4 rounded-lg border border-slate-700 space-y-1.5">
                 <div className="text-xs font-bold text-amber-400 uppercase tracking-wider">
-                  Cenário de Insegurança / Desafio:
+                  Cenário do Cotidiano / Desafio:
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
                   {module.caseStudy.scenarioDescription}
@@ -253,7 +253,7 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
 
           <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
             <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-              Perguntas Guiadas para Análise e Conduta:
+              Perguntas Guiadas para Reflexão e Conduta:
             </div>
             <ol className="list-decimal list-inside space-y-2 text-xs text-slate-700 font-medium">
               {module.caseStudy.guidedQuestions.map((q, idx) => (
@@ -277,7 +277,7 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
                 onClick={() => setActiveTab('quiz')}
                 className="bg-teal-600 hover:bg-teal-700 text-white font-medium px-5 py-2.5 rounded-lg text-xs transition-colors flex items-center space-x-2 shadow-sm"
               >
-                <span>Ir para o Teste de Fixação</span>
+                <span>Ir para o Teste de Fixação (10Q)</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -285,9 +285,9 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
         </div>
       )}
 
-      {/* Tab 3: Teste de Fixação */}
+      {/* Tab 3: Teste de Fixação (10 Questões) */}
       {activeTab === 'quiz' && (
-        <div className="bg-white border border-slate-200 rounded-xl p-6 md:p-8 shadow-sm">
+        <div className="bg-white border border-slate-200 rounded-xl p-6 md:p-8 shadow-sm space-y-6">
           <QuizComponent
             questions={module.quiz}
             moduleId={module.id}

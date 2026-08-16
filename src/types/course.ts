@@ -47,13 +47,31 @@ export interface Module {
   essayTask: EssayTask;
 }
 
+export interface FinalExamQuestion {
+  id: string;
+  moduleSource: number;
+  moduleLabel: string;
+  question: string;
+  scenario?: string;
+  options: string[];
+  correctIndex: number;
+  explanation: string;
+}
+
 export interface UserProgress {
   completedModules: number[];
-  quizScores: Record<number, number>; // moduleId -> score out of quiz length
+  quizScores: Record<number, number>; // moduleId -> score out of 10
   essayAnswers: Record<number, string>;
   essaySubmitted: Record<number, boolean>;
+  finalExamScore?: number; // score out of 20
+  finalExamPassed?: boolean;
+  finalExamAnswers?: Record<string, number>;
   userName: string;
   userRole: string;
+  userEmail?: string;
+  cpfOrRegistration?: string;
+  srtUnit?: string;
+  isRegistered?: boolean;
   startDate: string;
   completionDate?: string;
 }

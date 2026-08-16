@@ -1,6 +1,26 @@
 import React, { useState } from 'react';
 import { UserProgress, Module } from '../types/course';
-import { Award, CheckCircle2, FileText, HelpCircle, User, BarChart2, Lightbulb, RefreshCw, Quote, HeartHandshake, Copy, Check } from 'lucide-react';
+import {
+  Award,
+  CheckCircle2,
+  FileText,
+  HelpCircle,
+  User,
+  BarChart2,
+  Lightbulb,
+  RefreshCw,
+  Quote,
+  Copy,
+  Check,
+  Mail,
+  Shield,
+  Building2,
+  UserPlus,
+  Edit3,
+  FileCheck2,
+  Sparkles,
+  ArrowRight
+} from 'lucide-react';
 
 interface ProgressDashboardProps {
   modules: Module[];
@@ -8,12 +28,14 @@ interface ProgressDashboardProps {
   onUpdateUserName: (name: string) => void;
   onSelectModule: (moduleId: number) => void;
   onOpenCertificate: () => void;
+  onOpenAuthModal?: () => void;
+  onOpenFinalExam?: () => void;
 }
 
 const DAILY_TIPS = [
   {
     quote: "O cuidador na SRT não faz PELO morador, ele faz COM o morador. A verdadeira reabilitação nasce no resgate dos gestos simples do cotidiano.",
-    author: "Diretrizes de Reabilitação Psicossocial",
+    author: "Diretrizes de Reabilitação Psicossocial (Saraceno)",
     tag: "Autonomia & Dignidade"
   },
   {
@@ -28,12 +50,12 @@ const DAILY_TIPS = [
   },
   {
     quote: "Escuta qualificada não exige respostas prontas. Às vezes, o maior gesto de cuidado é estar presente com calma, segurança e sem julgamento.",
-    author: "Cuidado Antimanicomial",
+    author: "Cuidado Antimanicomial Humanizado",
     tag: "Vínculo Humano"
   },
   {
     quote: "Na hora da crise, o tom de voz do cuidador é a ponte para a calma. A desescalada verbal acolhe a dor sem jamais usar a violência do isolamento.",
-    author: "Protocolo de Manejo de Crises",
+    author: "Protocolo de Manejo de Crises (Richmond / Projeto BETA)",
     tag: "Manejo Humanizado"
   },
   {
@@ -48,7 +70,9 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
   userProgress,
   onUpdateUserName,
   onSelectModule,
-  onOpenCertificate
+  onOpenCertificate,
+  onOpenAuthModal,
+  onOpenFinalExam
 }) => {
   const [tipIndex, setTipIndex] = useState<number>(0);
   const [copied, setCopied] = useState<boolean>(false);
@@ -68,6 +92,8 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
 
   const completedModulesCount = userProgress.completedModules.length;
   const progressPercent = Math.round((completedModulesCount / modules.length) * 100);
+  const isFinalExamPassed = userProgress.finalExamPassed;
+  const hasFinalExamScore = userProgress.finalExamScore !== undefined;
 
   return (
     <div className="bg-white border border-slate-200 rounded-xl p-6 md:p-8 space-y-8 shadow-sm max-w-5xl mx-auto text-slate-800">
@@ -76,16 +102,18 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
         <div className="space-y-1">
           <div className="flex items-center space-x-2 text-xs font-bold text-teal-700 uppercase tracking-wider">
             <BarChart2 className="w-4 h-4" />
-            <span>Painel do Aluno & Capacitação Continuada</span>
+            <span>Painel do Aluno & Capacitação Continuada (40h)</span>
           </div>
           <h2 className="text-2xl font-bold text-slate-800">Residencial Terapêutico Salomão</h2>
-          <p className="text-xs text-slate-500">Acompanhe seu progresso de aprendizagem e emissão de certificado</p>
+          <p className="text-xs text-slate-500">
+            Acompanhe seu progresso de aprendizagem nos 5 módulos e na Prova Final Integradora
+          </p>
         </div>
 
         <div className="flex items-center space-x-4 bg-slate-50 p-4 rounded-lg border border-slate-200">
           <div className="text-center">
             <span className="text-2xl font-extrabold text-teal-600">{progressPercent}%</span>
-            <span className="text-[10px] text-slate-500 block uppercase font-bold">Concluído</span>
+            <span className="text-[10px] text-slate-500 block uppercase font-bold">Módulos</span>
           </div>
           <div className="w-32 bg-slate-200 h-2 rounded-full overflow-hidden">
             <div
@@ -100,6 +128,122 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
             <Award className="w-4 h-4" />
             <span>Ver Certificado</span>
           </button>
+        </div>
+      </div>
+
+      {/* Final Exam Highlight Banner */}
+      <div className="bg-gradient-to-r from-teal-900 via-slate-900 to-slate-800 text-white p-6 rounded-2xl shadow-md space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-center space-x-3.5">
+            <div className="w-12 h-12 rounded-xl bg-teal-500 text-white flex items-center justify-center font-bold shrink-0 shadow-lg">
+              <FileCheck2 className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="flex items-center space-x-2">
+                <span className="text-[10px] bg-teal-800/80 text-teal-300 px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+                  20 Questões Integradoras
+                </span>
+                {hasFinalExamScore && isFinalExamPassed && (
+                  <span className="text-[10px] bg-emerald-500 text-slate-950 px-2 py-0.5 rounded font-extrabold flex items-center space-x-1">
+                    <CheckCircle2 className="w-3 h-3" />
+                    <span>Aprovado</span>
+                  </span>
+                )}
+              </div>
+              <h3 className="text-base md:text-lg font-bold text-white mt-1">
+                Prova Final de Conclusão do Curso
+              </h3>
+              <p className="text-xs text-slate-300">
+                {hasFinalExamScore
+                  ? `Sua nota registrada: ${userProgress.finalExamScore} / 20 acertos (${Math.round(
+                      (userProgress.finalExamScore / 20) * 100
+                    )}%).`
+                  : 'Avaliação abrangente sobre leis, manejo de crises, cuidados e medicação (mínimo 14/20).'}
+              </p>
+            </div>
+          </div>
+
+          <button
+            onClick={onOpenFinalExam}
+            className="bg-teal-500 hover:bg-teal-400 text-slate-950 font-extrabold px-5 py-2.5 rounded-xl text-xs transition-all flex items-center space-x-2 shrink-0 self-start sm:self-auto shadow-md"
+          >
+            <span>{hasFinalExamScore ? 'Revisar / Refazer Prova' : 'Iniciar Prova Final'}</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+
+      {/* Cadastro / Ficha do Aluno Card */}
+      <div className="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
+          <div className="flex items-center space-x-2.5">
+            <div className="w-8 h-8 rounded-lg bg-teal-600 text-white flex items-center justify-center font-bold shrink-0">
+              <User className="w-4 h-4" />
+            </div>
+            <div>
+              <h3 className="text-sm font-bold text-slate-800">Ficha do Aluno Cadastrado</h3>
+              <p className="text-[11px] text-slate-500">Dados do profissional autenticados no sistema</p>
+            </div>
+          </div>
+
+          {onOpenAuthModal && (
+            <button
+              onClick={onOpenAuthModal}
+              className="bg-white hover:bg-slate-100 border border-slate-300 text-slate-700 font-bold px-3 py-1.5 rounded-lg text-xs transition-colors flex items-center space-x-1.5 shrink-0 self-start sm:self-auto"
+            >
+              {userProgress.isRegistered ? (
+                <>
+                  <Edit3 className="w-3.5 h-3.5 text-teal-600" />
+                  <span>Editar Cadastro</span>
+                </>
+              ) : (
+                <>
+                  <UserPlus className="w-3.5 h-3.5 text-teal-600" />
+                  <span>Cadastrar Aluno</span>
+                </>
+              )}
+            </button>
+          )}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div className="bg-white p-3 rounded-lg border border-slate-200 space-y-1">
+            <span className="text-[10px] uppercase tracking-wider font-bold text-slate-400 block">
+              Nome Completo (Certificado)
+            </span>
+            <div className="font-bold text-slate-800 flex items-center space-x-1.5">
+              <User className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+              <input
+                type="text"
+                value={userProgress.userName}
+                onChange={(e) => onUpdateUserName(e.target.value)}
+                className="bg-transparent font-bold text-slate-800 focus:outline-none focus:underline w-full"
+              />
+            </div>
+          </div>
+
+          <div className="bg-white p-3 rounded-lg border border-slate-200 space-y-1">
+            <span className="text-[10px] uppercase tracking-wider font-bold text-slate-400 block">
+              E-mail Registrado
+            </span>
+            <div className="font-semibold text-slate-700 flex items-center space-x-1.5 truncate">
+              <Mail className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+              <span className="truncate">{userProgress.userEmail || 'Não cadastrado'}</span>
+            </div>
+          </div>
+
+          <div className="bg-white p-3 rounded-lg border border-slate-200 space-y-1">
+            <span className="text-[10px] uppercase tracking-wider font-bold text-slate-400 block">
+              CPF / Registro & Unidade
+            </span>
+            <div className="font-semibold text-slate-700 flex items-center space-x-1.5 truncate">
+              <Building2 className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+              <span className="truncate">
+                {userProgress.cpfOrRegistration ? `${userProgress.cpfOrRegistration} • ` : ''}
+                {userProgress.srtUnit || 'Residencial Salomão'}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -160,30 +304,10 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
         </div>
       </div>
 
-      {/* Candidate Name Input */}
-      <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="flex items-center space-x-3">
-          <User className="w-5 h-5 text-slate-500 shrink-0" />
-          <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
-              Nome do Cuidador / Aluno para o Certificado:
-            </label>
-            <span className="text-[11px] text-slate-500">Este nome constará no documento oficial de 40 horas</span>
-          </div>
-        </div>
-        <input
-          type="text"
-          value={userProgress.userName}
-          onChange={(e) => onUpdateUserName(e.target.value)}
-          placeholder="Digite seu nome completo..."
-          className="bg-white border border-slate-200 rounded px-4 py-2 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-teal-500 w-full md:w-80 font-medium"
-        />
-      </div>
-
       {/* Modules Progress List */}
       <div className="space-y-4">
         <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-          Status de Conclusão por Módulo Operacional:
+          Status de Conclusão por Módulo Operacional (10 Questões Cada):
         </h3>
 
         <div className="grid grid-cols-1 gap-3">
@@ -212,13 +336,13 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
                     <div className="flex items-center space-x-1 text-slate-600 justify-end">
                       <HelpCircle className="w-3.5 h-3.5 text-teal-600" />
                       <span>
-                        Quiz: {quizScore !== undefined ? `${quizScore}/${m.quiz.length}` : 'Pendente'}
+                        Teste de Fixação: {quizScore !== undefined ? `${quizScore}/${m.quiz.length}` : 'Pendente (10Q)'}
                       </span>
                     </div>
                     <div className="flex items-center space-x-1 text-slate-600 justify-end">
                       <FileText className="w-3.5 h-3.5 text-teal-600" />
                       <span>
-                        Prova: {essaySubmitted ? 'Enviada' : 'Pendente'}
+                        Estudo de Caso: {essaySubmitted ? 'Respondido' : 'Pendente'}
                       </span>
                     </div>
                   </div>

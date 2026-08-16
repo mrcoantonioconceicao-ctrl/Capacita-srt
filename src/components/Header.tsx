@@ -1,18 +1,23 @@
 import React from 'react';
-import { Award, Menu, BookOpen, FileText, ShieldAlert, Pill, Scale, LayoutDashboard, HeartHandshake } from 'lucide-react';
+import { Award, Menu, BookOpen, FileText, ShieldAlert, Pill, Scale, LayoutDashboard, HeartHandshake, User, LogIn, FileCheck2 } from 'lucide-react';
+import { UserProgress } from '../types/course';
 
 interface HeaderProps {
-  currentTab: 'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard';
-  onTabChange: (tab: 'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard') => void;
+  currentTab: 'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard' | 'final-exam';
+  userProgress: UserProgress;
+  onTabChange: (tab: 'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard' | 'final-exam') => void;
   onOpenCertificate: () => void;
+  onOpenAuthModal: () => void;
   onToggleMobileSidebar: () => void;
   completedPercent: number;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   currentTab,
+  userProgress,
   onTabChange,
   onOpenCertificate,
+  onOpenAuthModal,
   onToggleMobileSidebar,
   completedPercent
 }) => {
@@ -53,7 +58,19 @@ export const Header: React.FC<HeaderProps> = ({
             }`}
           >
             <BookOpen className="w-3.5 h-3.5" />
-            <span>Módulos</span>
+            <span>Módulos (10Q)</span>
+          </button>
+
+          <button
+            onClick={() => onTabChange('final-exam')}
+            className={`px-3 py-1.5 rounded-md text-xs font-semibold whitespace-nowrap shrink-0 transition-colors flex items-center space-x-1.5 ${
+              currentTab === 'final-exam'
+                ? 'bg-teal-600 text-white shadow-xs'
+                : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+            }`}
+          >
+            <FileCheck2 className="w-3.5 h-3.5" />
+            <span>Prova Final (20Q)</span>
           </button>
 
           <button
@@ -117,8 +134,30 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
         </nav>
 
-        {/* Primary Action Zone */}
+        {/* Primary Action Zone: User Login & Certificate */}
         <div className="flex items-center space-x-2 shrink-0">
+          <button
+            onClick={onOpenAuthModal}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center space-x-1.5 border ${
+              userProgress.isRegistered
+                ? 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-800'
+                : 'bg-amber-50 hover:bg-amber-100 border-amber-300 text-amber-900'
+            }`}
+            title={userProgress.isRegistered ? "Editar Perfil do Aluno" : "Cadastrar Aluno"}
+          >
+            {userProgress.isRegistered ? (
+              <>
+                <User className="w-3.5 h-3.5 text-teal-600" />
+                <span className="max-w-[100px] sm:max-w-[140px] truncate">{userProgress.userName}</span>
+              </>
+            ) : (
+              <>
+                <LogIn className="w-3.5 h-3.5 text-amber-600" />
+                <span>Cadastrar Aluno</span>
+              </>
+            )}
+          </button>
+
           <button
             onClick={onOpenCertificate}
             className="bg-teal-600 hover:bg-teal-700 text-white font-bold px-3.5 py-2 rounded-lg text-xs whitespace-nowrap shrink-0 transition-colors flex items-center space-x-1.5 shadow-xs"
@@ -141,6 +180,14 @@ export const Header: React.FC<HeaderProps> = ({
           }`}
         >
           Módulos
+        </button>
+        <button
+          onClick={() => onTabChange('final-exam')}
+          className={`px-3 py-1 rounded-md text-xs font-semibold whitespace-nowrap shrink-0 transition-colors ${
+            currentTab === 'final-exam' ? 'bg-teal-600 text-white' : 'text-slate-700 hover:bg-slate-200'
+          }`}
+        >
+          Prova Final (20Q)
         </button>
         <button
           onClick={() => onTabChange('handover')}

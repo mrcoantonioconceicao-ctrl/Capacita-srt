@@ -1,5 +1,6 @@
 import React from 'react';
 import { modulesData } from '../data/modulesData';
+import { UserProgress } from '../types/course';
 import {
   HeartHandshake,
   BookOpen,
@@ -10,17 +11,23 @@ import {
   LayoutDashboard,
   Award,
   CheckCircle2,
-  X
+  X,
+  User,
+  UserPlus,
+  FileCheck2,
+  Sparkles
 } from 'lucide-react';
 
 interface SidebarProps {
-  currentTab: 'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard';
+  currentTab: 'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard' | 'final-exam';
   selectedModuleId: number;
   completedModules: number[];
   completedPercent: number;
-  onTabChange: (tab: 'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard') => void;
+  userProgress: UserProgress;
+  onTabChange: (tab: 'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard' | 'final-exam') => void;
   onSelectModule: (moduleId: number) => void;
   onOpenCertificate: () => void;
+  onOpenAuthModal: () => void;
   isMobileOpen?: boolean;
   onCloseMobile?: () => void;
 }
@@ -30,12 +37,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
   selectedModuleId,
   completedModules,
   completedPercent,
+  userProgress,
   onTabChange,
   onSelectModule,
   onOpenCertificate,
+  onOpenAuthModal,
   isMobileOpen = false,
   onCloseMobile
 }) => {
+  const isFinalExamPassed = userProgress.finalExamPassed;
+  const hasFinalExamScore = userProgress.finalExamScore !== undefined;
+
   return (
     <aside
       className={`bg-slate-900 text-white flex flex-col shrink-0 transition-all duration-300 z-50 ${
@@ -68,11 +80,50 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* Navigation Sections */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-6 text-xs">
+      <div className="flex-1 overflow-y-auto p-4 space-y-5 text-xs">
+        {/* Student Profile Card */}
+        <div className="bg-slate-800/90 p-3 rounded-xl border border-slate-700/80 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] uppercase tracking-wider font-bold text-slate-400">Perfil do Aluno</span>
+            <button
+              onClick={() => {
+                onOpenAuthModal();
+                if (onCloseMobile) onCloseMobile();
+              }}
+              className="text-[10px] text-teal-400 hover:text-teal-300 font-bold underline"
+            >
+              {userProgress.isRegistered ? 'Editar' : 'Cadastrar'}
+            </button>
+          </div>
+
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-full bg-teal-600/30 border border-teal-500/50 flex items-center justify-center text-teal-400 shrink-0">
+              <User className="w-4 h-4" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="font-bold text-slate-200 truncate">{userProgress.userName}</div>
+              <div className="text-[10px] text-slate-400 truncate">{userProgress.userRole}</div>
+            </div>
+          </div>
+
+          {!userProgress.isRegistered && (
+            <button
+              onClick={() => {
+                onOpenAuthModal();
+                if (onCloseMobile) onCloseMobile();
+              }}
+              className="w-full py-1.5 bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 border border-amber-500/40 rounded-lg text-[11px] font-bold transition-colors flex items-center justify-center gap-1.5"
+            >
+              <UserPlus className="w-3.5 h-3.5" />
+              <span>Cadastrar Aluno</span>
+            </button>
+          )}
+        </div>
+
         {/* Section 1: Modules */}
         <div className="space-y-2">
           <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2 flex items-center justify-between">
-            <span>Módulos do Curso</span>
+            <span>Módulos de Ensino (10Q)</span>
             <span className="text-teal-400">{completedModules.length}/5</span>
           </div>
 
@@ -113,10 +164,60 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </div>
         </div>
 
+        {/* Section: Final Exam Callout */}
+        <div className="space-y-2">
+          <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2 flex items-center justify-between">
+            <span>Avaliação de Conclusão</span>
+            <span className="text-amber-400 font-bold">20Q</span>
+          </div>
+
+          <button
+            onClick={() => {
+              onTabChange('final-exam');
+              if (onCloseMobile) onCloseMobile();
+            }}
+            className={`w-full text-left p-3 rounded-xl border transition-all flex items-center justify-between gap-2.5 ${
+              currentTab === 'final-exam'
+                ? 'bg-gradient-to-r from-teal-700 to-slate-800 text-white border-teal-500 shadow-lg'
+                : hasFinalExamScore && isFinalExamPassed
+                ? 'bg-emerald-950/40 text-emerald-300 border-emerald-700/60 hover:bg-emerald-900/50'
+                : 'bg-slate-800/90 text-slate-200 border-slate-700 hover:bg-slate-800 hover:border-slate-600'
+            }`}
+          >
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div
+                className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
+                  hasFinalExamScore && isFinalExamPassed
+                    ? 'bg-emerald-500 text-slate-950'
+                    : 'bg-teal-500/20 text-teal-400 border border-teal-500/40'
+                }`}
+              >
+                <FileCheck2 className="w-4 h-4" />
+              </div>
+              <div className="min-w-0">
+                <div className="font-bold text-xs truncate">Prova Final (20Q)</div>
+                <div className="text-[10px] text-slate-400">
+                  {hasFinalExamScore
+                    ? `${userProgress.finalExamScore}/20 acertos (${isFinalExamPassed ? 'Aprovado' : 'Pendente'})`
+                    : 'Avaliação Integradora'}
+                </div>
+              </div>
+            </div>
+
+            {hasFinalExamScore && isFinalExamPassed ? (
+              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+            ) : (
+              <span className="text-[10px] bg-teal-500/20 text-teal-300 px-1.5 py-0.5 rounded font-bold shrink-0">
+                Fazer
+              </span>
+            )}
+          </button>
+        </div>
+
         {/* Section 2: Interactive Simulators & Tools */}
         <div className="space-y-2">
           <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">
-            Simuladores & Prática
+            Simuladores Práticos
           </div>
 
           <div className="space-y-1">
@@ -132,7 +233,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               }`}
             >
               <FileText className="w-4 h-4 shrink-0 text-teal-400" />
-              <span className="truncate">Passagem de Plantão SBAR</span>
+              <span className="truncate">Passagem SBAR</span>
             </button>
 
             <button
@@ -147,7 +248,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               }`}
             >
               <ShieldAlert className="w-4 h-4 shrink-0 text-teal-400" />
-              <span className="truncate">Desescalada Verbal em Crise</span>
+              <span className="truncate">Desescalada em Crise</span>
             </button>
 
             <button
@@ -170,7 +271,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Section 3: Reference & Student Area */}
         <div className="space-y-2">
           <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">
-            Base & Progresso
+            Base & Painel
           </div>
 
           <div className="space-y-1">

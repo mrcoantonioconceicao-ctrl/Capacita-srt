@@ -4,13 +4,15 @@ import { UserProgress } from './types/course';
 import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
 import { ModuleViewer } from './components/ModuleViewer';
+import { FinalExamViewer } from './components/FinalExamViewer';
 import { HandoverSimulator } from './components/Simulators/HandoverSimulator';
 import { DeescalationSimulator } from './components/Simulators/DeescalationSimulator';
 import { MedicationChecker } from './components/Simulators/MedicationChecker';
 import { NormsCompendium } from './components/NormsCompendium';
 import { ProgressDashboard } from './components/ProgressDashboard';
 import { CertificateModal } from './components/CertificateModal';
-import { BookOpen, CheckCircle2, FileText, ShieldAlert, Pill, Scale, LayoutDashboard } from 'lucide-react';
+import { AuthModal } from './components/AuthModal';
+import { BookOpen, CheckCircle2, FileText, ShieldAlert, Pill, Scale, LayoutDashboard, FileCheck2 } from 'lucide-react';
 
 const INITIAL_PROGRESS: UserProgress = {
   completedModules: [],
@@ -18,7 +20,11 @@ const INITIAL_PROGRESS: UserProgress = {
   essayAnswers: {},
   essaySubmitted: {},
   userName: 'Cuidador(a) de Saúde Mental',
-  userRole: 'Cuidador de Residência Terapêutica (SRT Tipo II)',
+  userRole: 'Cuidador de Residência Terapêutica (SRT)',
+  userEmail: '',
+  cpfOrRegistration: '',
+  srtUnit: 'Residencial Terapêutico Salomão (Blumenau/SC)',
+  isRegistered: false,
   startDate: new Date().toLocaleDateString('pt-BR')
 };
 
@@ -35,9 +41,10 @@ export default function App() {
     return INITIAL_PROGRESS;
   });
 
-  const [activeTab, setActiveTab] = useState<'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard'>('modules');
+  const [activeTab, setActiveTab] = useState<'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard' | 'final-exam'>('modules');
   const [selectedModuleId, setSelectedModuleId] = useState<number>(1);
   const [showCertificateModal, setShowCertificateModal] = useState<boolean>(false);
+  const [showAuthModal, setShowAuthModal] = useState<boolean>(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState<boolean>(false);
 
   useEffect(() => {
@@ -82,8 +89,32 @@ export default function App() {
     });
   };
 
+  const handleFinalExamCompleted = (score: number, passed: boolean, answers: Record<string, number>) => {
+    setUserProgress((prev) => ({
+      ...prev,
+      finalExamScore: score,
+      finalExamPassed: passed,
+      finalExamAnswers: answers,
+      completionDate: prev.completionDate || new Date().toLocaleDateString('pt-BR')
+    }));
+  };
+
   const handleUpdateUserName = (name: string) => {
     setUserProgress((prev) => ({ ...prev, userName: name }));
+  };
+
+  const handleSaveProfile = (profileData: {
+    userName: string;
+    userRole: string;
+    userEmail: string;
+    cpfOrRegistration: string;
+    srtUnit: string;
+  }) => {
+    setUserProgress((prev) => ({
+      ...prev,
+      ...profileData,
+      isRegistered: true
+    }));
   };
 
   const handleNextModule = () => {
@@ -118,15 +149,18 @@ export default function App() {
         selectedModuleId={selectedModuleId}
         completedModules={userProgress.completedModules}
         completedPercent={completedPercent}
+        userProgress={userProgress}
         onTabChange={(tab) => {
           setActiveTab(tab);
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
         onSelectModule={(id) => {
           setSelectedModuleId(id);
+          setActiveTab('modules');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
         onOpenCertificate={() => setShowCertificateModal(true)}
+        onOpenAuthModal={() => setShowAuthModal(true)}
         isMobileOpen={isMobileSidebarOpen}
         onCloseMobile={() => setIsMobileSidebarOpen(false)}
       />
@@ -136,11 +170,13 @@ export default function App() {
         {/* Top Header Bar */}
         <Header
           currentTab={activeTab}
+          userProgress={userProgress}
           onTabChange={(tab) => {
             setActiveTab(tab);
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
           onOpenCertificate={() => setShowCertificateModal(true)}
+          onOpenAuthModal={() => setShowAuthModal(true)}
           onToggleMobileSidebar={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
           completedPercent={completedPercent}
         />
@@ -153,7 +189,7 @@ export default function App() {
               <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between overflow-x-auto gap-2 scrollbar-none">
                 <div className="text-xs font-bold text-slate-500 uppercase tracking-wider shrink-0 px-2 flex items-center space-x-1.5">
                   <BookOpen className="w-4 h-4 text-teal-600" />
-                  <span className="hidden sm:inline">Módulos Operacionais:</span>
+                  <span className="hidden sm:inline">Módulos de Formação:</span>
                   <span className="sm:hidden">Módulos:</span>
                 </div>
                 <div className="flex items-center space-x-2 overflow-x-auto">
@@ -193,6 +229,15 @@ export default function App() {
             </div>
           )}
 
+          {activeTab === 'final-exam' && (
+            <FinalExamViewer
+              userProgress={userProgress}
+              onExamCompleted={handleFinalExamCompleted}
+              onOpenCertificate={() => setShowCertificateModal(true)}
+              onGoToModules={() => setActiveTab('modules')}
+            />
+          )}
+
           {activeTab === 'handover' && <HandoverSimulator />}
           {activeTab === 'deescalation' && <DeescalationSimulator />}
           {activeTab === 'meds' && <MedicationChecker />}
@@ -208,6 +253,11 @@ export default function App() {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
               onOpenCertificate={() => setShowCertificateModal(true)}
+              onOpenAuthModal={() => setShowAuthModal(true)}
+              onOpenFinalExam={() => {
+                setActiveTab('final-exam');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
             />
           )}
         </main>
@@ -236,7 +286,7 @@ export default function App() {
               setActiveTab('modules');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`flex flex-col items-center py-1 px-2.5 rounded-lg text-[10px] transition-colors ${
+            className={`flex flex-col items-center py-1 px-2 rounded-lg text-[10px] transition-colors ${
               activeTab === 'modules' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -246,10 +296,23 @@ export default function App() {
 
           <button
             onClick={() => {
+              setActiveTab('final-exam');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className={`flex flex-col items-center py-1 px-2 rounded-lg text-[10px] transition-colors ${
+              activeTab === 'final-exam' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            <FileCheck2 className="w-4 h-4 mb-0.5" />
+            <span>Prova (20Q)</span>
+          </button>
+
+          <button
+            onClick={() => {
               setActiveTab('handover');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`flex flex-col items-center py-1 px-2.5 rounded-lg text-[10px] transition-colors ${
+            className={`flex flex-col items-center py-1 px-2 rounded-lg text-[10px] transition-colors ${
               activeTab === 'handover' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -262,7 +325,7 @@ export default function App() {
               setActiveTab('deescalation');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`flex flex-col items-center py-1 px-2.5 rounded-lg text-[10px] transition-colors ${
+            className={`flex flex-col items-center py-1 px-2 rounded-lg text-[10px] transition-colors ${
               activeTab === 'deescalation' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -275,7 +338,7 @@ export default function App() {
               setActiveTab('meds');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`flex flex-col items-center py-1 px-2.5 rounded-lg text-[10px] transition-colors ${
+            className={`flex flex-col items-center py-1 px-2 rounded-lg text-[10px] transition-colors ${
               activeTab === 'meds' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -285,23 +348,10 @@ export default function App() {
 
           <button
             onClick={() => {
-              setActiveTab('norms');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className={`flex flex-col items-center py-1 px-2.5 rounded-lg text-[10px] transition-colors ${
-              activeTab === 'norms' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
-            }`}
-          >
-            <Scale className="w-4 h-4 mb-0.5" />
-            <span>Normas</span>
-          </button>
-
-          <button
-            onClick={() => {
               setActiveTab('dashboard');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`flex flex-col items-center py-1 px-2.5 rounded-lg text-[10px] transition-colors ${
+            className={`flex flex-col items-center py-1 px-2 rounded-lg text-[10px] transition-colors ${
               activeTab === 'dashboard' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -316,6 +366,15 @@ export default function App() {
         <CertificateModal
           userProgress={userProgress}
           onClose={() => setShowCertificateModal(false)}
+        />
+      )}
+
+      {/* Student Auth / Registration Modal */}
+      {showAuthModal && (
+        <AuthModal
+          userProgress={userProgress}
+          onSaveProfile={handleSaveProfile}
+          onClose={() => setShowAuthModal(false)}
         />
       )}
     </div>

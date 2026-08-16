@@ -1,6 +1,9 @@
 import { Module } from '../types/course';
 
 export const modulesData: Module[] = [
+  // ==========================================
+  // MÓDULO 1: MARCO LEGAL E FILOSÓFICO
+  // ==========================================
   {
     id: 1,
     title: 'Módulo 1: Marco Legal e Filosófico das SRTs e o Papel do Cuidador',
@@ -13,42 +16,59 @@ export const modulesData: Module[] = [
       'Lei Federal nº 10.216/2001 (Lei da Reforma Psiquiátrica e Direitos das Pessoas com Transtornos Mentais)',
       'Portaria GM/MS nº 106/2000 (Criação dos Serviços de Residência Terapêutica em Saúde Mental)',
       'Portaria GM/MS nº 3.088/2011 (Institui a Rede de Atenção Psicossocial - RAPS)',
-      'Portaria GM/MS nº 2.840/2014 (Atualização e redefinição do funcionamento das SRTs no SUS)'
+      'Portaria GM/MS nº 2.840/2014 (Atualização e redefinição do funcionamento das SRTs no SUS)',
+      'Diretrizes de Saúde Mental da RAPS Blumenau / SC (CAPS II, CAPS III e Atenção Primária à Saúde)'
     ],
     contentSections: [
       {
-        title: '1. Da Lógica Asilar ao Morar na Cidade: A Luta Antimanicomial',
+        title: '1. Da Lógica Asilar ao Morar na Cidade: A Luta Antimanicomial no Brasil',
         paragraphs: [
-          'A história da psiquiatria tradicional no Brasil foi marcada pela segregação e isolamento em grandes hospitais psiquiátricos, nos quais os indivíduos perdiam seus laços familiares, sua identidade jurídica e sua autonomia cotidiana. A Reforma Psiquiátrica Brasileira, consolidada pela Lei Federal nº 10.216/2001, redirecionou o modelo assistencial: o tratamento deve ocorrer prioritariamente em serviços comunitários e em meio livre.',
-          'Nesse contexto, os Serviços de Residência Terapêutica (SRTs), como o Residencial Terapêutico Salomão em Blumenau/SC, surgem como moradias inseridas na comunidade destinadas a pessoas com transtornos mentais egressas de longas internações psiquiátricas ou em situação de vulnerabilidade e dependência social.'
+          'A história da assistência psiquiátrica tradicional no Brasil e no mundo foi alicerçada no paradigma asilar e segregador. Hospitais psiquiátricos gigantescos (como o antigo Hospital Colônia de Barbacena em Minas Gerais) funcionavam como depósitos humanos, onde o sujeito diagnosticado com transtorno mental era despojado de sua identidade civil, suas roupas, suas memórias familiares, seus bens e seus direitos fundamentais. A internação tornava-se perpétua, gerando o fenômeno da "institucionalização": o indivíduo perdia a capacidade de escolher quando comer, vestir, circular ou falar.',
+          'A Reforma Psiquiátrica Brasileira, consolidada com a promulgação da Lei Federal nº 10.216 em 6 de abril de 2001, provocou uma revolução ética, jurídica e sanitária: transferiu o eixo do cuidado do hospital psiquiátrico fechado para serviços territoriais, abertos, comunitários e de base territorial no SUS (como os CAPS, SRTs, Centros de Convivência e Unidades de Acolhimento).',
+          'Nesse cenário, os Serviços de Residência Terapêutica (SRTs), como o modelo pioneiro do Residencial Terapêutico Salomão em Blumenau/SC, foram instituídos pela Portaria GM/MS nº 106/2000. Trata-se de moradias acolhedoras inseridas no tecido urbano comum, destinadas prioritariamente a pessoas que vivenciaram longos períodos de internação psiquiátrica (2 anos ou mais ininterruptos) e que perderam referências familiares ou suporte social autônomo.'
         ],
-        keyTakeaway: 'Uma SRT não é uma clínica, não é um hospital e não é um asilo. É uma CASA de fato, um lar no território, onde o morador detém direitos civis, chaves da porta, liberdade de circulação e voz ativa.',
-        normativeHighlight: 'Portaria GM/MS nº 106/2000: Define a SRT como recurso residencial de apoio para reinserção social de egressos de hospitais psiquiátricos, com capacidade para 1 a 8 moradores (Tipo I) ou até 10 moradores com suporte intensivo (Tipo II).'
+        keyTakeaway: 'Uma SRT NUNCA é um hospital em miniatura, uma clínica particular ou um asilo disfarçado. É um LAR no território, com endereço civil, onde os moradores detêm a chave da porta, poder de escolha e liberdade cidadã.',
+        normativeHighlight: 'Art. 2º da Lei 10.216/2001: É direito da pessoa portadora de transtorno mental ter livre acesso aos melhores meios terapêuticos pelos serviços de saúde, ser tratada com humanidade e respeito e ser protegida contra qualquer forma de abuso, exploração e tratamento desumano ou degradante.'
       },
       {
-        title: '2. Tipologias das SRTs e a Especificidade do Cuidado',
+        title: '2. Tipologias das SRTs (Tipo I e Tipo II) e Estrutura Operacional',
         paragraphs: [
-          'A legislação brasileira divide os serviços residenciais em SRT Tipo I (voltada para moradores com maior grau de autonomia, demandando suporte técnico contínuo porém não presencial 24h) e SRT Tipo II (voltada para moradores com alto grau de dependência física ou institucional, requerendo equipe de cuidadores presencial 24 horas por dia).',
-          'No Residencial Terapêutico Salomão, o trabalho da equipe de cuidadores articula-se diariamente com o Centro de Atenção Psicossocial (CAPS II e CAPS III do município de Blumenau) e com a Unidade Básica de Saúde (eSF/eMulti) do bairro. O cuidador não prescreve, não diagnostica e não isola; seu papel central é reabilitar para a vida diária.'
+          'O Ministério da Saúde, por meio da Portaria GM/MS nº 2.840/2014, regulamenta duas tipologias operacionais de SRT no âmbito do Sistema Único de Saúde:',
+          '• SRT Tipo I: Moradia destinada a até 8 moradores que apresentam maior grau de autonomia e independência nas atividades instrumentais e básicas de vida diária (ABVD e AIVD). Essa modalidade conta com suporte técnico de referência, acompanhamento periódico do CAPS e da Atenção Primária, mas não demanda presença física contínua de cuidadores 24 horas por dia.',
+          '• SRT Tipo II: Moradia destinada a até 10 moradores com severo grau de dependência física, motora, cognitiva ou institucional crônica. Exige estrutura física adaptada (acessibilidade para cadeirantes, barras de apoio, portas alargadas conforme NBR 9050) e equipe presencial de cuidadores e técnicos de enfermagem 24 horas por dia, 7 dias por semana, em escala contínua de revezamento.',
+          'No Residencial Terapêutico Salomão, o fluxo de cuidado é estritamente articulado com a Rede de Atenção Psicossocial (RAPS) de Blumenau/SC: os moradores são acompanhados pela equipe multidisciplinar do CAPS de referência (psiquiatra, psicólogo, assistente social, terapeuta ocupacional, enfermeiro) e vinculados à Unidade Básica de Saúde (eSF/eMulti) do bairro para prevenção em saúde geral (hipertensão, diabetes, vacinação).'
         ],
         practicalTips: [
-          'Nunca trate os moradores como doentes incapacitados ou crianças ("meus velhinhos", "coitadinhos"). Trate-os sempre pelo nome próprio e como adultos com história de vida.',
-          'Lembre-se: o cuidador trabalha NA CASA do morador. Nós somos os profissionais que entram no espaço privativo dele, e não o morador que está "visitando" nosso local de trabalho.'
+          'O cuidador não prescreve, não faz diagnósticos médicos e não impõe castigos. Sua missão precípua é a mediação do cotidiano, a reabilitação psicossocial e a garantia de direitos.',
+          'A casa pertence aos moradores. Ao entrar em seus quartos, bata na porta e peça licença. Nós somos profissionais autorizados a trabalhar no espaço privado deles.'
         ]
       },
       {
-        title: '3. O Cuidador Terapêutico como Agente de Cidadania e Reabilitação Psicossocial',
+        title: '3. A Reabilitação Psicossocial e a Teoria dos 3 Eixos de Benedetto Saraceno',
         paragraphs: [
-          'A Reabilitação Psicossocial, segundo Saraceno, fundamenta-se em reconstruir três eixos centrais na vida do sujeito: Casa (habitat), Rede Social (trocas interpessoais e afeto) e Trabalho/Valor Social (ocupação e produção de sentido).',
-          'O cuidador de SRT é a ponte diária para a autonomia. Cada ação rotineira — desde acompanhar uma ida à padaria na rua XV de Novembro em Blumenau até incentivar o morador a escolher a própria roupa — é uma intervenção terapêutica de resgate da cidadania violada por anos de institucionalização.'
+          'A Reabilitação Psicossocial, formulada pelo psiquiatra italiano Benedetto Saraceno e adotada pelas diretrizes da OMS e do SUS, define que reabilitar não é curar uma doença incurável, mas restituir o poder de contratualidade e valor social ao sujeito. Saraceno estrutura a reabilitação em 3 eixos indissociáveis:',
+          '1. Eixo do Habitat (A Casa): Ter um espaço com intimidade, segurança, cama própria, guarda-roupa individual, fotos na parede e objetos pessoais sem risco de expropriação.',
+          '2. Eixo da Rede Social (Os Afetos e a Troca): Construir vínculos reais com a vizinhança, ir à padaria, à praça, participar de celebrações comunitárias, restabelecer contatos com familiares quando possível e conviver com amigos fora do circuito asilar.',
+          '3. Eixo do Trabalho e Produção de Sentido (O Valor Social): Ter uma ocupação que faça sentido para o morador (artesanato, cuidados com o jardim, horta, oficinas de geração de renda, música ou voluntariado), resgatando o sentimento de utilidade e realização pessoal.'
         ],
-        normativeHighlight: 'Direito Fundamental (Art. 2º da Lei 10.216/2001): Garantia de ser tratado com humanidade e respeito, no interesse exclusivo de beneficiar sua saúde, visando alcançar sua recuperação pela inserção na família, no trabalho e na comunidade.'
+        normativeHighlight: 'Portaria GM/MS nº 3.088/2011 (Diretriz da RAPS): Respeito aos direitos humanos, garantindo a autonomia e a liberdade das pessoas, combatendo estigmas e preconceitos e promovendo a equidade e a inclusão social no SUS.'
+      },
+      {
+        title: '4. Postura Ética do Cuidador: Desconstruindo a Tutela e o Paternalismo',
+        paragraphs: [
+          'Um dos maiores desafios no cotidiano da SRT é o combate ao "paternalismo tutelar". Por boa intenção mal direcionada, alguns cuidadores acabam fazendo tudo pelos moradores (escolhendo as roupas, servindo o prato já montado, proibindo pequenas iniciativas), reproduzindo a mesma invalidação da autonomia que o manicômio praticava.',
+          'Outro desvio grave é a infantilização: tratar adultos de 50 ou 60 anos como "crianças", "meus velhinhos" ou "anjinhos inocentes". O cuidador antimanicomial acolhe a fragilidade, mas trata o morador com a dignidade de sua condição adulta, respeitando sua história pregressa, seus gostos, sua sexualidade, sua religiosidade e suas escolhas individuais.'
+        ],
+        practicalTips: [
+          'Em vez de perguntar: "Quer que eu escolha sua camisa?", estimule: "Seu Geraldo, hoje está fazendo calor. Você prefere a camisa azul ou a verde para o almoço?".',
+          'Sempre ofereça opções reais de escolha dentro dos limites de segurança e autocuidado.'
+        ]
       }
     ],
     caseStudy: {
       title: 'O Retorno à Vida Comunitária de Seu Geraldo',
       residentContext: 'Seu Geraldo, 62 anos, viveu 31 anos continuamente internado em um hospital psiquiátrico de custódia e tratamento. Chegou ao Residencial Terapêutico Salomão há 2 meses. Apresenta marcha lenta, olhar desconfiado, hábito de guardar restos de comida embaixo do travesseiro e extrema passividade, aguardando ordens para tudo (até para ir ao banheiro ou tomar água).',
-      scenarioDescription: 'Durante a manhã, a cuidadora da equipe orienta que é hora do café. Geraldo senta-se na mesa, coloca as mãos no colo e fica imóvel por 40 minutos sem tocar no pão ou na xícara de café, aguardando que alguém lhe dê permissão explícita ou lhe dê o alimento na boca. Quando um novo cuidador tenta pegar o prato dele para ajudá-lo de forma abrupta, Geraldo assusta-se, esconde a cabeça com os braços e começa a tremer, temendo punição.',
+      scenarioDescription: 'Durante a manhã, a cuidadora da equipe orienta que é hora do café. Geraldo senta-se na mesa, coloca as mãos no colo e fica imóvel por 40 minutos sem tocar no pão ou na xícara de café, aguardando que alguém lhe dê permissão explícita ou lhe dê o alimento na boca. Quando um novo cuidador tenta pegar o prato dele para ajudá-lo de forma abrupta, Geraldo assusta-se, esconde a cabeça com os braços e começa a tremer, temendo punição física.',
       keyDilemma: 'Como desconstruir o automatismo da institucionalização asilar sem gerar angústia, respeitando o tempo do morador e estimulando a autonomia sem tutoramento excessivo?',
       guidedQuestions: [
         'Quais marcas da institucionalização hospitalar (asilamento) estão presentes no comportamento de Geraldo?',
@@ -99,559 +119,1014 @@ export const modulesData: Module[] = [
         id: 'q1-4',
         question: 'O conceito de Reabilitação Psicossocial desenvolvido por Benedetto Saraceno fundamenta-se em três eixos essenciais. Quais são eles?',
         options: [
-          'Medicação, Isolamento e Higienização.',
-          'Casa (habitat), Rede Social (afeto e trocas) e Trabalho/Produção de Sentido.',
-          'Diagnóstico Psiquiátrico, Tutela Judicial e Internação Contínua.',
-          'Contenção Mecânica, Consulta Médica e Repouso Absoluto.'
+          'Medicação, Isolamento e Contenção Física.',
+          'Casa (Habitat), Rede Social (Trocas/Afeto) e Trabalho/Valor Social (Sentido da Vida).',
+          'Diagnóstico Psiquiátrico, Eletroconvulsoterapia e Internação Judicial.',
+          'Higiene, Alimentação e Repouso Obrigatório.'
         ],
         correctIndex: 1,
-        explanation: 'Saraceno define a Reabilitação Psicossocial como um processo de reconstrução de contratualidade nos três eixos: o habitat (morar com dignidade), a rede social (reconstruir laços e afetos) e o valor social/trabalho.'
+        explanation: 'Para Saraceno, reabilitar é reconstruir a cidadania a partir do habitar (casa digna), do pertencer (rede de relações interpessoais) e do produzir sentido (trabalho, cultura e valor social).'
+      },
+      {
+        id: 'q1-5',
+        question: 'Ao ingressar no quarto de um morador da SRT para organizar a roupa de cama, qual atitude demonstra respeito ao espaço privado e aos princípios da Reforma Psiquiátrica?',
+        options: [
+          'Entrar sem aviso a qualquer hora, pois o cuidador tem livre acesso a todas as dependências.',
+          'Bater na porta, pedir licença, cumprimentar o morador e explicar com gentileza o objetivo da entrada.',
+          'Exigir que o morador saia do quarto imediatamente para a limpeza ser feita.',
+          'Revistar as gavetas e bolsos do morador sem justificativa técnica ou consentimento.'
+        ],
+        correctIndex: 1,
+        explanation: 'Na SRT, o quarto é o espaço privativo e sagrado do morador. O cuidador trabalha na casa do morador, devendo sempre pedir licença, respeitar a privacidade e a posse dos objetos pessoais.'
+      },
+      {
+        id: 'q1-6',
+        question: 'Por que o termo "institucionalização" ou "asilamento" é considerado nocivo ao desenvolvimento do indivíduo?',
+        options: [
+          'Porque reduz o custo de manutenção da rede municipal de saúde.',
+          'Porque atrofia a capacidade decisória do sujeito, tornando-o dependente de ordens externas e apagando sua subjetividade.',
+          'Porque aumenta a resistência física do paciente a medicamentos psicotrópicos.',
+          'Porque impede que o morador assista televisão no horário nobre.'
+        ],
+        correctIndex: 1,
+        explanation: 'A vida asilar retira a capacidade de escolha e autodeterminação. O sujeito acostuma-se à passividade forçada, perdendo as referências mínimas de autonomia e cuidado pessoal.'
+      },
+      {
+        id: 'q1-7',
+        question: 'Qual é o papel do Plano Terapêutico Singular (PTS) na rotina de uma Residência Terapêutica?',
+        options: [
+          'Um documento punitivo aplicado quando o morador quebra uma regra interna da casa.',
+          'Um planejamento de metas individualizadas construído conjuntamente pelo morador, equipe da SRT e equipe do CAPS para promover autonomia e projetos de vida.',
+          'Uma lista de horários fixos de banho e remédios igual para todos os moradores da casa.',
+          'Um formulário contábil para cobrança de aluguel dos moradores.'
+        ],
+        correctIndex: 1,
+        explanation: 'O PTS é um instrumento clínico e pedagógico de pactuação contínua, onde se definem ações singulares para o resgate de habilidades, sonhos e autonomia de cada sujeito.'
+      },
+      {
+        id: 'q1-8',
+        question: 'De que forma a equipe do Residencial Salomão em Blumenau/SC deve se articular com a Atenção Primária à Saúde (eSF/UBS)?',
+        options: [
+          'A SRT não deve ter contato com a UBS, pois atende apenas saúde mental e não saúde física.',
+          'Cadastrando os moradores na UBS do bairro para acompanhamento integral (vacinação, controle de diabetes, hipertensão, saúde bucal e exames preventivos).',
+          'Encaminhando os moradores para o hospital apenas quando estiverem em estado terminal.',
+          'Exigindo que a UBS forneça alimentação diária pronta para os cuidadores.'
+        ],
+        correctIndex: 1,
+        explanation: 'O morador da SRT é cidadão do território e usuário pleno do SUS. O acompanhamento de saúde física deve ser garantido pela Estratégia Saúde da Família (eSF) da UBS do bairro.'
+      },
+      {
+        id: 'q1-9',
+        question: 'Tratar moradores adultos de uma SRT com termos diminutivos e infantilizantes ("meus bebês", "anjinhos") constitui um desvio ético conhecido como:',
+        options: [
+          'Comunicação assertiva qualificada.',
+          'Paternalismo infantilizador, que anula a condição adulta e cidadã do sujeito.',
+          'Protocolo padrão de humanização hospitalar.',
+          'Técnica avançada de reabilitação motora.'
+        ],
+        correctIndex: 1,
+        explanation: 'A infantilização reforça a tutela e a menoridade social. Cuidadores antimanicomiais devem tratar os moradores com afeto e respeito compatíveis com sua idade adulta e dignidade civil.'
+      },
+      {
+        id: 'q1-10',
+        question: 'Se um morador da SRT manifestar o desejo de administrar seu próprio Benefício de Prestação Continuada (BPC / Lei Orgânica da Assistência Social) ou aposentadoria, qual deve ser a orientação da equipe?',
+        options: [
+          'A equipe deve confiscar o cartão bancário e proibir o morador de ver seu extrato.',
+          'Apoiar e trabalhar gradativamente a educação financeira com o apoio do assistente social do CAPS, estimulando o morador a gerenciar suas compras pessoais.',
+          'Entregar todo o dinheiro a vizinhos para que eles administrem.',
+          'Dizer ao morador que pessoas com diagnóstico psiquiátrico não têm direito a dinheiro.'
+        ],
+        correctIndex: 1,
+        explanation: 'O dinheiro do benefício pertence ao morador. A equipe da SRT e do CAPS deve estimular o manejo financeiro autônomo (comprar suas roupas, seus doces, seus passeios), resgatando o valor de troca social.'
       }
     ],
     essayTask: {
-      prompt: 'Considerando a história da Luta Antimanicomial no Brasil e as diretrizes do Residencial Terapêutico Salomão, elabore um texto dissertativo (de 15 a 25 linhas) explicando: 1) Por que o cuidador é considerado um "agente de cidadania" e não um mero leigo ou vigilante; 2) Como a postura diária do cuidador pode evitar que a SRT reproduza a lógica de um "mini-manicômio".',
+      prompt: 'Analise criticamente a diferença entre a "lógica asilar/tutelar" e a "lógica antimanicomial emancipatória" no cotidiano de uma Residência Terapêutica. Cite dois exemplos práticos de como o cuidador do Residencial Salomão pode transformar uma atividade rotineira (como a escolha da alimentação ou do vestuário) em um ato de reabilitação psicossocial e cidadania.',
       rubric: [
         {
-          criterion: 'Articulação Normativa e Antimanicomial',
+          criterion: 'Fundamentação na Lei 10.216/2001 e Reforma Psiquiátrica',
           weight: '30%',
-          guideline: 'Citar explicitamente os princípios da Lei 10.216/2001 e o conceito de desinstitucionalização.'
+          guideline: 'Demonstrar clareza sobre o papel da desinstitucionalização e superação do modelo manicomial segregador.'
         },
         {
-          criterion: 'Papel do Cuidador na Prática',
+          criterion: 'Aplicação prática aos 3 eixos de Saraceno (Habitat, Rede Social, Sentido)',
           weight: '40%',
-          guideline: 'Explicar a transição da postura de tutela/vigilância para a postura de escuta, facilitação da autonomia e apoio nas AVDs.'
+          guideline: 'Descrever como o cotidiano domiciliar promove a autonomia sem paternalismo ou infantilização.'
         },
         {
-          criterion: 'Prevenção da Lógica Asilar',
+          criterion: 'Clareza técnica e postura ética profissional',
           weight: '30%',
-          guideline: 'Identificar atitudes que geram institucionalização (rotinas rígidas impostas, uniformização, falta de escolha) e propor atitudes emancipatórias.'
+          guideline: 'Redação clara, respeitosa, propositiva e focada no papel pedagógico e acolhedor do cuidador.'
         }
       ],
-      modelAnswer: 'O cuidador em um Serviço de Residência Terapêutica (SRT) atua como um verdadeiro agente de cidadania ao operacionalizar no dia a dia os preceitos da Lei Federal nº 10.216/2001. Diferente de uma postura meramente vigilante ou assistencialista, o cuidador de saúde mental facilita a reconstrução da laço social e da autonomia de sujeitos historicamente privados de seus direitos fundamentais por longas internações asilares.\n\nPara evitar que a SRT Salomão se transforme em um "mini-manicômio", a equipe precisa combater práticas rotineiras de institucionalização, tais como: impor horários inflexíveis para dormir/acordar sem pactuação, escolher as roupas pelo morador, trancar mantimentos sem justificativa terapêutica ou referir-se aos moradores com tom infantilizado. A conduta emancipatória traduz-se no respeito à individualidade, na oferta de escolhas reais (o que comer, qual roupa vestir, onde passear no bairro), na mediação de conflitos com escuta qualificada e no incentivo contínuo às Atividades de Vida Diária (AVD), fortalecendo os eixos de habitar, conviver e pertencer à comunidade de Blumenau.'
+      modelAnswer: 'A lógica asilar baseia-se na padronização, no isolamento, na imposição de horários rígidos e na perda da identidade individual, onde o usuário é mero objeto passivo de cuidados. Em contraste, a lógica antimanicomial e emancipatória do Residencial Salomão (fundamentada na Lei 10.216/2001) reconhece o morador como sujeito de direitos e protagonista de sua própria vida. No cotidiano, o cuidador aplica essa emancipação de forma prática: 1) Na alimentação, em vez de servir o prato pronto sem consulta, o cuidador convida o morador para a cozinha, apresenta as opções de alimentos disponíveis, incentiva-o a servir a quantidade desejada ou a temperar sua salada, transformando o ato de comer em exercício de escolha; 2) No vestuário, o cuidador respeita o gosto pessoal e o estilo de cada um, estimulando o morador a abrir o guarda-roupa, escolher a combinação de cores para sair à rua e guardar suas roupas limpas, reconstruindo o senso de posse e autoestima corporal.'
     }
   },
+
+  // ==========================================
+  // MÓDULO 2: COTIDIANO E CUIDADO FÍSICO COM DIGNIDADE
+  // ==========================================
   {
     id: 2,
     title: 'Módulo 2: O Cotidiano e o Cuidado Físico com Dignidade',
     shortTitle: 'Cotidiano e Cuidado Físico',
-    subtitle: 'Autonomia nas AVDs, Higiene Respeitosa, Ergonomia e Rotina Domiciliar Terapêutica',
-    summary: 'Aprenda a estruturar a rotina da casa promovendo a máxima autonomia dos moradores. Domine técnicas de ergonomia para preservação da coluna do cuidador, prevenção de lesões por pressão em acamados e suporte humanizado na higiene pessoal.',
+    subtitle: 'Autonomia nas ABVDs, Higiene Humanizada, Prevenção de Lesões por Pressão e Nutrição Afetiva',
+    summary: 'Aprenda a estruturar a rotina de um lar terapêutico sem reproduzir a rigidez asilar. Domine técnicas humanizadas de auxílio nas Atividades Básicas de Vida Diária (ABVD), prevenção de lesões de pele, hidratação e biossegurança domiciliar segundo a RDC ANVISA nº 50/2002.',
     iconName: 'HeartHandshake',
     workloadHours: 8,
     normativeBase: [
-      'Resolução RDC ANVISA nº 50/2002 (Critérios de acessibilidade, conforto e higiene em ambientes assistenciais)',
-      'Cadernos de Atenção Básica do Ministério da Saúde (Envelhecimento e Saúde da Pessoa Idosa/Dependente)',
-      'Manual de Boas Práticas de Higiene e Nutrição em Unidades Residenciais Coletivas'
+      'RDC ANVISA nº 50/2002 (Critérios de infraestrutura física e sanitária em serviços coletivos de saúde)',
+      'Cadernos de Atenção Básica nº 39 do Ministério da Saúde (Núcleo de Apoio à Saúde da Família e Reabilitação)',
+      'Protocolos Clínicos e Diretrizes Terapêuticas (PCDT) para Prevenção e Tratamento de Lesões por Pressão (LPP/MS)',
+      'Guia Alimentar para a População Brasileira (Ministério da Saúde)'
     ],
     contentSections: [
       {
-        title: '1. A Rotina Doméstica Terapêutica: Entre a Estrutura e a Flexibilidade',
+        title: '1. A Rotina Domiciliar: Do Controle Hospitalar à Flexibilidade do Lar',
         paragraphs: [
-          'Em uma SRT, a rotina não deve ser uma imposição militar ou hospitalar, mas um organizador psíquico que traz segurança e previsibilidade aos moradores. A elaboração do cardápio, a organização da lavanderia, a limpeza dos quartos e os horários de lazer devem contar com a participação ativa dos moradores dentro de suas capacidades.',
-          'Fazer COM o morador, e não FAZER PELO morador, é a regra de ouro do cuidado de reabilitação. Se um morador consegue dobrar suas próprias camisetas, ele deve ser incentivado e apoiado a fazê-lo, ainda que a dobra não fique perfeita.'
+          'No ambiente asilar tradicional, a rotina é militarizada: todos acordam ao toque de campainha, tomam banho em fila no mesmo horário e comem em mesas coletivas de aço inox. Na Residência Terapêutica Salomão, a rotina é viva, humana e adaptada às necessidades e ritmos biológicos dos moradores.',
+          'Construir uma rotina doméstica saudável não significa impor horários ditatoriais, mas estabelecer uma previsibilidade tranquilizadora que ajude os moradores a se organizarem no tempo e no espaço. Quem gosta de acordar mais cedo tem seu café servido com calma; quem precisa de repouso adicional tem seu sono respeitado, desde que as necessidades nutricionais e medicamentosas sejam atendidas com segurança.'
         ],
-        keyTakeaway: 'A dependência funcional muitas vezes é produzida e aprofundada pela própria equipe quando esta substitui o morador em tarefas que ele teria condições de realizar com apoio.',
+        keyTakeaway: 'A regra de ouro do cotidiano é: "FAZER COM E NÃO FAZER POR". Se um morador consegue segurar a escova de dentes, o cuidador guia e estimula o movimento, mas não toma a escova da mão dele por pressa.',
+        normativeHighlight: 'Diretriz de Humanização do SUS: O cuidado cotidiano deve promover a co-responsabilidade e a autonomia dos sujeitos, valorizando a dimensão subjetiva e singular de cada indivíduo.'
+      },
+      {
+        title: '2. Higiene e Banho Humanizado: Manejo de Traumas e Recusas',
+        paragraphs: [
+          'O momento do banho é uma das atividades mais delicadas na SRT. Muitos moradores que passaram décadas em manicômios têm memórias de abusos associadas à água (duchas frias de mangueira usadas como castigo, banhos coletivos forçados sem privacidade). Por essa razão, a recusa ao banho não deve ser interpretada como "birra" ou "falta de higiene", mas frequentemente como resposta a um gatilho de dor e medo.',
+          'Passos para o Banho Humanizado:',
+          '1. Preparação Ambiental: Manter o banheiro aquecido, privativo (portas e cortinas fechadas), com toalha macia e sabonete preferido à disposição.',
+          '2. Comunicação Prévia: Nunca despir o morador subitamente. Explique com calma o que vai acontecer: "Dona Ivone, a água está morninha e bem gostosa. Vamos lavar os braços primeiro?".',
+          '3. Respeito ao Pudor: Manter o morador coberto com uma toalha seca durante a transição e permitir que ele mesmo lave as partes íntimas quando capaz.',
+          '4. Alternativas em caso de Recusa Aguda: Se houver recusa severa com angústia, não force. Negocie a higienização facial e das mãos, ou banho de leito/bacia com água morna e toalhas úmidas, retomando a tentativa mais tarde.'
+        ],
         practicalTips: [
-          'Construa um quadro visual interativo de rotinas na cozinha com fotos ou figuras para moradores com dificuldades de leitura.',
-          'Estimule o pertencimento permitindo que cada morador decore e organize seu quarto com seus objetos pessoais e memórias.'
+          'Teste sempre a temperatura da água no dorso da sua mão antes de direcionar o chuveiro para o corpo do morador.',
+          'Utilize tapetes de borracha antiderrapantes e verifique a firmeza das barras de apoio no box.'
         ]
       },
       {
-        title: '2. Higiene Pessoal Respeitosa e Prevenção de Traumas no Banho',
+        title: '3. Prevenção e Manejo de Lesões por Pressão (LPP) e Cuidados Posturais',
         paragraphs: [
-          'O momento do banho e da higiene íntima é frequentemente uma zona de vulnerabilidade extrema e de gatilhos pós-traumáticos para egressos de asilos psiquiátricos (onde duchas frias e duchas coletivas sob coação eram usadas como punição).',
-          'A recusa ao banho não deve ser respondida com força física ou ameaças ("se não tomar banho, não vai ver TV"). Exige negociação, adequação da temperatura da água, escolha do sabonete de preferência, presença de cuidador do mesmo sexo quando solicitado e garantia de total privacidade.'
+          'Moradores com limitações de mobilidade ou que passam longos períodos sentados em cadeiras de rodas ou deitados estão em alto risco de desenvolver Lesões por Pressão (LPP), antigamente chamadas de escaras. A prevenção é um dever técnico primário da equipe de cuidadores:',
+          '• Mudança de Decúbito Sistemática: Em moradores acamados, alternar a posição corporal a cada 2 horas (decúbito dorsal, decúbito lateral direito e lateral esquerdo em ângulo de 30º para não sobrecarregar o trocânter).',
+          '• Alívio de Pressão na Poltrona: Em moradores cadeirantes, reposicionar o peso corporal a cada 30 a 60 minutos e utilizar almofadas de redistribuição de ar ou gel.',
+          '• Inspeção Diária da Pele: Durante o banho e a troca de fraldas, inspecionar rigorosamente as proeminências ósseas: região sacral, calcanhares, cotovelos, escápulas e trocânteres.',
+          '• Hidratação Cutânea: Aplicar loções hidratantes suaves e AGE (Ácidos Graxos Essenciais). ATENÇÃO: NUNCA massagear áreas que já apresentem vermelhidão fixa (hiperemia não branqueável), pois a massagem agrava a isquemia tecidual.'
         ],
-        normativeHighlight: 'Direito à Privacidade e Intimidade: Toda intervenção de higiene corporal deve ocorrer a portas fechadas, respeitando a pudicícia e a integridade física e moral do morador.'
+        normativeHighlight: 'Protocolo de Prevenção de Úlcera por Pressão (MS/ANVISA): Medidas preventivas adequadas reduzem em até 95% a incidência de lesões graves de pele em ambientes de acolhimento e saúde.'
       },
       {
-        title: '3. Ergonomia do Cuidador e Mobilização Segura de Moradores Dependentes',
+        title: '4. Nutrição Afetiva, Hidratação e Prevenção de Engasgos (Disfagia)',
         paragraphs: [
-          'O cuidador de SRT Tipo II frequentemente lida com moradores idosos, com sequelas neurológicas, déficit motor ou uso de psicotrópicos que alteram a marcha e o equilíbrio. A preservação da saúde física do cuidador (coluna vertebral, articulações) é indispensável para a sustentabilidade do trabalho.',
-          'Mecanismos de transferência: Uso da base de apoio alargada (pés afastados na largura dos ombros), flexão dos joelhos (não dobrar a coluna), manter o peso do morador próximo ao próprio corpo e utilizar o peso corporal a seu favor durante a mudança de decúbito e transferência cama-cadeira.'
-        ],
-        practicalTips: [
-          'Nas mudanças de decúbito a cada 2 horas para moradores acamados, utilize lençóis móbiles ("traçado") e peça ajuda a um colega de equipe para transferências pesadas.',
-          'Verifique a pele do morador nas zonas de pressão (sacro, calcanhares, trocânteres) diariamente para prevenção de Lesões por Pressão (LPP).'
+          'A alimentação na SRT tem função terapêutica, social e biológica. Preparar bolos, escolher o tempero do almoço e sentar juntos à mesa são atos de celebração da vida comunitária.',
+          'No entanto, moradores em uso crônico de antipsicóticos ou com doenças neurológicas associadas frequentemente apresentam disfagia (dificuldade de deglutição) e lentificação motora, aumentando o risco de engasgos e pneumonia aspirativa.',
+          'Cuidados Vitais na Alimentação:',
+          '• Postura Ergonômica: O morador deve se alimentar sempre sentado com a coluna a 90º. NUNCA alimentar morador deitado.',
+          '• Ritmo Calmo: Respeite o tempo de mastigação e deglutição. Aguarde a deglutição completa antes de oferecer nova garfada.',
+          '• Adaptação de Consistência: Se orientado pela fonoaudióloga ou equipe de saúde, utilizar espessantes alimentares para líquidos e adaptar alimentos sólidos para consistência pastosa ou branda.',
+          '• Oferta Hídrica Ativa: Manter oferta regular de água fresca ao longo de todo o dia (mínimo de 1,5 a 2 litros por morador, salvo contraindicação renal/cardíaca).'
         ]
       }
     ],
     caseStudy: {
-      title: 'A Resistência Terapêutica ao Banho Matinal de Dona Maria',
-      residentContext: 'Dona Maria, 68 anos, reside na SRT Salomão há 1 ano. Possui diagnóstico de Esquizofrenia Residual e osteoartrose grave em joelhos. Pela manhã, a cuidadora da escala tenta levá-la ao banheiro às 07:00 para o banho. Maria encolhe-se na cama, agarra as cobertas, chora e grita: "A água gelada não! Não me matem!".',
-      scenarioDescription: 'A cuidadora novata, com pressa para cumprir as tarefas da manhã e servir o café, tenta puxar a coberta de Dona Maria e diz em tom ríspido: "Vamos Maria, larga de drama que a água tá morna e eu tenho mais 7 moradores pra dar banho antes do plantão acabar!". A moradora reage tentando desferir um tapa na cuidadora.',
-      keyDilemma: 'Como lidar com o trauma prévio de internação psiquiátrica associado à água e respeitar a autonomia temporal da moradora sem comprometer os cuidados essenciais de higiene?',
+      title: 'O Conflito do Banho e a Higiene de Dona Valdete',
+      residentContext: 'Dona Valdete, 58 anos, diagnosticada com esquizofrenia paranoide e sequela de AVC com hemiparesia leve à direita, reside no Residencial Salomão há 1 ano. É extremamente apegada às suas bolsas velhas e casacos grossos, mesmo em dias de calor intenso de verão em Blumenau.',
+      scenarioDescription: 'Às 16h, durante a escala de banho, o cuidador avisa Valdete que ela precisa tomar banho e tirar os três casacos que está vestindo. Valdete agarra as roupas com força, senta no chão da sala e grita que não vai tirar as roupas porque "vão roubar suas joias e jogar água de mangueira nela". O cuidador novato perde a paciência, puxa o braço de Valdete para levantá-la e ameaça deixá-la sem jantar.',
+      keyDilemma: 'Como mediar a necessidade real de higiene corporal e troca de roupas sem cometer violência verbal/física e sem desrespeitar os medos arcaicos da moradora?',
       guidedQuestions: [
-        'O que a reação de alarme e choro de Dona Maria revela sobre sua história de institucionalização?',
-        'Qual foi o erro de abordagem da cuidadora novata ao priorizar a pressa operacional em vez do acolhimento?',
-        'Quais estratégias de pactuação e conforto físico podem ser adotadas para transformar a higiene em um momento seguro?'
+        'Qual o erro grave de conduta cometido pelo cuidador no manejo da situação?',
+        'Como a equipe pode negociar a segurança das roupas e pertences de Valdete para que ela se sinta protegida?',
+        'Quais estratégias de cuidado físico respeitam a dignidade e a integridade da moradora?'
       ],
-      recommendedConduct: 'A cuidadora deve imediatamente cessar a aproximação física ostensiva, dar dois passos para trás, cobrir Dona Maria novamente e abaixar-se na altura dos olhos dela com tom acolhedor. Deve validar a dor: "Dona Maria, desculpe assustar a senhora. Ninguém vai te machucar e a água aqui é quentinha, mas a senhora não precisa tomar banho agora se não quiser". Oferecer adiar o banho para depois do café da manhã ou para a tarde (quando a dor articular da osteoartrose diminui), permitir que Maria teste a temperatura da água com a própria mão na torneira e escolha seu sabonete preferido.',
-      normativeReference: 'Diretrizes de Humanização do SUS (PNH) e Resolução RDC 50/ANVISA - Garantia de ambiência acolhedora, autonomia do usuário e proibição de condutas coercitivas.'
+      recommendedConduct: 'O cuidador deve cessar imediatamente qualquer contato físico forçado, ajoelhar-se na altura dos olhos de Valdete e pedir desculpas pelo susto. Deve validar seu sentimento: "Dona Valdete, suas coisas são suas e ninguém vai mexer nelas". A equipe pode propor que as bolsas e os casacos fiquem dentro de uma cesta visível dentro do banheiro ao alcance dos olhos dela durante o banho. O banho deve ser realizado em etapas tranquilas, adaptado para a hemiparesia, permitindo que ela escolha roupas limpas e confortáveis.',
+      normativeReference: 'RDC ANVISA nº 50/2002 e Estatuto da Pessoa com Deficiência (Lei nº 13.146/2015): Garantia de acessibilidade, respeito à integridade física e moral e proibição de tratamento coercitivo.'
     },
     quiz: [
       {
         id: 'q2-1',
-        question: 'Ao planejar as Atividades de Vida Diária (AVD) dos moradores do Residencial Terapêutico Salomão, qual deve ser o princípio condutor da equipe de cuidadores?',
+        question: 'Qual é o lema central da reabilitação psicossocial no suporte às Atividades Básicas de Vida Diária (ABVD)?',
         options: [
-          'Assumir a execução total de todas as tarefas domésticas para garantir rapidez e padrão de limpeza institucional.',
-          'Estimular e acompanhar a autonomia dos moradores, incentivando que façam o máximo de tarefas possíveis por si mesmos, com apoio gradual.',
-          'Permitir que os moradores façam apenas tarefas de alto risco para testar sua capacidade de responsabilidade.',
-          'Proibir moradores de entrarem na cozinha ou lavanderia por motivos estritos de segurança patrimonial.'
+          'Fazer o mais rápido possível pelo morador para economizar tempo da equipe.',
+          'Fazer COM o morador e não PELO morador, estimulando cada pequeno gesto de autonomia.',
+          'Exigir que o morador faça tudo sozinho sem qualquer ajuda ou supervisão.',
+          'Delegar todas as tarefas de higiene para a família nos finais de semana.'
         ],
         correctIndex: 1,
-        explanation: 'O foco da reabilitação psicossocial é a máxima autonomia possível nas AVDs. O cuidador apoia e ensina, sem infantilizar ou substituir a capacidade do sujeito.'
+        explanation: 'O cuidado reabilitador estimula a autonomia residual do sujeito. O cuidador apoia, orienta e compartilha a tarefa ("fazer com"), evitando a substituição desnecessária ("fazer por").'
       },
       {
         id: 'q2-2',
-        question: 'Durante a transferência de um morador com dependência motora da cama para a cadeira de rodas, qual é a conduta ergonômica correta para o cuidador proteger sua coluna vertebral?',
+        question: 'Durante o auxílio no banho de um morador com histórico de longa internação asilar, ele começa a chorar e recusa entrar no box. Qual deve ser a atitude imediata do cuidador?',
         options: [
-          'Manter as pernas totalmente esticadas e dobrar a coluna lombar para frente ao puxar o morador.',
-          'Afastar os pés na largura dos ombros, dobrar os joelhos, manter o morador próximo ao tronco e girar o corpo com os pés, sem torcer o tronco.',
-          'Puxar o morador rapidamente pelos braços esticados de uma só vez, sem avisá-lo previamente.',
-          'Realizar a transferência sempre sozinho, independentemente do peso do morador.'
+          'Despir o morador à força e colocá-lo debaixo da água fria para interromper a crise.',
+          'Acolher com voz calma, interromper a ação que causa sofrimento, respeitar o espaço e propor alternativas como banho de bacia morno ou retomar mais tarde.',
+          'Trancar a porta do banheiro até que ele decida tomar o banho sozinho.',
+          'Avisar que ele perderá a sobremesa do almoço caso não tome banho imediatamente.'
         ],
         correctIndex: 1,
-        explanation: 'A biomecânica correta exige base ampla, flexão de joelhos, proximidade da carga ao centro de gravidade e rotação em bloco com os pés, evitando o cisalhamento da coluna lombar.'
+        explanation: 'O banho forçado reproduz a violência asilar. A recusa deve ser tratada com acolhimento empático, diálogo paciente e adaptações que garantam a dignidade do morador.'
       },
       {
         id: 'q2-3',
-        question: 'Um morador idoso acamado na SRT necessita de mudanças de posição (decúbito) periódicas para evitar lesões por pressão (escaras). Qual é a frequência recomendada para esse procedimento?',
+        question: 'Para a prevenção eficaz de Lesões por Pressão (LPP) em moradores com mobilidade reduzida acamados, qual é o intervalo máximo recomendado para mudança de decúbito?',
         options: [
-          'Uma vez a cada 24 horas, preferencialmente durante a troca de plantão noturno.',
-          'A cada 2 horas, alternando entre decúbito dorsal (costas), lateral esquerdo e lateral direito, inspecionando a pele.',
-          'Apenas quando o morador reclamar de dores intensas nas costas.',
-          'Três vezes por semana após o banho completo.'
+          'A cada 2 horas ao longo de todo o dia e noite.',
+          'Apenas uma vez ao dia pela manhã.',
+          'A cada 12 horas durante a troca de plantão.',
+          'Somente quando o morador solicitar ajuda verbalmente.'
         ],
-        correctIndex: 1,
-        explanation: 'A reposição a cada 2 horas é o padrão-ouro de enfermagem e cuidado continuado para aliviar a pressão isquêmica sobre proeminências ósseas e prevenir Lesões por Pressão (LPP).'
+        correctIndex: 0,
+        explanation: 'Diretrizes internacionais e o Ministério da Saúde estabelecem a mudança sistemática de posição a cada 2 horas para aliviar a isquemia tecidual sobre proeminências ósseas.'
       },
       {
         id: 'q2-4',
-        question: 'Frente à recusa convicta de um morador em realizar a higiene bucal antes de dormir, qual deve ser a postura adequada do cuidador?',
+        question: 'Ao inspecionar a pele de um morador idoso durante o banho, o cuidador nota uma área avermelhada na região sacral que não embranquece ao toque. Qual conduta é expressamente CONTRAINDICADA?',
         options: [
-          'Uso da força física para abrir a boca do morador e passar a escova.',
-          'Ameaçar cortar o café da manhã do dia seguinte até que ele cumpra a higiene.',
-          'Compreender o motivo da recusa com escuta calma, tentar uma abordagem lúdica/pactuada ou postergar momentaneamente, registrando a conduta no diário de bordo sem punições.',
-          'Ignorar definitivamente a higiene bucal de todos os moradores que não demonstrarem vontade espontânea.'
+          'Aliviar a pressão sobre o local e reposicionar o morador.',
+          'Massagear com força a região avermelhada com álcool ou cremes.',
+          'Comunicar a enfermagem do CAPS/UBS para avaliação e conduta tópica.',
+          'Hidratar a pele intacta ao redor sem fricção mecânica direta na lesão.'
         ],
-        correctIndex: 2,
-        explanation: 'Coação e punição são veementemente vedadas. A conduta correta passa pela escuta, vínculo, paciência e estratégias de pactuação, com devido registro e repasse à equipe multidisciplinar.'
+        correctIndex: 1,
+        explanation: 'A massagem vigorosa sobre áreas de hiperemia não branqueável (estágio 1 de LPP) é contraindicada, pois rompe os capilares já fragilizados e acelera a necrose tecidual.'
+      },
+      {
+        id: 'q2-5',
+        question: 'Qual é a posição corporal correta para oferecer alimentação e hidratação a um morador com queixa de dificuldade de engolir (disfagia)?',
+        options: [
+          'Deitado de costas com a cabeça baixa para relaxar o pescoço.',
+          'Sentado ereto com a coluna a 90 graus (posição de Fowler alta) e tronco alinhado.',
+          'Deitado de lado com o prato colocado na altura dos pés.',
+          'Em pé correndo pelo corredor da residência.'
+        ],
+        correctIndex: 1,
+        explanation: 'Alimentar o morador sentado a 90º com apoio para a cabeça e tronco é essencial para prevenir broncoaspiração de alimentos para os pulmões e engasgos fatais.'
+      },
+      {
+        id: 'q2-6',
+        question: 'De acordo com a RDC ANVISA nº 50/2002 sobre biossegurança e infraestrutura, como devem ser acondicionados os lençóis e roupas sujas com fluidos corporais na SRT?',
+        options: [
+          'Jogados diretamente no chão do corredor para serem recolhidos depois.',
+          'Acondicionados em sacos impermeáveis (hamper) devidamente identificados e lavados separadamente com desinfetante adequado.',
+          'Misturados com os panos de prato da cozinha na mesma bacia.',
+          'Guardados úmidos dentro do armário do morador.'
+        ],
+        correctIndex: 1,
+        explanation: 'Roupas com presença de fluidos corporais exigem manejo higiênico seguro em sacos impermeáveis para evitar contaminação cruzada no ambiente domiciliar coletivo.'
+      },
+      {
+        id: 'q2-7',
+        question: 'Um morador com disfagia leve engasga frequentemente com água pura. Qual é a intervenção correta após avaliação fonoaudiológica e médica?',
+        options: [
+          'Suspender completamente a oferta de qualquer líquido para o morador.',
+          'Utilizar espessante alimentar na dosagem prescrita para conferir consistência adequada (néctar, mel ou pudim) aos líquidos oferecidos.',
+          'Obrigar o morador a beber água rapidamente com um canudo largo.',
+          'Oferecer refrigerante com bastante gás para desobstruir a garganta.'
+        ],
+        correctIndex: 1,
+        explanation: 'O uso de espessantes alimentares padronizados permite que líquidos atinjam a consistência segura recomendada por fonoaudiólogos, prevenindo a aspiração pulmonar.'
+      },
+      {
+        id: 'q2-8',
+        question: 'Por que o incentivo à higiene bucal (escovação dos dentes e limpeza de próteses dentárias) após cada refeição é crucial na saúde mental?',
+        options: [
+          'Apenas por exigência estética da coordenação da casa.',
+          'Porque a má higiene bucal combinada com a boca seca (efeito colateral de antipsicóticos) gera cáries severas, infecções fúngicas e risco de endocardite e pneumonias.',
+          'Porque substitui o uso de medicamentos psiquiátricos diários.',
+          'Para evitar que os moradores conversem durante a tarde.'
+        ],
+        correctIndex: 1,
+        explanation: 'Medicamentos psicotrópicos reduzem o fluxo salivar (xerostomia), tornando dentes e gengivas altamente suscetíveis a infecções bacterianas e pneumonias por aspiração bacteriana oral.'
+      },
+      {
+        id: 'q2-9',
+        question: 'Ao auxiliar um morador cadeirante na transferência da cama para a cadeira de rodas, qual cuidado ergonômico o cuidador deve adotar para proteger sua própria coluna e a segurança do morador?',
+        options: [
+          'Dobrar a coluna lombar mantendo as pernas esticadas e puxar o morador pelo pescoço.',
+          'Travar as rodas da cadeira, flexionar os joelhos, manter a coluna ereta, posicionar a cadeira próxima à cama e solicitar auxílio de outro colega se necessário.',
+          'Deixar a cadeira de rodas solta para que ela deslize livremente durante o movimento.',
+          'Realizar o movimento com apenas uma das mãos enquanto segura o celular na outra.'
+        ],
+        correctIndex: 1,
+        explanation: 'Ergonomia do cuidador exige joelhos flexionados, coluna preservada, base de apoio ampla e travamento firme dos equipamentos de mobilidade.'
+      },
+      {
+        id: 'q2-10',
+        question: 'Qual é a conduta correta em relação à alimentação saudável e afetiva dos moradores no Residencial Terapêutico Salomão?',
+        options: [
+          'Servir refeições ultraprocessadas todos os dias para evitar o trabalho de cozinhar.',
+          'Construir cardápios balanceados com alimentos frescos, respeitando restrições clínicas (diabetes, hipertensão) e incluindo pratos típicos e preferências culturais dos moradores.',
+          'Proibir que qualquer morador coma doces ou frutas sob qualquer circunstância.',
+          'Obrigar todos os moradores a comer exatamente a mesma quantidade de comida sem respeitar a saciedade individual.'
+        ],
+        correctIndex: 1,
+        explanation: 'A alimentação humanizada equilibra o rigor nutricional preventivo com o afeto, a memória alimentar e o prazer gastronômico do viver comunitário.'
       }
     ],
     essayTask: {
-      prompt: 'Descreva detalhadamente a conduta de um cuidador ao realizar o banho em um morador da SRT Tipo II que apresenta limitação de mobilidade e histórico de trauma em instituições psiquiátricas fechadas. Sua resposta deve abordar obrigatoriamente: 1) As etapas de preparação do ambiente e do morador; 2) Os cuidados ergométricos do cuidador; 3) As ações para garantir a dignidade e a eliminação do sentimento de ameaça.',
+      prompt: 'Descreva um protocolo de atuação do cuidador para a realização do Banho Humanizado em um morador de SRT que apresenta resistência e medo decorrentes de vivências traumáticas em hospitais psiquiátricos. Destaque: 1) A preparação do ambiente; 2) A abordagem comunicacional; 3) A conduta ética caso a recusa persista.',
       rubric: [
         {
-          criterion: 'Humanização e Comunicação Prévia',
-          weight: '35%',
-          guideline: 'Explicar o aviso antecipado, checagem da água pelo morador, acolhimento afetivo e preservação do pudor.'
+          criterion: 'Domínio das técnicas de banho humanizado e acolhimento',
+          weight: '40%',
+          guideline: 'Demonstrar passos detalhados de ambientação, respeito ao pudor e prevenção de quedas.'
         },
         {
-          criterion: 'Segurança Física e Ergonomia',
+          criterion: 'Sensibilidade ao trauma asilar e postura não punitiva',
           weight: '35%',
-          guideline: 'Descrever o uso de cadeira de banho apropriada, barras de apoio, antiderrapante e postura biomecânica correta do cuidador.'
+          guideline: 'Explicitar a proibição de coerção física e apresentar alternativas suaves e respeitosas.'
         },
         {
-          criterion: 'Respeito à Autonomia',
-          weight: '30%',
-          guideline: 'Mencionar a participação ativa do morador no processo (lavar o rosto, escolher o sabonete).'
+          criterion: 'Registro técnico e articulação com a equipe',
+          weight: '25%',
+          guideline: 'Explicar como o evento deve ser registrado no diário de bordo e comunicado à referência técnica.'
         }
       ],
-      modelAnswer: 'A realização do banho em um morador com limitação motora e histórico de trauma psiquiátrico exige planejamento rigoroso para transformar a rotina assistencial em ato de cuidado terapêutico. \n\nPrimeiramente, a preparação envolve avisar o morador com antecedência e voz calma, convidando-o e não impondo a tarefa. O banheiro deve estar pré-aquecido, com portas fechadas para garantir total privacidade, barras de apoio inspecionadas e tapetes antiderrapantes instalados. Antes de iniciar, o cuidador oferece para que o próprio morador sinta a temperatura da água na mão, desconstruindo a memória traumática de jatos frios coercitivos.\n\nEm segundo lugar, do ponto de vista ergonômico, o cuidador utiliza uma cadeira de banho adequada com travamento de rodas ativado, mantendo sua coluna ereta e joelhos flexionados durante a transferência e o auxílio. Durante a higiene, preserva-se a exposição corporal lavando uma parte do corpo de cada vez sob a toalha ou água morna.\n\nPor fim, incentiva-se a máxima autonomia possível: se o morador consegue lavar seu próprio rosto ou braços, a esponja lhe é entregue. Ao final, a secagem é suave e a escolha da roupa é feita pelo próprio morador, reforçando sua dignidade e sentimento de segurança no lar.'
+      modelAnswer: 'O protocolo do Banho Humanizado estrutura-se em 3 etapas: 1) Preparação Ambiental: O cuidador verifica previamente a temperatura da água no dorso da mão, garante que portas e cortinas estejam fechadas para assegurar privacidade, separa toalhas secas, roupas limpas escolhidas pelo próprio morador e produtos de higiene de sua preferência, além de checar barras de apoio e tapete antiderrapante; 2) Abordagem Comunicacional: O cuidador aproxima-se com tom de voz calmo e acolhedor, explica o procedimento sem pressa, convida o morador a acompanhar o preparo e estimula que ele participe lavando partes do corpo acessíveis, mantendo-o coberto com toalha para preservar o pudor; 3) Conduta em caso de Recusa Persistente: Caso o morador apresente intensa angústia, o cuidador NUNCA utiliza força física ou ameaças. Acolhe o medo, interrompe a tentativa no chuveiro e propõe higienização facial e das mãos ou banho de leito morno com toalhas úmidas, pactuando uma nova tentativa mais tarde. Ao término, registra o comportamento de forma técnica no diário de bordo e compartilha com a equipe do CAPS para atualização do PTS.'
     }
   },
+
+  // ==========================================
+  // MÓDULO 3: SAÚDE MENTAL PRÁTICA E MANEJO DE CRISES
+  // ==========================================
   {
     id: 3,
     title: 'Módulo 3: Saúde Mental Prática e Manejo de Crises',
     shortTitle: 'Manejo de Crises e Desescalada',
-    subtitle: 'Sinais Prodrômicos, Desescalada Verbal, Protocolos de Segurança e Articulação RAPS Blumenau',
-    summary: 'Aprenda a reconhecer precocemente as alterações de comportamento que antecedem uma crise psiquiátrica. Domine técnicas avançadas de desescalada verbal (método de Richmond) e saiba como acionar o CAPS II/III e o SAMU 192 com clareza.',
+    subtitle: 'Sinais Prodrômicos, Desescalada Verbal (Método Richmond), Não-Violência e Articulação na RAPS',
+    summary: 'Domine a identificação precoce de desestabilizações psíquicas, técnicas avançadas de desescalada verbal sem coerção física e a atuação articulada com CAPS III, SAMU 192 e a rede de urgência de Blumenau/SC.',
     iconName: 'ShieldAlert',
-    workloadHours: 10,
+    workloadHours: 8,
     normativeBase: [
-      'Portaria GM/MS nº 3.088/2011 (Organização da RAPS e atenção às urgências psiquiátricas)',
-      'Diretrizes de Desescalada e Manejo de Comportamento Agitado da Associação Brasileira de Psiquiatria (ABP)',
-      'Protocolo de Atendimento Pré-Hospitalar do SAMU 192 Blumenau / Santa Catarina para Urgências Psiquiátricas'
+      'Lei Federal nº 10.216/2001 (Proteção contra violência e tratamento desumano em saúde mental)',
+      'Protocolo de Desescalada Verbal em Situações de Agitação Psicomotora (Projeto BETA / Richmond Consensus)',
+      'Portaria GM/MS nº 3.088/2011 (Articulação da Rede de Atenção às Urgências e Emergências Psiquiátricas na RAPS)',
+      'Diretrizes do Ministério da Saúde para o Manejo de Comportamento Suicida e Autolesão'
     ],
     contentSections: [
       {
-        title: '1. Compreendendo a Crise Psíquica: Sofrimento, Não Ameaça',
+        title: '1. Compreendendo a Crise em Saúde Mental: Sofrimento, Não Delito',
         paragraphs: [
-          'A crise em saúde mental não deve ser entendida como um ato de violência intencional ou "maldade", mas sim como um momento de desorganização psíquica intensa, no qual o sujeito perde temporariamente a capacidade de reverter o sofrimento por vias verbais convencionais.',
-          'No Residencial Terapêutico Salomão, o cuidador deve atuar na prevenção e identificação precoce dos sinais prodrômicos (sinais de alerta): alteração no padrão de sono, mutismo repentino, ritmo acelerado de caminhada na casa (pacing), olhar fixo, fala desconexa, respostas a alucinações auditivas ou isolamento social atípico.'
+          'A crise psíquica não é um ato de desobediência civil nem um crime; é a expressão aguda de um sofrimento psíquico insuportável no qual os mecanismos habituais de autorregulação do sujeito entram em colapso temporário. Na SRT, o objetivo da equipe não é "reprimir" a crise com violência, mas ser o continente seguro e afetivo que ajuda o morador a restabelecer o equilíbrio.',
+          'Sinais Prodrômicos (Precursores da Crise):',
+          'Raramente uma crise grave irrompe sem avisos prévios. Cuidadores atentos reconhecem os pródromos dias ou horas antes:',
+          '• Alteração abrupta no padrão de sono (insônia terminal, inversão dia/noite);',
+          '• Inquietação psicomotora contínua ("pacing" - andar de um lado para o outro sem parar);',
+          '• Aumento de solilóquios (falar sozinho em tom alterado ou discutir com vozes alucinatórias);',
+          '• Isolamento social repentino ou recusa de refeições;',
+          '• Postura de hipervigilância, olhar assustado ou desconfiança intensa.'
         ],
-        keyTakeaway: 'A maior parte das crises graves pode ser evitada se o cuidador notar as pequenas mudanças de comportamento nas primeiras 24 a 48 horas e intervir com escuta qualificada.',
+        keyTakeaway: 'Identificar o pródromo e intervir precocemente com escuta, acolhimento e ajuste de rotina evita 80% das crises agudas graves com necessidade de encaminhamento externo.',
+        normativeHighlight: 'Art. 2º da Lei 10.216/2001: É direito do usuário ter atendimento em ambiente terapêutico menos invasivo possível, visando primordialmente sua reinserção comunitária.'
+      },
+      {
+        title: '2. Os 10 Princípios da Desescalada Verbal (Método de Richmond / Projeto BETA)',
+        paragraphs: [
+          'O Projeto BETA (Best Practices in Evaluation and Treatment of Agitation) e o Consenso de Richmond estabelecem 10 passos fundamentais para a desescalada verbal em situações de agitação psicomotora:',
+          '1. Respeite o Espaço Pessoal: Mantenha pelo menos dois braços de distância do morador. Não se posicione encurralando-o nem fique de costas para uma parede fechada.',
+          '2. Não Seja Provocador: Mantenha postura corporal aberta, mãos visíveis, sem cruzar os braços, sem cerrar os punhos e sem apontar o dedo.',
+          '3. Estabeleça Contato Verbal: Apenas UM cuidador deve falar de cada vez. Múltiplas vozes falando juntas aumentam a sobrecarga cognitiva e a desorganização do morador.',
+          '4. Seja Conciso e Claro: Use frases curtas, objetivas e em vocabulário simples. Pessoas em crise têm dificuldade de processar raciocínios complexos.',
+          '5. Identifique Desejos e Sentimentos: Valide a emoção: "Seu Carlos, percebo que o senhor está muito irritado com o barulho da TV. Eu quero te ajudar".',
+          '6. Escute Atentamente: Ouça o que o morador diz sem interrompê-lo a cada frase.',
+          '7. Concorde ou Concorde em Discordar: Encontre pontos de verdade ("O senhor tem razão, a casa está barulhenta hoje") sem alimentar delírios delirantes graves.',
+          '8. Estabeleça Limites Claros de Segurança: Informe os limites com firmeza serena: "Seu Carlos, eu estou aqui para te proteger, mas não posso permitir que o senhor quebre o prato na sala".',
+          '9. Ofereça Opções e Esperança: Dê escolhas reais: "O senhor prefere sentar um pouco no jardim para respirar ou quer tomar um copo de água fresca no quarto?".',
+          '10. Debriefing com o Morador e a Equipe: Após a crise passar, converse com o morador sobre o que aconteceu e discuta com a equipe para prevenir novos episódios.'
+        ],
         practicalTips: [
-          'Mantenha um diário de observação individualizado para identificar o "patamar normal" de cada morador.',
-          'Quando notar agitação inicial, diminua os estímulos ambientais (desligue a TV em volume alto, reduza luzes fortes e evite aglomeração de pessoas ao redor).'
+          'Mantenha o tom de voz mais baixo e mais lento do que o do morador em crise. O tom de voz do cuidador atua como modulador biológico do estresse.',
+          'Nunca ria, não faça ironias e nunca descarte o sofrimento dizendo: "Isso é bobagem sua".'
         ]
       },
       {
-        title: '2. Técnica de Desescalada Verbal (Os 10 Princípios de Richmond)',
+        title: '3. Manejo de Delírios, Alucinações e Crises de Ansiedade Aguda',
         paragraphs: [
-          'A desescalada verbal é o conjunto de intervenções não físicas destinadas a acalmar um indivíduo agitado ou agressivo. É a PRIMEIRA e mais importante linha de resposta em qualquer situação de tensão na SRT.',
-          'Princípios chave: 1) Mantenha distância física de segurança (mais de dois passos de distância); 2) Mantenha postura corporal aberta e relaxada (mãos visíveis, sem cruzar braços); 3) Fale com tom de voz calmo, baixo e pausado; 4) Estabeleça contato verbal com apenas UM interlocutor (evite falar ao mesmo tempo que outros colegas); 5) Valide os sentimentos do morador ("Percebo que você está muito chateado e assustado"); 6) Ofereça escolhas claras e simples.'
-        ],
-        normativeHighlight: 'Proibição Absoluta de Punição: É estritamente vedado o uso de isolamento trancado (solitária), duchas frias, agressão verbal/física ou contenção mecânica improvisada com cordas/faixas não homologadas.'
+          'Como se comunicar diante de conteúdos psicóticos?',
+          '• Diante de Delírios (Crenças falsas inabaláveis, ex: "Estão envenenando a comida"): NUNCA debata ou tente provar com lógica cartesiana que o delírio é falso (isso aumenta a desconfiança). Também NUNCA finja que vê ou acredita no delírio. Foque no afeto e na segurança: "Eu compreendo que você está com muito medo de comer. Eu mesmo preparei esse almoço e garanto que ele está fresco e seguro. Vamos almoçar juntos?".',
+          '• Diante de Alucinações (Percepções sensoriais sem objeto, ex: ouvir vozes): Reconheça a experiência do morador sem validar a realidade externa das vozes: "Eu não escuto essas vozes, mas percebo que o que elas estão te dizendo te deixa muito assustado. O que podemos fazer para você se sentir mais calmo agora?".'
+        ]
       },
       {
-        title: '3. Protocolo de Acionamento da RAPS e Urgência (SAMU 192 e CAPS)',
+        title: '4. Fluxo de Emergência e Articulação na RAPS de Blumenau/SC',
         paragraphs: [
-          'Quando a desescalada verbal não produz resultado e há risco iminente de autoagressão ou heteroagressão física incontrolável, a equipe ativa a rede externa de apoio de Blumenau.',
-          'O cuidador deve contatar imediatamente a equipe de referência do CAPS (CAPS II ou CAPS III) durante o dia para suporte técnico/médico de urgência. Fora do horário do CAPS ou em crises com risco direto à vida, o SAMU (192) deve ser acionado com relato objetivo (não rotular como "louco agressivo", mas descrever condutas reais e sinais vitais).'
-        ],
-        practicalTips: [
-          'Ao ligar para o SAMU 192, informe: "Sou cuidador da SRT Salomão. O morador X está em crise de agitação psicomotora intensa com risco de queda/ferimento, sem resposta à desescalada verbal. Não há armas. Necessitamos de apoio de saúde".'
+          'Quando a desescalada verbal não for suficiente e houver risco iminente de autoagressão severa ou violência física descontrolada que coloque em perigo a vida dos moradores e da equipe:',
+          '1. Priorize a segurança física de todos os presentes, retirando os outros moradores da área de conflito.',
+          '2. Faça contato imediato com a equipe técnica de referência do CAPS II / CAPS III de Blumenau.',
+          '3. Se houver risco vital agudo, acione o SAMU 192 informando com clareza: Trata-se de urgência psiquiátrica em Serviço de Residência Terapêutica (SRT), histórico de saúde, sinais vitais e ausência de resposta à desescalada.',
+          '4. É terminantemente proibida a utilização de amarras improvisadas, cordas, agressões físicas ou trancafiamento punitivo de moradores em quartos escuros (crime de maus-tratos e cárcere privado).'
         ]
       }
     ],
     caseStudy: {
-      title: 'Surto Psicomotor e Alucinação Auditiva com Seu Antônio',
-      residentContext: 'Seu Antônio, 54 anos, diagnóstico de Transtorno Espectro da Esquizofrenia, reside na SRT Salomão há 3 anos. Por volta das 22h, começa a andar velozmente pelo corredor, segurando firme um cabo de vassoura e gritando com a parede: "Eles estão vindo me pegar pela janela! Vou me defender!". Os outros moradores começam a acordar assustados.',
-      scenarioDescription: 'O cuidador de plantão noturno percebe a cena. Se o cuidador tentar correr e gritar para tomar o cabo de vassoura à força, Antônio interpretará o cuidador como um dos "agressores da alucinação", aumentando drasticamente o risco de confronto físico.',
-      keyDilemma: 'Como desarmar o morador sem confronto físico, proteger a casa e realizar a desescalada verbal garantindo a segurança de todos?',
+      title: 'A Crise Persecutória Noturna de Seu Marcos',
+      residentContext: 'Seu Marcos, 52 anos, residente na SRT Salomão há 2 anos, tem diagnóstico de Esquizofrenia Paranoide. Há 2 dias apresenta insônia e não toma a medicação noturna devido a um desentendimento com outro colega de quarto.',
+      scenarioDescription: 'Às 23h30, Marcos surge no corredor com um cabo de vassoura na mão, gritando que "homens armados invadiram o telhado para matá-lo" e ameaça quebrar a janela da sala. Os demais moradores acordam assustados. Um dos cuidadores pega outro cabo de vassoura para enfrentá-lo e começa a gritar para ele largar o pedaço de madeira.',
+      keyDilemma: 'Como desarmar uma situação de risco iminente de violência sem confronto físico, reduzindo o pânico dos moradores e estabilizando o sujeito em crise?',
       guidedQuestions: [
-        'Qual foi o gatilho provável e qual o conteúdo da vivência delirante-alucinatória de Antônio?',
-        'Quais são os passos exatos de posicionamento corporal e fala para a desescalada verbal neste momento?',
-        'Quando e como o colega de plantão deve proceder para afastar os demais moradores e acionar o suporte médico?'
+        'Qual o erro grave cometido pelo cuidador ao pegar outro pedaço de pau e gritar?',
+        'Como aplicar os princípios de Richmond para desarmar Marcos verbalmente?',
+        'Qual o fluxo de apoio e medicação de resgate previsto com o CAPS de Blumenau?'
       ],
-      recommendedConduct: '1) O segundo cuidador afasta calmamente os demais moradores para os quartos, fechando as portas suavemente; 2) O primeiro cuidador posiciona-se a 3 metros de distância, de lado (postura não confrontativa), com as mãos espalmadas e visíveis na altura do peito; 3) Fale com voz baixa e segura: "Antônio, sou o [Nome], seu cuidador aqui na nossa casa. Você está seguro aqui. Ninguém vai entrar pela janela"; 4) Valide sem concordar com o delírio: "Eu sei que você está ouvindo vozes e assustado, mas eu estou aqui com você para te proteger. Pode me entregar esse cabo de vassoura para eu guardar na cozinha?"; 5) Se Antônio abaixar o objeto, acolha-o com um copo de água morna em local tranquilo e avalie a medicação de resgate orientada no PTS pelo psiquiatra do CAPS.',
-      normativeReference: 'Diretrizes de Manejo da Agitação Psicomotora (ABP/MS) e Portaria nº 3.088/2011.'
+      recommendedConduct: 'O segundo cuidador deve intervir imediatamente, solicitando que o colega abaixe o pedaço de madeira e recue. Deve acalmar os outros moradores e conduzi-los aos seus quartos em segurança. Em seguida, posiciona-se a 3 metros de Marcos, com as mãos abertas para cima, tom de voz sereno e firme: "Seu Marcos, sou o Paulo. Estou aqui e estou desarmado. Aqui na casa não há nenhum invasor e nós estamos protegendo as portas. Abaixe o cabo para podermos conversar; ninguém vai te machucar". Ao demonstrar proteção e não ameaça, Marcos tende a ceder. Após a entrega do objeto, oferece-se água, escuta-se o relato e administra-se a medicação de resgate SOS prescrita pelo psiquiatra do CAPS.',
+      normativeReference: 'Lei nº 10.216/2001, Art. 2º, Parágrafo Único, Inciso I: Direito ao melhor tratamento de saúde mental de acordo com as necessidades, em ambiente menos restritivo possível.'
     },
     quiz: [
       {
         id: 'q3-1',
-        question: 'Durante o processo de desescalada verbal de um morador em estado de agitação psicomotora na SRT, qual deve ser a postura física inicial do cuidador?',
+        question: 'O que são sinais prodrômicos no contexto do cuidado em saúde mental em uma Residência Terapêutica?',
         options: [
-          'Aproximar-se rapidamente a menos de meio metro, segurar os punhos do morador e olhá-lo fixamente nos olhos.',
-          'Manter uma distância de segurança de pelo menos 2 a 3 passos, posicionar-se num ângulo lateral, manter as mãos abertas e visíveis e usar tom de voz calmo.',
-          'Cruzando os braços, encostar-se na parede e exigir em tom alto que ele pare imediatamente com o escândalo.',
-          'Correr para o quarto de medicamentos e trancar a porta por dentro deixando o morador sozinho.'
+          'Sintomas de doenças dermatológicas graves na pele.',
+          'Sinais e alterações comportamentais precoces que indicam o início de uma desestabilização psíquica antes da eclosão da crise aguda.',
+          'Procedimentos burocráticos exigidos pelo SUS para internação hospitalar.',
+          'Exames de sangue laboratoriais de rotina semestrais.'
         ],
         correctIndex: 1,
-        explanation: 'A postura não confrontativa (distância de segurança, ângulo lateral, mãos abertas, tom baixo) reduz a sensação de ameaça no cérebro do sujeito agitado, viabilizando o diálogo de desescalada.'
+        explanation: 'Sinais prodrômicos são alterações precoces (insônia, agitação, isolamento, solilóquios) que alertam a equipe sobre uma crise iminente, permitindo intervenções preventivas oportunas.'
       },
       {
         id: 'q3-2',
-        question: 'Qual das seguintes manifestações comportamentais representa um possível SINAL PRODRÔMICO (sinal de alerta precoce) de descompensação psíquica em um morador?',
+        question: 'Segundo o Protocolo de Richmond de Desescalada Verbal (Projeto BETA), qual é a primeira medida ao abordar uma pessoa em estado de agitação psicomotora?',
         options: [
-          'Morador alimentando-se bem, dormindo 8 horas por noite e participando das conversas na varanda.',
-          'Morador apresentando insônia persistente há 2 dias, caminhada rápida e sem rumo (pacing) e sussurros isolados no quarto.',
-          'Morador pedindo para assistir ao jogo de futebol na TV junto com os colegas.',
-          'Morador escovando os dentes espontaneamente após o almoço.'
+          'Segurar os braços da pessoa imediatamente para evitar movimentos bruscos.',
+          'Garantir a segurança do ambiente, manter distância física segura (2 braços) e adotar postura corporal aberta e não ameaçadora.',
+          'Gritar ordens claras com voz autoritária para demonstrar autoridade.',
+          'Apagar todas as luzes da casa para forçar o morador a dormir.'
         ],
         correctIndex: 1,
-        explanation: 'Alterações no sono, inquietude motora, mutismo ou solilóquios (falar sozinho em resposta a alucinações) são clássicos sinais prodrômicos que exigem intervenção preventiva da equipe.'
+        explanation: 'A segurança espacial mútua e uma postura corporal serena e desarmada são a base do primeiro princípio de Richmond para reduzir a reatividade do sujeito agitado.'
       },
       {
         id: 'q3-3',
-        question: 'Ao conversar com um morador que está vivenciando um delírio persecutório ("estão querendo me envenenar com a comida"), qual é a conduta correta do cuidador?',
+        question: 'Quantos profissionais da equipe devem liderar o diálogo verbal principal com um morador em crise?',
         options: [
-          'Confrontar o morador dizendo que ele está louco, que a comida não tem nada e obrigá-lo a engolir.',
-          'Fingir que concorda totalmente com o delírio e inventar uma história fantástica sobre quem são os envenenadores.',
-          'Não alimentar o delírio nem confrontá-lo agressivamente; validar o sentimento do morador ("Vejo que você está assustado") e oferecer alternativas seguras (permitir que ele abra uma embalagem lacrada ou sirva sua própria comida).',
-          'Chamar a polícia militar imediatamente para fazer uma perícia no prato de comida.'
+          'Todos os cuidadores presentes devem falar ao mesmo tempo para convencer o morador.',
+          'Apenas UM profissional designado deve conduzir a fala, evitando sobrecarga sensorial e confusão mental no morador.',
+          'Nenhum profissional pode falar; a comunicação deve ser apenas por gestos silenciosos.',
+          'O diálogo deve ser feito obrigatoriamente por um policial militar fardado.'
         ],
-        correctIndex: 2,
-        explanation: 'A abordagem terapêutica valida a EMOÇÃO (o medo é real para o sujeito) sem endossar nem debochar do CONTEÚDO delirante, pactuando saídas de conforto prático.'
+        correctIndex: 1,
+        explanation: 'Várias pessoas falando ao mesmo tempo geram sobrecarga cognitiva e aumentam o pânico do sujeito em crise. Apenas um cuidador deve conduzir a comunicação verbal.'
       },
       {
         id: 'q3-4',
-        question: 'Em que situação a contenção física presencial emergencial é admitida na atenção em saúde mental, segundo os conselhos profissionais e normativas vigentes?',
+        question: 'Ao atender um morador que afirma com convicção que "há câmeras escondidas no espelho do banheiro para filmá-lo" (delírio persecutório), qual é a conduta comunicacional correta?',
         options: [
-          'Como forma habitual de disciplina, castigo por desobediência ou falta de funcionários no plantão.',
-          'Apenas como recurso de EXCEÇÃO ABSOLUTA, em situações de extremo risco e falha da desescalada verbal, realizada por equipe treinada, por menor tempo possível e comunicada ao serviço de saúde.',
-          'Sempre que o morador se recusar a tomar o banho da manhã.',
-          'Livremente, desde que autorizada por vizinhos da casa.'
+          'Rir da situação e dizer que ele está louco.',
+          'Desmontar o espelho na frente dele para provar cientificamente que ele está errado.',
+          'Não confrontar de forma agressiva nem confirmar a existência das câmeras; acolher o sentimento de medo e garantir que o ambiente é seguro.',
+          'Dizer que você também viu as câmeras e que a casa toda está sendo vigiada.'
+        ],
+        correctIndex: 2,
+        explanation: 'Não se deve alimentar o delírio nem bater de frente com a crença psicótica. Deve-se focar na emoção gerada (o medo) e oferecer segurança afetiva e ambiental.'
+      },
+      {
+        id: 'q3-5',
+        question: 'Por que o uso de contenção física (amarras na cama) como rotina ou punição disciplinar é expressamente proibido na Residência Terapêutica?',
+        options: [
+          'Porque amarras são caras e faltam no estoque da prefeitura.',
+          'Porque a contenção punitiva viola a Lei 10.216/2001, constitui crime de maus-tratos/tortura e resgata a violência manicomial que a SRT visa superar.',
+          'Porque a contenção física só pode ser feita na sala de jantar.',
+          'Porque os moradores preferem ser contidos com cadeados.'
         ],
         correctIndex: 1,
-        explanation: 'Contenção física é intervenção excepcionalíssima de emergência médica/técnica para contenção de danos graves e iminentes à integridade física, sendo banida como medida disciplinar ou corretiva.'
+        explanation: 'A contenção mecânica punitiva é ilegal, antiética e causadora de traumas profundos. A desescalada verbal e o manejo humanizado são os pilares do cuidado antimanicomial.'
+      },
+      {
+        id: 'q3-6',
+        question: 'O tom de voz utilizado pelo cuidador durante a desescalada verbal deve ser:',
+        options: [
+          'Mais alto e estridente que o do morador para impor autoridade.',
+          'Mais calmo, sereno, lento e em tom mais baixo que o do morador, atuando como regulador biológico de tranquilidade.',
+          'Irônico e sussurrado para confundir o pensamento do morador.',
+          'Totalmente mudo sem emitir qualquer som durante 1 hora.'
+        ],
+        correctIndex: 1,
+        explanation: 'O tom de voz calmo e ritmado ativa mecanismos neurológicos de segurança, auxiliando o indivíduo em pânico a desacelerar sua frequência cardíaca e sua reatividade.'
+      },
+      {
+        id: 'q3-7',
+        question: 'Se um morador em crise verbalizar intenção de tirar a própria vida e apresentar histórico de tentativas anteriores, qual deve ser a postura da equipe?',
+        options: [
+          'Dizer que é apenas uma tentativa de chamar a atenção e deixá-lo sozinho no quarto trancado.',
+          'Levar a queixa com máxima seriedade, manter vigilância compassiva e contínua, retirar objetos cortantes do alcance e acionar imediatamente a referência técnica do CAPS.',
+          'Desafiar o morador a provar o que está dizendo.',
+          'Aguardar 1 semana para ver se a ideia de suicídio desaparece espontaneamente.'
+        ],
+        correctIndex: 1,
+        explanation: 'Toda ideação ou ameaça suicida exige intervenção imediata, acolhimento sem julgamentos morais, proteção do ambiente e mobilização da rede de saúde mental.'
+      },
+      {
+        id: 'q3-8',
+        question: 'Qual é o papel do CAPS III (que funciona 24 horas com leitos de acolhimento noturno) na retaguarda do Residencial Salomão em Blumenau?',
+        options: [
+          'O CAPS III serve apenas para emitir receitas de medicamentos uma vez por ano.',
+          'Oferecer suporte técnico contínuo, matriciamento da equipe e, em casos de crises severas refratárias, acolhimento noturno temporário em leito de atenção à crise sem necessidade de internação em hospital geral.',
+          'Cobrar mensalidades dos cuidadores da residência.',
+          'Substituir a moradia permanente do morador definitivamente.'
+        ],
+        correctIndex: 1,
+        explanation: 'O CAPS III é o serviço de referência da RAPS para acolhimento de crises 24h, garantindo cuidado territorial intensivo e evitando internações psiquiátricas hospitalares.'
+      },
+      {
+        id: 'q3-9',
+        question: 'O que significa o termo "Debriefing" após o encerramento de um episódio de crise na SRT?',
+        options: [
+          'Aplicação de suspensão disciplinar ao morador que entrou em crise.',
+          'Momento de diálogo acolhedor com o morador e reunião reflexiva da equipe para avaliar o que desencadeou a crise e como aprimorar as intervenções futuras.',
+          'Limpeza geral do chão da residência com água sanitária.',
+          'Registro de boletim de ocorrência policial contra o morador.'
+        ],
+        correctIndex: 1,
+        explanation: 'O debriefing é uma ferramenta pedagógica e terapêutica pós-crise para processar emoções, aprender com o ocorrido e fortalecer os planos preventivos no PTS.'
+      },
+      {
+        id: 'q3-10',
+        question: 'Em caso de agitação psicomotora grave em que haja agressão física com arma branca e risco de vida iminente incontrolável por desescalada verbal, qual serviço de emergência do SUS deve ser acionado?',
+        options: [
+          'Guarda de Trânsito Municipal.',
+          'SAMU 192 com apoio integrado de segurança pública e articulação imediata com a equipe de sobreaviso do CAPS.',
+          'Funerária municipal.',
+          'Empresa privada de segurança armada patrimonial.'
+        ],
+        correctIndex: 1,
+        explanation: 'Situações de emergência médica e psiquiátrica com risco vital demandam acionamento do SAMU 192, com comunicação transparente sobre o histórico de saúde mental do paciente.'
       }
     ],
     essayTask: {
-      prompt: 'Elabore um Plano Ação de Manejo de Crise para a SRT Salomão contendo 4 etapas estruturadas: 1) Identificação e Prevenção nos Sinais Prodrômicos; 2) Protocolo de Desescalada Verbal no Espaço Comunitário da Casa; 3) Ações de Proteção dos Demais Moradores e do Ambiente; 4) Procedimento de Acionamento da RAPS Blumenau e Registro Pós-Crise.',
+      prompt: 'Descreva detalhadamente como aplicar os 10 Princípios de Desescalada Verbal de Richmond em um morador de Residência Terapêutica que se encontra em estado de agitação psicomotora na sala de estar. Destaque a linguagem corporal do cuidador, o tom de voz, a validação de sentimentos e o estabelecimento de limites seguros.',
       rubric: [
         {
-          criterion: 'Prevenção e Identificação Precoce',
+          criterion: 'Aplicação técnica dos princípios de Richmond',
+          weight: '40%',
+          guideline: 'Citar e descrever os passos práticos de desescalada verbal de forma estruturada.'
+        },
+        {
+          criterion: 'Postura não violenta e comunicação empática',
+          weight: '35%',
+          guideline: 'Demonstrar clareza sobre linguagem corporal aberta, tom de voz modulador e validação de emoções.'
+        },
+        {
+          criterion: 'Segurança ambiental e fechamento pós-crise (debriefing)',
           weight: '25%',
-          guideline: 'Descrever sinais prodrômicos (sono, motricidade, afeto) e intervenções de alívio ambiental.'
-        },
-        {
-          criterion: 'Técnicas de Desescalada Verbal',
-          weight: '30%',
-          guideline: 'Aplicar os princípios de Richmond (tom de voz, distância, escuta, interlocutor único).'
-        },
-        {
-          criterion: 'Segurança Coletiva e Ambiente',
-          weight: '20%',
-          guideline: 'Mencionar a remoção de objetos perigosos e o remanejamento protetivo dos outros moradores.'
-        },
-        {
-          criterion: 'Rede de Urgência e Notificação',
-          weight: '25%',
-          guideline: 'Especificar o acionamento de CAPS/SAMU 192 e o registro detalhado em prontuário.'
+          guideline: 'Explicar o manejo de segurança dos outros moradores e o acompanhamento posterior.'
         }
       ],
-      modelAnswer: 'O Plano de Manejo de Crise na SRT Salomão é articulado em quatro etapas operacionais rigorosas:\n\n1) Identificação e Prevenção nos Sinais Prodrômicos: A equipe monitora sinais de descompensação (insônia, perambulação, hipervigilância, respostas a estímulos internos). Ao notar esses sinais, reduz-se a estimulação sensorial da casa (TV, ruídos) e oferece-se espaço de escuta individualizada e chá calmante, comunicando o enfermeiro de referência do CAPS.\n\n2) Protocolo de Desescalada Verbal: Se a agitação se instala, um único cuidador assume a comunicação, mantendo distância mínima de 2 a 3 metros em posição não ostensiva. Com tom de voz pausado e sereno, valida o sofrimento do morador ("Percebo que você está sobrecarregado") e oferece alternativas de escolha simples (sentar na varanda, tomar água).\n\n3) Proteção dos Demais Moradores e do Ambiente: Simultaneamente, o segundo cuidador orienta com calma os demais moradores a se dirigirem à área de convivência externa ou quartos, afastando objetos perfurocortantes, vidros ou mobílias pontiagudas do raio de alcance.\n\n4) Acionamento da RAPS e Registro: Persistindo o risco iminente de violência física insuperável, contata-se o CAPS II/III de Blumenau ou o SAMU 192, fornecendo dados clínicos objetivos. Após a estabilização, o evento é registrado no diário de plantão e prontuário, seguido de debriefing com a equipe técnica para reavaliação do PTS.'
+      modelAnswer: 'A aplicação prática dos princípios de Richmond na sala de estar compreende: 1) Respeito ao espaço e segurança: O cuidador posiciona-se a 2 braços de distância, mantendo a saída desobstruída e solicitando que os demais moradores se desloquem com calma para outro cômodo; 2) Postura corporal não provocadora: O profissional mantém as mãos abertas e visíveis, tronco relaxado e evita cruzar os braços ou apontar dedos; 3) Comunicação única e clara: Apenas UM cuidador fala, utilizando frases curtas, objetivas e tom de voz calmo e compassivo, que atua modulando a ansiedade do morador; 4) Validação dos sentimentos: O cuidador acolhe a aflição ("Percebo que você está muito chateado e assustado com essa situação; estou aqui ao seu lado para te apoiar"); 5) Concordância e limites seguros: Encontra pontos de contato sem confrontar o conteúdo delirante e estabelece limites claros ("Eu quero te ajudar, mas preciso que você solte esse objeto para que possamos conversar com calma e segurança"); 6) Oferta de escolhas: Apresenta alternativas reais ("Você prefere sentar um instante na varanda ou tomar um copo de água fresca no quarto?"); 7) Debriefing pós-crise: Após a estabilização, conversa calmamente com o morador para compreender os gatilhos e reúne a equipe para atualizar as estratégias no PTS.'
     }
   },
+
+  // ==========================================
+  // MÓDULO 4: GESTÃO SEGURA DE MEDICAMENTOS NA SRT
+  // ==========================================
   {
     id: 4,
     title: 'Módulo 4: Gestão Segura de Medicamentos na SRT',
-    shortTitle: 'Gestão Segura de Medicamentos',
-    subtitle: 'Protocolo dos 9 Certos, Mapeamento de Efeitos Colaterais e Conduta na Recusa Medicamentosa',
-    summary: 'Domine a administração segura de psicotrópicos no ambiente residencial. Saiba reconhecer reações adversas extrapiramidais graves (acatisia, parkinsonismo) e saiba agir eticamente diante da recusa de medicamentos sem recorrer a atalhos clandestinos.',
-    iconName: 'Pills',
+    shortTitle: 'Gestão de Medicamentos',
+    subtitle: 'Os 9 Certos, Efeitos Extrapiramidais, Psicotrópicos Comuns e Proibição do Mascaramento',
+    summary: 'Aprenda os protocolos internacionais de segurança farmacológica, a identificação rápida de efeitos adversos extrapiramidais (acatisia, parkinsonismo, distonias), os cuidados com psicofármacos comuns e a conduta ética diante da recusa medicamentosa.',
+    iconName: 'Pill',
     workloadHours: 8,
     normativeBase: [
-      'Decreto Federal nº 8.501/2015 e Lei de Exercício Profissional da Enfermagem (Regulamentação de administração de fármacos)',
-      'Anvisa RDC nº 67/2007 e Portaria SVS/MS nº 344/1998 (Controle de substâncias psicotrópicas e sujeitas a controle especial)',
-      'Protocolo de Segurança na Prescrição, Uso e Administração de Medicamentos (Ministério da Saúde/PNSP)'
+      'Protocolo de Segurança na Prescrição, Uso e Administração de Medicamentos (Ministério da Saúde / ANVISA / Fiocruz)',
+      'Resolução COFEN nº 564/2017 (Código de Ética dos Profissionais de Enfermagem)',
+      'Formulário Terapêutico Nacional e Rename (Relação Nacional de Medicamentos Essenciais do SUS)',
+      'Diretrizes de Farmacovigilância em Serviços de Residência Terapêutica (MS/SVS)'
     ],
     contentSections: [
       {
-        title: '1. O Protocolo dos 9 Certos na Administração Residencial',
+        title: '1. O Protocolo Internacional dos 9 Certos na Administração de Fármacos',
         paragraphs: [
-          'A medicação psiquiátrica em uma SRT é um componente importante do tratamento, mas deve ser gerida com máximo rigor para evitar erros fatais de dosagem, medicação trocada entre moradores ou horários incorretos.',
-          'A rotina de dispensação deve seguir obrigatoriamente a checagem dos 9 Certos: 1. User/Morador Certo; 2. Medicamento Certo; 3. Via Certa; 4. Dose Certa; 5. Hora Certa; 6. Tempo Certo; 7. Ação Certa; 8. Registro Certo; 9. Formato/Apresentação Certa.'
+          'A administração de medicamentos em uma SRT Tipo II é uma das responsabilidades mais críticas da equipe de cuidados. Erros de medicação em saúde mental podem provocar intoxicações severas, crises agudas ou sequelas neurológicas irreversíveis.',
+          'Os 9 Certos de Segurança:',
+          '1. Paciente Certo: Confirmar o nome completo do morador (nunca confiar apenas em apelidos ou entregar por suposição).',
+          '2. Medicamento Certo: Conferir o nome comercial e o princípio ativo na receita médica e na embalagem antes de dosar.',
+          '3. Dose Certa: Verificar a dosagem exata (miligramas, gotas, comprimidos). ATENÇÃO a dosagens decimais (ex: Haloperidol 5mg vs 1mg).',
+          '4. Via Certa: Confirmar se a via é oral, sublingual, intramuscular ou tópica.',
+          '5. Hora Certa: Administrar nos horários estipulados pela prescrição médica para manter o nível plasmático terapêutico.',
+          '6. Tempo Certo / Velocidade: Respeitar o intervalo de deglutição e não apressar a ingestão.',
+          '7. Validade e Conservação Certa: Verificar data de validade, integridade da embalagem e armazenamento adequado (temperatura ambiente fresca ou refrigeração entre 2ºC e 8ºC para itens específicos).',
+          '8. Orientação Certa: Explicar ao morador qual medicamento ele está tomando e para que serve, estimulando sua coparticipação no tratamento.',
+          '9. Registro Certo: Checar e assinar a planilha de medicação IMEDIATAMENTE após a administração presenciada (NUNCA checar antes de o morador engolir).'
         ],
-        keyTakeaway: 'O armário de medicamentos da SRT deve permanecer sempre trancado à chave, organizado por gaveteiros individuais identificados com NOME COMPLETO e FOTO do morador.',
-        practicalTips: [
-          'Confira a prescrição médica atualizada (emitida pelo médico do CAPS) antes de preparar a dose.',
-          'Nunca estruture caixas de remédios genéricas ou soltas. Cada morador tem seu compartimento exclusivo.'
+        keyTakeaway: 'Medicamento preparado é medicamento administrado. NUNCA deixe copos com remédios em cima de mesas ou na cabeceira da cama para o morador "tomar depois".',
+        normativeHighlight: 'Meta 3 da OMS de Segurança do Paciente: Redução global de 50% dos danos graves e evitáveis relacionados a erros de medicação nos serviços de saúde.'
+      },
+      {
+        title: '2. Principais Classes de Psicotrópicos Utilizados na RAPS',
+        paragraphs: [
+          'Cuidadores de SRT devem conhecer os efeitos terapêuticos e os principais efeitos adversos das classes farmacológicas mais comuns no SUS:',
+          '• Antipsicóticos Típicos (1ª Geração - ex: Haloperidol, Clorpromazina): Alto poder de controle de delírios e alucinações, mas elevado risco de efeitos motores extrapiramidais.',
+          '• Antipsicóticos Atípicos (2ª Geração - ex: Risperidona, Olanzapina, Quetiapina, Clozapina): Menor incidência de efeitos motores, porém maior risco de ganho de peso, síndrome metabólica, sonolência e hipotensão.',
+          '• Estabilizadores do Humor (ex: Carbonato de Lítio, Ácido Valproico, Carbamazepina): Utilizados no Transtorno Bipolar. Exigem controle hídrico rigoroso (risco de intoxicação por lítio em caso de desidratação).',
+          '• Antidepressivos (ex: Fluoxetina, Sertralina, Amitriptilina): Utilizados em depressão e ansiedade crônica. Podem causar boca seca, constipação e náuseas iniciais.',
+          '• Benzodiazepínicos / Ansiolíticos (ex: Clonazepam, Diazepam): Medicamentos de tarja preta. Risco de sedação excessiva, quedas em idosos e tolerância/dependência.'
         ]
       },
       {
-        title: '2. Identificação de Efeitos Colaterais Extrapiramidais e Reações Adversas',
+        title: '3. Efeitos Adversos Extrapiramidais e Emergências Farmacológicas',
         paragraphs: [
-          'Os psicotrópicos (antipsicóticos típicos como Haloperidol/Haldol e atípicos como Risperidona, Olanzapina, além de estabilizadores de humor e ansiolíticos) possuem efeitos colaterais marcantes que o cuidador DEVE saber identificar.',
-          'Principais Reações Extrapiramidais (SEP): 1) Acatisia (inquietação motora incontrolável nas pernas — o morador não consegue ficar sentado); 2) Parkinsonismo medicamentoso (rigidez muscular, tremor de repouso, marcha em bloco e sialorreia/babação); 3) Distonia aguda (contração muscular involuntária dolorosa no pescoço/olhos); 4) Impregnação por Olanzapina/Clozapina (ganho de peso acentuado, tontura postural e sedação excessiva).'
+          'A identificação precoce de reações adversas graves pode salvar a vida do morador:',
+          '1. Acatisia: Inquietação motora e angústia interna insuportável; o morador não consegue ficar parado, bate os pés no chão, cruza e descruza as pernas ("comichão interior"). Frequentemente confundida com agitação da doença. Conduta: Notificar o médico do CAPS para ajuste de dose ou associação com Biperideno.',
+          '2. Distonia Aguda: Espasmos musculares dolorosos súbitos no pescoço (torcicolo espasmódico), língua protrusa (dificuldade de fechar a boca) ou revirar involuntário dos olhos (crise oculógira). Conduta: Emergência que causa pânico. Administrar anticolinérgico prescrito (Biperideno) conforme orientação médica.',
+          '3. Parkinsonismo Medicamentoso: Tremores de extremidades em repouso ("contar moedas"), rigidez muscular em roda denteada, marcha com passos curtos e salivação excessiva (sialorreia).',
+          '4. Síndrome Neuroléptica Maligna (SNM): EMERGÊNCIA MÉDICA GRAVE E POTENCIALMENTE FATAL! Sinais: Febre alta inexplicada (>38,5ºC), rigidez muscular severa ("cano de chumbo"), alteração da consciência, taquicardia e sudorese intensa. Conduta: Suspender medicação e ACIONAR IMEDIATAMENTE O SAMU 192 para transferência a hospital geral.'
         ],
-        normativeHighlight: 'Muitas vezes o morador é rotulado como "agitado" ou "não colaborativo" quando na verdade está sofrendo de ACATISIA (efeito colateral doloroso da medicação). O cuidador atento salva o morador desse sofrimento.'
+        practicalTips: [
+          'Monitore sempre a hidratação de moradores em uso de Lítio em dias quentes em Blumenau. A perda de líquidos pelo suor pode elevar perigosamente a concentração do lítio no sangue (litemia tóxica).'
+        ]
       },
       {
-        title: '3. A Ética da Recusa Medicamentosa: Por que NUNCA MASCARAR Remédio em Alimentos',
+        title: '4. Conduta Ética Diante da Recusa Medicamentosa e Proibição do Mascaramento',
         paragraphs: [
-          'Quando um morador se recusa a tomar o medicamento, surge um grande dilema na SRT. É estritamente PROIBIDO triturar comprimidos e escondê-los na comida, no suco ou no café do morador sem prescrição/orientação médica expressa.',
-          'Esconder medicação destrói a relação de confiança e vínculo entre o morador e a equipe. Se o morador descobrir que foi enganado, desenvolverá delírios de envenenamento e recusa alimentar generalizada.',
-          'Conduta na recusa: Tentar compreender o motivo (ex: "está me dando queimação no estômago", "estou ficando muito tonto", "o comprimido é muito grande"), dialogar suavemente, aguardar 30 minutos e tentar nova abordagem por outro cuidador com quem ele tenha maior vínculo. Caso persista a recusa, notificar o enfermeiro do CAPS no mesmo dia.'
+          'O que fazer quando o morador recusa o medicamento?',
+          '• O Mascaramento de Remédios é PROIBIDO: Triturar comprimidos e misturá-los secretamente na comida, no suco ou no café sem o conhecimento do morador é expressamente vedado pelo código de ética em saúde e pelas diretrizes da RAPS. Essa prática quebra o vínculo de confiança, pode alterar a farmacocinética da substância (reação química com o alimento) e viola a dignidade civil.',
+          '• Conduta Recomendada:',
+          '1. Escutar a razão da recusa: O comprimido é grande? Causa azia? Dá sonolência excessiva? Dá tontura?',
+          '2. Explicar a importância terapêutica com respeito e paciência;',
+          '3. Se a recusa persistir, não forçar fisicamente nem fazer ameaças;',
+          '4. Registrar a recusa e o motivo declarado na planilha de checagem;',
+          '5. Comunicar a enfermeira e o médico do CAPS para reavaliação da posologia ou apresentação farmacológica (gotas, xarope, troca de molécula).'
         ]
       }
     ],
     caseStudy: {
-      title: 'A Recusa Medicamentosa de Seu Benedito e o Efeito Colateral Oculto',
-      residentContext: 'Seu Benedito, 59 anos, reside na SRT Salomão há 6 meses em uso de Haloperidol e Biperideno. Há 3 dias, recusa-se categoricamente a tomar o comprimido das 18h. A cuidadora do turno da tarde nota que Benedito fica andando de um lado para o outro na sala, bate as mãos nas coxas e parece irritado.',
-      scenarioDescription: 'A cuidadora diz para o colega: "Ele está ficando rebelde. Vamos macerar o Haldol no prato de sopa dele hoje à noite, senão ele vai surtar e sobram problemas pra gente". O colega fica em dúvida se deve aceitar a sugestão.',
-      keyDilemma: 'Como investigar a causa real da recusa medicamentosa sem recorrer à prática antiética de mascarar o remédio na refeição?',
+      title: 'A Angústia Motora Incompreendida de Seu Cláudio',
+      residentContext: 'Seu Cláudio, 49 anos, morador da SRT há 6 meses, faz uso de Haloperidol 5mg (2 vezes ao dia) e Prometazina 25mg. Há 4 dias sua dose de Haloperidol foi aumentada pelo psiquiatra do ambulatório para 15mg/dia.',
+      scenarioDescription: 'Durante a tarde, Cláudio anda incessantemente de um lado para o outro na sala, senta-se por 10 segundos, levanta-se abruptamente balançando as pernas, chora e diz que "suas pernas estão pegando fogo por dentro". Um cuidador acredita que Cláudio está tendo uma "crise de malcriação" e manda que ele se deite e pare de incomodar. Cláudio fica desesperado e tenta pular o muro da residência.',
+      keyDilemma: 'Como diferenciar a acatisia medicamentosa de um comportamento desafiador ou agitação psicótica, garantindo o socorro farmacológico correto?',
       guidedQuestions: [
-        'Quais sintomas físicos apresentados por Benedito sugerem a presença de um efeito colateral extrapiramidal (Acatisia)?',
-        'Quais são os riscos éticos, jurídicos e de vínculo ao triturar e esconder medicação na sopa do morador?',
-        'Qual deve ser o fluxo correto de comunicação com a equipe de enfermagem e médica do CAPS II Blumenau?'
+        'Qual o quadro clínico neurológico apresentado por Cláudio decorrente do aumento da medicação?',
+        'Qual o erro grave de interpretação cometido pelo cuidador?',
+        'Qual é a conduta farmacológica e de suporte imediato a ser adotada com a equipe do CAPS?'
       ],
-      recommendedConduct: 'O colega de plantão deve impedir a ação de mascarar a medicação na sopa. O cuidador deve sentar-se com Benedito e perguntar com empatia: "Seu Benedito, o que o senhor sente quando toma esse remédio das 18h?". Benedito provavelmente expressará a sensação insuportável de agitação nas pernas (Acatisia). A cuidadora registra formalmente a recusa e a queixa física no livro de plantão, notifica a enfermagem do CAPS na manhã seguinte para reavaliação da dose do antipsicótico ou ajuste do Biperideno/Propranolol. O vínculo de confiança e o direito à integridade são preservados.',
-      normativeReference: 'Código de Ética Profissional e Diretrizes da Política Nacional de Segurança do Paciente (PNSP/MS) - Proibição de administração velada de fármacos sem consentimento ou respaldo terapêutico legal.'
+      recommendedConduct: 'A equipe deve reconhecer imediatamente os sintomas clássicos de acatisia motora induzida por antipsicóticos de alta potência (Haloperidol). O cuidador deve acolher Cláudio com empatia: "Seu Cláudio, nós sabemos que essa angústia nas pernas é efeito do remédio e não é culpa sua. Vamos te ajudar". Deve-se fazer contato urgente com o médico/enfermeiro do CAPS para administração de Biperideno (anticolinérgico) ou ajuste imediato da dosagem do antipsicótico, oferecendo caminhada leve acompanhada e massagem suave até que a medicação corretora faça efeito.',
+      normativeReference: 'Protocolo de Farmacovigilância do Ministério da Saúde / ANVISA: Notificação e manejo imediato de eventos adversos medicamentosos graves em serviços de saúde.'
     },
     quiz: [
       {
         id: 'q4-1',
-        question: 'O Protocolo dos 9 Certos na administração de medicamentos é uma garantia essencial de segurança. Qual das alternativas abaixo NÃO faz parte dos 9 Certos?',
+        question: 'Qual é a regra correta sobre o registro e checagem de medicamentos administrados na planilha da SRT?',
         options: [
-          'Morador Certo, Medicamento Certo e Dose Certa.',
-          'Via Certa, Hora Certa e Registro Certo.',
-          'Preço do Medicamento Certo, Marca Preferida do Cuidador Certa e Cor do Comprimido Certa.',
-          'Ação Certa, Tempo Certo e Formato/Apresentação Certa.'
+          'Checar todos os medicamentos logo no início do plantão antes mesmo de preparar as doses.',
+          'Checar e assinar a planilha de medicação IMEDIATAMENTE APÓS presenciar a ingestão completa do medicamento pelo morador.',
+          'Assinar a planilha apenas no final da semana se sobrar tempo.',
+          'Não precisa registrar medicação em residências terapêuticas.'
         ],
-        correctIndex: 2,
-        explanation: 'Preço, marca do fabricante e cor do comprimido não integram a lista técnica dos 9 Certos da administração segura de fármacos.'
+        correctIndex: 1,
+        explanation: 'A checagem de medicamentos só pode ser realizada após a administração confirmada. Checar antes gera risco grave de duplicação de dose ou falsa confirmação de administração.'
       },
       {
         id: 'q4-2',
-        question: 'Um morador da SRT em uso de antipsicóticos típicos (como Haloperidol) começa a apresentar uma inquietação motora incontrolável, dizendo que "não consegue parar as pernas quieta nem ficar sentado". Qual é o nome desse efeito colateral?',
+        question: 'Um morador em uso de antipsicótico típico (Haloperidol) relata sensação insuportável de inquietação interna nas pernas e não consegue permanecer sentado por mais de alguns segundos. Qual é o nome desse efeito colateral?',
         options: [
-          'Sindrome da Fadiga Crônica.',
-          'Acatisia (efeito colateral extrapiramidal).',
-          'Crise Histérica Voluntária.',
-          'Hipertensão Arterial Sistêmica Aguda.'
+          'Acatisia motora.',
+          'Preguiça muscular seletiva.',
+          'Sonambulismo acordado.',
+          'Disfagia alimentar congênita.'
         ],
-        correctIndex: 1,
-        explanation: 'A Acatisia é uma reação adversa extrapiramidal extremamente angustiante caracterizada por inquietação motora objetiva e subjetiva, especialmente nos membros inferiores.'
+        correctIndex: 0,
+        explanation: 'A acatisia é um efeito adverso extrapiramidal caracterizado por inquietação motora e sofrimento psíquico intenso, necessitando de ajuste médico imediato.'
       },
       {
         id: 'q4-3',
-        question: 'Por que a prática de macerar comprimidos e escondê-los na alimentação do morador sem autorização médica expressa é terminantemente vedada nas SRTs?',
+        question: 'Por que o ato de triturar comprimidos e misturá-los secretamente na comida do morador (mascaramento) é proibido na prática do cuidador?',
         options: [
-          'Porque estraga o sabor da refeição e a cozinha fica brava.',
-          'Porque viola a autonomia e dignidade do morador, destrói a relação de confiança com a equipe e pode causar intoxicações ou alteração na biodisponibilidade do fármaco.',
-          'Porque os remédios psiquiátricos só funcionam se tomados com refrigerante.',
-          'Porque aumenta o custo financeiro da residência terapêutica.'
+          'Porque a comida fica muito saborosa e o morador come demais.',
+          'Porque viola a autonomia do paciente, pode alterar a eficácia química do fármaco e quebra o vínculo de confiança terapêutica.',
+          'Porque a ANVISA proíbe que moradores de SRT comam comida quente.',
+          'Porque comprimidos só podem ser tomados com refrigerante de cola.'
         ],
         correctIndex: 1,
-        explanation: 'Mascarar medicação quebra a ética do cuidado, destrói a confiança interpessoal (gerando delírios de envenenamento) e pode alterar a absorção físico-química dos fármacos.'
+        explanation: 'O mascaramento de medicação é antiético e ilegal. A recusa deve ser respeitada, acolhida, dialogada, registrada e comunicada à equipe do CAPS para revisão terapêutica.'
       },
       {
         id: 'q4-4',
-        question: 'Diante da recusa de um morador em tomar a medicação prescrita para o horário das 20h, qual deve ser a PRIMEIRA atitude do cuidador?',
+        question: 'Quais são os sinais clínicos clássicos da Síndrome Neuroléptica Maligna (SNM), uma emergência médica rara e potencialmente fatal associada ao uso de antipsicóticos?',
         options: [
-          'Segurar as mãos do morador e forçar o comprimido garganta abaixo.',
-          'Ouvir o motivo da recusa com empatia, checar se há desconforto físico, tentar uma nova abordagem pacífica mais tarde e registrar no diário de plantão.',
-          'Ameaçar expulsar o morador do Residencial Terapêutico Salomão.',
-          'Dobrar a dose da manhã seguinte sem avisar a equipe médica.'
+          'Manchas roxas nos pés e coceira nos olhos.',
+          'Febre alta súbita inexplicada, rigidez muscular severa ("cano de chumbo"), sudorese excessiva e alteração do nível de consciência.',
+          'Fome excessiva e vontade de praticar esportes de corrida.',
+          'Aumento do crescimento de unhas e cabelos.'
         ],
         correctIndex: 1,
-        explanation: 'Escuta afetuosa, investigação da causa (dor, queimação, vertigem), repactuação temporal e registro formal são os passos do cuidado humanizado ético.'
+        explanation: 'A SNM é uma emergência médica que cursa com hipertermia severa, rigidez muscular rígida e instabilidade autonômica, exigindo socorro imediato via SAMU 192.'
+      },
+      {
+        id: 'q4-5',
+        question: 'Em dias de calor intenso de verão, qual cuidado especial a equipe de cuidadores deve ter com moradores que utilizam Carbonato de Lítio?',
+        options: [
+          'Proibir a ingestão de água para concentrar o sal no corpo.',
+          'Garantir oferta hídrica abundante e hidratação contínua, pois a desidratação e perda de sais pelo suor elevam os níveis de lítio no sangue a patamares tóxicos perigosos.',
+          'Aumentar a dose de lítio por conta própria sem receita médica.',
+          'Substituir o lítio por xarope de guaraná.'
+        ],
+        correctIndex: 1,
+        explanation: 'O lítio tem margem terapêutica estreita. A desidratação reduz a excreção renal do lítio, elevando a litemia e provocando intoxicação grave (tremores, confusão, coma).'
+      },
+      {
+        id: 'q4-6',
+        question: 'O que caracteriza a Distonia Aguda induzida por psicofármacos e como a equipe deve agir?',
+        options: [
+          'Sensação de felicidade súbita e riso descontrolado.',
+          'Espasmos musculares dolorosos súbitos na língua, pescoço (torcicolo) ou olhos virados para cima (crise oculógira), exigindo uso de anticolinérgico (Biperideno) e suporte médico.',
+          'Manchas brancas na pele após exposição solar.',
+          'Aumento repentino do apetite por doces.'
+        ],
+        correctIndex: 1,
+        explanation: 'A distonia aguda é uma contração muscular espasmódica dolorosa e angustiante que responde rapidamente à administração de medicação anticolinérgica corretora.'
+      },
+      {
+        id: 'q4-7',
+        question: 'Qual dos itens abaixo NÃO faz parte do protocolo de segurança dos 9 Certos na medicação?',
+        options: [
+          'Medicamento Certo e Dose Certa.',
+          'Paciente Certo e Hora Certa.',
+          'Administrar qualquer comprimido que estiver sobrando no chão para não desperdiçar.',
+          'Via Certa e Registro Certo.'
+        ],
+        correctIndex: 2,
+        explanation: 'Nunca se deve administrar medicamentos sem identificação, caídos no chão ou de procedência incerta. Todo medicamento deve ser rigorosamente identificado e conferido.'
+      },
+      {
+        id: 'q4-8',
+        question: 'Ao constatar que um morador engoliu acidentalmente a medicação do colega de quarto por engano na bancada, qual é a conduta imediata do cuidador?',
+        options: [
+          'Esconder o fato da coordenação e rezar para que nada aconteça.',
+          'Comunicar imediatamente o enfermeiro/médico do CAPS ou ligar para o Centro de Informações Toxicológicas (CIT/SAMU 192), monitorar sinais vitais e relatar com transparência o ocorrido.',
+          'Dar um copo de leite fervendo com vinagre para o morador vomitar.',
+          'Fazer o morador correr no jardim para queimar o remédio.'
+        ],
+        correctIndex: 1,
+        explanation: 'Erros de medicação exigem transparência ética e conduta clínica imediata: notificação à equipe técnica, contato com centro toxicológico e vigilância dos sinais vitais.'
+      },
+      {
+        id: 'q4-9',
+        question: 'Medicamentos da classe dos benzodiazepínicos (ex: Clonazepam/Rivotril, Diazepam) aumentam significativamente qual risco em moradores idosos na SRT?',
+        options: [
+          'Risco de crescimento acelerado de dentes.',
+          'Risco de sedação excessiva, tontura, hipotensão postural e quedas graves com fraturas ósseas.',
+          'Risco de insônia permanente.',
+          'Risco de miopia aguda.'
+        ],
+        correctIndex: 1,
+        explanation: 'Benzodiazepínicos causam sedação residual e relaxamento muscular, sendo uma das principais causas de quedas e fraturas de fêmur em idosos institucionalizados.'
+      },
+      {
+        id: 'q4-10',
+        question: 'Qual é o armazenamento correto de medicamentos psicotrópicos e controlados no ambiente de uma Residência Terapêutica Tipo II?',
+        options: [
+          'Espalhados em cima da mesa da sala de jantar ao alcance de qualquer pessoa.',
+          'Armazenados em armário próprio, limpo, ventilado, protegido de luz solar direta e umidade, trancado à chave sob responsabilidade direta da equipe de cuidadores/enfermagem.',
+          'Guardados no congelador da geladeira junto com os sorvetes.',
+          'Guardados dentro das mochilas dos visitantes.'
+        ],
+        correctIndex: 1,
+        explanation: 'Normas sanitárias da ANVISA determinam que medicamentos de controle especial fiquem sob guarda trancada, com controle de estoque e em ambiente com temperatura adequada.'
       }
     ],
     essayTask: {
-      prompt: 'Elabore um Protocolo de Gestão de Medicamentos para o Residencial Terapêutico Salomão. O texto deve cobrir: 1) As rotinas de armazenamento, organização dos gaveteiros e conferência dos 9 Certos; 2) Os principais efeitos colaterais extrapiramidais que a equipe de cuidadores deve monitorar; 3) O fluxo de conduta diante da recusa medicamentosa persistente e articulação com a RAPS.',
+      prompt: 'Explique por que o mascaramento de medicamentos em alimentos (triturar remédios e misturar secretamente em sopas, sucos ou cafés) é uma prática eticamente inaceitável na perspectiva da Luta Antimanicomial e da segurança do paciente. Descreva a conduta técnica e ética correta que o cuidador do Residencial Salomão deve adotar quando um morador recusa sua medicação prescrita.',
       rubric: [
         {
-          criterion: 'Procedimento dos 9 Certos e Armazenamento',
-          weight: '35%',
-          guideline: 'Detalhar o uso de armário trancado, gaveteiros individuais com nome/foto e a rotina diária de checagem.'
+          criterion: 'Fundamentação ética e antimanicomial contra o mascaramento',
+          weight: '40%',
+          guideline: 'Demonstrar compreensão sobre autonomia, consentimento informado e vínculo de confiança.'
         },
         {
-          criterion: 'Mapeamento de Efeitos Colaterais',
+          criterion: 'Riscos farmacológicos e sanitários da prática',
           weight: '30%',
-          guideline: 'Citar acatisia, parkinsonismo (rigidez/sialorreia), distonia e sedação extrema.'
+          guideline: 'Explicitar alterações farmacocinéticas, interação química e perda de controle de dosagem.'
         },
         {
-          criterion: 'Manejo Ético da Recusa e Registro',
-          weight: '35%',
-          guideline: 'Vedar medicação velada, descrever a pactuação, registro no livro de plantão e notificação ao CAPS.'
+          criterion: 'Protocolo de manejo da recusa medicamentosa',
+          weight: '30%',
+          guideline: 'Apresentar os passos de escuta, diálogo, registro em prontuário e acionamento da equipe do CAPS.'
         }
       ],
-      modelAnswer: 'O Protocolo de Gestão Segura de Medicamentos na SRT Salomão é estruturado para garantir a eficácia terapêutica e a segurança dos moradores:\n\n1) Armazenamento e Conferência: Todos os medicamentos permanecem em armário exclusivo, trancado à chave, sob responsabilidade do cuidador do turno. Os remédios são organizados em gaveteiros individuais identificados com nome completo e foto do morador. Antes da dispensação, o cuidador aplica a checagem dos 9 Certos (Morador, Medicamento, Via, Dose, Hora, Tempo, Ação, Registro e Apresentação), conferindo a prescrição médica válida emitida pelo CAPS.\n\n2) Monitoramento de Efeitos Adversos: A equipe de cuidadores realiza a vigilância diária de efeitos extrapiramidais: Acatisia (inquietação motora e incapacidade de sentar), Parkinsonismo (rigidez, marcha lenta, tremor nas mãos e salivação abundante), Distonias (espasmos musculares) e sedação excessiva. Qualquer alteração observada é anotada para discussão médica.\n\n3) Conduta Ética na Recusa: É expressamente proibido esconder medicação na comida. Diante da recusa, o cuidador investiga as razões com escuta empática. Se a recusa mantiver-se após nova tentativa pactuada em intervalo de 30 a 60 minutos por outro profissional, o fato é registrado com clareza no prontuário residencial e comunicado à enfermagem/médico do CAPS Blumenau para ajuste de esquema posológico.'
+      modelAnswer: 'O mascaramento de medicamentos é eticamente inaceitável porque reproduz a violência asilar da tutela e do engano, violando frontalmente a dignidade, a autonomia e o direito à informação do usuário previstos na Lei 10.216/2001. Quando o cuidador esconde o remédio na comida e o morador descobre, o vínculo de confiança terapêutica é quebrado de forma muitas vezes irreparável, gerando delírios de envenenamento e recusa alimentar generalizada. Além disso, há riscos farmacológicos graves: a trituração de comprimidos de liberação prolongada ou revestimento entérico altera a absorção, pode inativar o princípio ativo em contato com o pH do alimento ou causar irritação gástrica severa. Diante da recusa medicamentosa, a conduta correta consiste em: 1) Acolher a recusa com calma e investigar a causa (o morador sente dor de estômago? tem dificuldade de engolir comprimido grande? está com medo?); 2) Explicar a importância daquele tratamento com respeito e sem chantagens; 3) Se a recusa for mantida, não utilizar coação física nem ameaças; 4) Registrar formalmente a recusa e a justificativa na folha de checagem; 5) Comunicar a equipe de enfermagem e o médico psiquiatra do CAPS para avaliar adequações na dosagem, substituição por formulação líquida ou revisão do PTS.'
     }
   },
+
+  // ==========================================
+  // MÓDULO 5: COMUNICAÇÃO E PASSAGEM DE PLANTÃO
+  // ==========================================
   {
     id: 5,
     title: 'Módulo 5: Comunicação e Passagem de Plantão Infalível',
-    shortTitle: 'Passagem de Plantão e Registro',
-    subtitle: 'Metodologia SBAR, Registro em Prontuário Residencial, Sigilo Ético e Prevenção de Falhas',
-    summary: 'Aprenda a realizar passagens de plantão padronizadas e sem ruídos utilizando a ferramenta internacional SBAR. Estruture registros no prontuário residencial com valor legal e ético, garantindo a continuidade do cuidado na SRT.',
-    iconName: 'ClipboardCheck',
-    workloadHours: 6,
+    shortTitle: 'Comunicação e Passagem de Plantão',
+    subtitle: 'Metodologia SBAR, Diário de Bordo Técnico, Sigilo Profissional (LGPD) e Trabalho Interdisciplinar',
+    summary: 'Aprenda a estruturar passagens de turno sem falhas de informação com a metodologia internacional SBAR. Domine a escrita técnica no Diário de Bordo, os limites éticos do sigilo profissional em saúde mental e a comunicação não-violenta no trabalho em equipe.',
+    iconName: 'FileText',
+    workloadHours: 8,
     normativeBase: [
-      'Resolução COFEN nº 564/2017 (Código de Ética) e orientações de documentação em saúde',
-      'Diretrizes da Organização Mundial da Saúde (OMS) para Comunicação Efetiva nas Transições de Cuidado',
-      'Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018) aplicada aos prontuários e dados de saúde'
+      'Ferramenta SBAR (Situation, Background, Assessment, Recommendation) - Institute for Healthcare Improvement (IHI / OMS)',
+      'Lei Federal nº 13.709/2018 (Lei Geral de Proteção de Dados Pessoais - LGPD no contexto de saúde)',
+      'Código de Ética dos Profissionais de Saúde e Cuidadores',
+      'Portaria GM/MS nº 3.088/2011 (Comunicação intersetorial e matriciamento na RAPS)'
     ],
     contentSections: [
       {
-        title: '1. A Importância da Transição de Cuidado Sem Ruídos',
+        title: '1. A Importância Crítica da Comunicação Interdisciplinar nas SRTs',
         paragraphs: [
-          'A passagem de plantão na SRT é o momento mais crítico para a segurança do morador. Uma informação omitida ou mal comunicada ("Seu João não almoçou" ou "Dona Ana não tomou o remédio das 14h") pode desencadear erros em cadeia no turno seguinte.',
-          'Passagens de plantão informais ou apressadas no portão da casa geram descontinuidade no cuidado. O momento de troca de turno deve ser sagrado, realizado em local reservado, com duração aproximada de 15 a 20 minutos entre toda a equipe que sai e a equipe que entra.'
+          'Em uma Residência Terapêutica Tipo II com funcionamento ininterrupto 24 horas por dia, a passagem de plantão é o momento de maior vulnerabilidade para a ocorrência de falhas no cuidado. Uma informação omitida (como um remédio não administrado, uma recusa alimentar persistente, um corte no pé ou uma alteração de humor no turno anterior) pode levar a consequências graves para a saúde do morador.',
+          'A comunicação profissional na SRT deve ser contínua, padronizada, técnica e empática, conectando a equipe de cuidadores, a coordenação da residência, os técnicos de enfermagem e os profissionais do CAPS e da Atenção Primária.'
         ],
-        keyTakeaway: 'O que não está registrado, oficialmente não foi realizado. A palavra falada se perde; o registro formal no livro/prontuário protege o morador e o cuidador.',
+        keyTakeaway: 'A passagem de plantão não é um bate-papo informal de corredor; é um ato profissional solene de transferência de responsabilidade sobre a vida dos moradores.',
+        normativeHighlight: 'Meta 2 Internacional de Segurança do Paciente (OMS/MS): Melhorar a eficácia da comunicação entre os profissionais de saúde durante transições de cuidados.'
+      },
+      {
+        title: '2. A Metodologia Internacional SBAR Aplicada à Saúde Mental',
+        paragraphs: [
+          'O método SBAR (Situation, Background, Assessment, Recommendation) foi desenvolvido para padronizar a transmissão de dados clínicos críticos em 4 etapas estruturadas:',
+          '• S - Situação (Situation): O que está acontecendo agora de forma clara e imediata. Identifique o morador, sua idade e o problema atual em 1 ou 2 frases.',
+          '• B - Breve Histórico (Background): Contexto clínico e psicossocial relevante (diagnóstico principal, histórico de crises semelhantes, medicamentos recentes, eventos desencadeantes nas últimas 24h).',
+          '• A - Avaliação (Assessment): A sua leitura técnica da situação atual (sinais vitais, estado emocional, comportamento observado, sintomas físicos, recusas).',
+          '• R - Recomendação (Recommendation): O que precisa ser feito no próximo turno (cuidados específicos, monitoramentos agendados, exames, consultas no CAPS, atenção a gatilhos).'
+        ],
         practicalTips: [
-          'Nunca repasse informações por boatos ou "achismos" ("Acho que ele estava triste"). Descreva fatos observáveis ("Ficou em silêncio durante o café e recusou a caminhada").',
-          'Inicie o plantão LENDO o relatório do turno anterior antes de assumir as rotinas.'
+          'Utilize sempre a estrutura SBAR verbalmente e por escrito ao transmitir informações para o colega que está assumindo o turno ou ao ligar para a equipe técnica do CAPS.'
         ]
       },
       {
-        title: '2. A Metodologia SBAR Adaptada à Residência Terapêutica',
+        title: '3. Redação Técnica no Livro de Diário de Bordo e Prontuário',
         paragraphs: [
-          'Para padronizar a fala e evitar esquecimentos, utiliza-se a metodologia SBAR internacionalmente reconhecida pela OMS:',
-          '• S (Situação): Quem é o morador e qual o evento atual relevante? (Ex: "Seu Pedro, quarto 2, apresentou pico febril de 38.2ºC às 15h").',
-          '• B (Breve Histórico): Qual o contexto prévio? (Ex: "Tem histórico de infecção urinária e está em uso de antibiótico há 2 dias").',
-          '• A (Avaliação): O que você observou no seu turno? (Ex: "Aceitou bem os líquidos, mas reclamou de dor ao urinar e está mais sonolento").',
-          '• R (Recomendação): O que o plantão seguinte precisa fazer? (Ex: "Medir temperatura novamente às 19h, incentivar ingestão de água e aguardar visita do enfermeiro do CAPS às 09h").'
+          'O Livro de Ocorrências / Diário de Bordo é o documento jurídico e técnico da residência. Deve ser redigido com clareza, objetividade, precisão cronológica e respeito aos princípios éticos.',
+          'O que NUNCA escrever no Diário de Bordo:',
+          '• Julgamentos morais e adjetivos pejorativos: "O morador estava chato, insuportável, fazendo manha, birra ou fingindo dor".',
+          '• Opiniões leigas não fundamentadas: "Acho que ele está endemoniado ou querendo nos sacanear".',
+          'O que SEMPRE escrever:',
+          '• Descrição objetiva dos fatos observados com horários: "Às 14h20, o morador apresentou choro contínuo, recusou a refeição da tarde relatando dor abdominal e deitou-se na cama. Pressão arterial aferida: 120x80 mmHg. Comunicada a enfermeira do CAPS às 14h40".'
         ],
-        normativeHighlight: 'SBAR (Situation, Background, Assessment, Recommendation): Reduz em até 70% as falhas de comunicação interprofissional na transição de turnos de saúde.'
+        normativeHighlight: 'Resolução CFM nº 1.638/2002 e COFEN: Os registros em prontuários e diários de saúde são documentos legais auditáveis que comprovam a assistência prestada.'
       },
       {
-        title: '3. Registros de Prontuário, Sigilo Profissional e LGPD na SRT',
+        title: '4. Sigilo Ético Profissional e a Lei Geral de Proteção de Dados (LGPD)',
         paragraphs: [
-          'Os diários de bordo e prontuários da SRT Salomão contêm dados sensíveis protegidos pela Lei Geral de Proteção de Dados (LGPD) e pelo sigilo profissional ético. É proibido fotografar moradores ou cadernos de registros para postar em redes sociais ou enviar em grupos não oficiais de WhatsApp.',
-          'Regras de ouro do registro escrito: Usar caneta azul ou preta (sem uso de corretivo/branquinho), escrever com letra legível, assinar e carimbar/identificar cada anotação, sem rasuras ou folhas em branco entre os turnos.'
+          'O diagnóstico, o histórico de vida, as fotos, a rotina e os dados de saúde dos moradores de uma SRT são dados pessoais sensíveis protegidos pela Lei Geral de Proteção de Dados (Lei nº 13.709/2018) e pelo Código de Ética Profissional.',
+          'Regras de Ouro do Sigilo:',
+          '• NUNCA tire fotos ou grave vídeos dos moradores para publicar em redes sociais pessoais (Instagram, TikTok, WhatsApp), mesmo que pareça uma "homenagem carinhosa".',
+          '• NUNCA comente sobre a vida íntima, diagnósticos ou comportamentos dos moradores com vizinhos, amigos ou familiares seus fora do ambiente profissional.',
+          '• O sigilo só pode ser quebrado em situações de determinação legal, dever ético profissional para com a equipe de saúde ou risco iminente de morte.'
         ]
       }
     ],
     caseStudy: {
-      title: 'A Omissão de Informação no Plantão Noturno e Suas Consequências',
-      residentContext: 'Dona Clarice, 71 anos, é hipertensa e reside na SRT Salomão. Durante a madrugada, apresentou dois episódios de diarreia volumosa e recusou o copo de água oferecido pela cuidadora da noite. A cuidadora noturna estava cansada ao final do turno e, na passagem de plantão matinal de 07h, disse apenas ao colega da manhã: "Tudo tranquilo na noite, o pessoal dormiu feito anjo".',
-      scenarioDescription: 'Às 11h da manhã, Dona Clarice apresenta tontura intensa, hipotensão severa (PA 80x50 mmHg) e desmaia no corredor da residência. A equipe da manhã entra em pânico sem entender o motivo da queda súbita.',
-      keyDilemma: 'Como a falha na passagem de plantão verbal e a ausência de registro no livro de bordo colocaram em risco a vida da moradora?',
+      title: 'A Falha de Comunicação na Passagem de Turno de Dona Lúcia',
+      residentContext: 'Dona Lúcia, 67 anos, diabética e hipertensa, reside na SRT Salomão. Faz uso de insulina NPH matinal e Metformina.',
+      scenarioDescription: 'No plantão da tarde, Lúcia queixa-se de tontura e suor frio às 17h. A cuidadora afere o HGT (glicemia capilar), que marca 52 mg/dL (hipoglicemia moderada). A cuidadora oferece suco de laranja com açúcar e Lúcia melhora. No entanto, na passagem de plantão das 19h, a cuidadora conversa sobre assuntos pessoais com o colega que está chegando, esquece de relatar o episódio de hipoglicemia e não faz o registro no diário de bordo. Na madrugada, Lúcia entra em coma hipoglicêmico.',
+      keyDilemma: 'Como a ausência de um método estruturado de passagem de plantão e a falta de registro técnico quase provocaram o óbito de uma moradora?',
       guidedQuestions: [
-        'Quais foram as omissões graves cometidas pela cuidadora da noite na transição de turno?',
-        'Como a aplicação do método SBAR teria evitado o desmaio e a hipotensão de Dona Clarice?',
-        'Quais são as implicações éticas para a equipe quando a passagem de plantão é feita de forma superficial?'
+        'Quais falhas de comunicação e quebra de protocolo ocorreram nessa passagem de plantão?',
+        'Como esse episódio deveria ter sido comunicado utilizando a metodologia SBAR?',
+        'Qual a responsabilidade ética e jurídica da equipe no registro de ocorrências clínicas?'
       ],
-      recommendedConduct: 'A cuidadora da noite deveria ter registrado os dois episódios de diarreia e a recusa hídrica no diário de bordo e aplicado a estrutura SBAR verbalmente: "S: Dona Clarice teve diarreia de madrugada; B: Ela é idosa e toma anti-hipertensivo; A: Apresentou recusa de líquidos e pode estar desidratando; R: Plantão da manhã deve priorizar soro de reidratação oral, checar pressão arterial e avisar a enfermagem". Diante do desmaio, a equipe atual deve prestar os primeiros socorros (elevar pernas a 45º, checar sinais vitais) e acionar o SAMU/CAPS, reportando a desidratação.',
-      normativeReference: 'Resolução COFEN/Conselho Profissional sobre Registro do Cuidado e Responsabilidade Ética em Saúde.'
+      recommendedConduct: 'A situação evidencia uma grave quebra de segurança do paciente. O episódio de hipoglicemia deveria ter sido transmitido prioritariamente com a metodologia SBAR: S (Situação: Dona Lúcia apresentou hipoglicemia de 52 mg/dL às 17h com sudorese e tontura); B (Histórico: Diabética em uso de insulina NPH e metformina); A (Avaliação: Recuperou nível glicêmico para 98 mg/dL após suco de laranja, mas permanece sonolenta); R (Recomendação: Realizar controle obrigatório de HGT às 22h e 03h da madrugada e oferecer ceia reforçada). O registro completo no livro de bordo é mandatório com assinatura e horário.',
+      normativeReference: 'Portaria GM/MS nº 3.088/2011 e Metas Internacionais de Segurança do Paciente (OMS/MS): Garantia de comunicação efetiva nas transições de cuidados.'
     },
     quiz: [
       {
         id: 'q5-1',
-        question: 'O que significa a sigla SBAR, utilizada como metodologia padrão para passagem de plantão efetiva em serviços de saúde mental?',
+        question: 'O que significa a sigla da metodologia de comunicação clínica SBAR?',
         options: [
-          'Saúde, Bem-estar, Alimentação e Remédios.',
-          'Situação, Breve Histórico (Background), Avaliação (Assessment) e Recomendação.',
-          'Segurança, Biologia, Atividade e Restrição.',
-          'Sintomas, Banhos, Almoço e Remédios.'
+          'Saúde, Biologia, Alimentação e Repouso.',
+          'Situação (Situation), Breve Histórico (Background), Avaliação (Assessment) e Recomendação (Recommendation).',
+          'Segurança, Bloqueio, Alerta e Resgate.',
+          'Supervisão, Banho, Almoço e Remédio.'
         ],
         correctIndex: 1,
-        explanation: 'SBAR significa Situation, Background, Assessment, Recommendation — estrutura lógica padronizada para transições de cuidado.'
+        explanation: 'O SBAR é uma ferramenta padronizada internacional para transmissão estruturada de informações clínicas entre equipes de saúde.'
       },
       {
         id: 'q5-2',
-        question: 'Durante o preenchimento do livro de diário de bordo ou prontuário residencial da SRT Salomão, qual das seguintes condutas é considerada CORRETA do ponto de vista ético e legal?',
+        question: 'Qual das opções abaixo representa um registro técnico e ético ADEQUADO no Livro de Diário de Bordo da SRT?',
         options: [
-          'Anotar os fatos com caneta, letra legível, data, horário e assinatura identificada, sem rasuras ou rasuras cobertas por branquinho.',
-          'Escrever a lápis para poder apagar se o enfermeiro do CAPS não gostar da anotação.',
-          'Pedir para o colega assinar pelo outro cuidador que já foi embora para adiantar o serviço.',
-          'Deixar várias linhas em branco no meio da página para preencher depois se lembrar de algo.'
+          '"O morador hoje estava insuportável e com muita preguiça de almoçar."',
+          '"Às 12h30, o morador verbalizou recusa ao almoço alegando náusea. Foi oferecido repouso e às 13h40 ele aceitou sopa e suco. Sem queixas no momento."',
+          '"Acho que o morador está fingindo dor de cabeça para não arrumar a cama."',
+          '"Plantão tranquilo, sem novidades (mesmo tendo ocorrido uma briga na sala)."'
         ],
-        correctIndex: 0,
-        explanation: 'O prontuário é um documento legal. Registros devem ser indelével (caneta), legíveis, datados, assinados e sem rasuras nem espaços em branco intercalaares.'
+        correctIndex: 1,
+        explanation: 'Registros profissionais devem ser objetivos, descritivos, conter horários exatos e ser isentos de adjetivos pejorativos e julgamentos morais leigos.'
       },
       {
         id: 'q5-3',
-        question: 'Um cuidador tira uma foto sorrindo ao lado de um morador da SRT durante um almoço festivo e posta no seu Instagram pessoal com a legenda "Cuidando dos meus velhinhos amados do Salomão". Essa conduta é:',
+        question: 'De acordo com a Lei Geral de Proteção de Dados (LGPD) e o Código de Ética Profissional, qual é a conduta correta sobre fotografar moradores da SRT?',
         options: [
-          'Exemplar e deve ser incentivada para divulgar o trabalho bonito da SRT.',
-          'Inadequada e gravíssima, pois viola o direito à imagem, a privacidade do morador, o sigilo ético e as diretrizes da LGPD sem autorização institucional formal.',
-          'Permitida, desde que a foto seja apagada em 24 horas.',
-          'Obrigatória por contrato de trabalho.'
+          'Pode postar fotos e vídeos nas redes sociais pessoais livremente desde que coloque uma legenda bonita.',
+          'É expressamente proibido tirar e publicar fotos/vídeos de moradores em redes sociais pessoais, pois a imagem e os dados de saúde são protegidos por sigilo legal e privacidade.',
+          'Pode vender fotos dos moradores para jornais da cidade.',
+          'Pode postar fotos se o morador for menor de idade.'
         ],
         correctIndex: 1,
-        explanation: 'A exposição de moradores em redes sociais sem autorização expressa e formal fere o direito de imagem, o sigilo profissional de saúde e as normas da LGPD.'
+        explanation: 'A divulgação de fotos e dados de saúde de usuários da RAPS em redes sociais pessoais viola o sigilo profissional, a LGPD e o direito constitucional à imagem e privacidade.'
       },
       {
         id: 'q5-4',
-        question: 'Qual deve ser a duração e o formato ideal da passagem de plantão entre a equipe que sai e a equipe que entra na SRT?',
+        question: 'Durante a passagem de plantão, qual atitude dos profissionais garante a segurança do cuidado dos moradores?',
         options: [
-          'Uma conversa rápida de 1 minuto enquanto os cuidadores estão abrindo o portão de saída na calçada.',
-          'Um momento reservado de 15 a 20 minutos dentro da casa, com leitura do diário de bordo, repasse estruturado por morador (SBAR) e checagem conjunta dos medicamentos.',
-          'Uma mensagem de áudio enviada no grupo de WhatsApp enquanto o cuidador está no ônibus voltando para casa.',
-          'Apenas um sinal de positivo com a mão sem necessidade de troca verbal.'
+          'Fazer a passagem de forma rápida enquanto arruma as malas para ir embora.',
+          'Realizar a passagem de plantão em local reservado, com atenção focada, conferindo a planilha de medicação e percorrendo a casa para visualizar todos os moradores antes de sair.',
+          'Deixar um bilhete de papel rasgado em cima da geladeira com recados ilegíveis.',
+          'Não conversar com o colega que está assumindo o turno por desavença pessoal.'
         ],
         correctIndex: 1,
-        explanation: 'A passagem de plantão exige tempo dedicado, presencial, reservado e sistemático para checagem do livro, quadro de medicamentos e estado clínico de cada morador.'
+        explanation: 'A passagem de plantão efetiva exige foco total, ambiente calmo, conferência de planilhas e visualização presencial dos moradores na troca de guarda.'
+      },
+      {
+        id: 'q5-5',
+        question: 'Se um vizinho do bairro abordar o cuidador no ponto de ônibus perguntando qual é o diagnóstico psiquiátrico de um morador da SRT, qual deve ser a resposta do cuidador?',
+        options: [
+          'Contar detalhadamente todas as doenças e remédios que o morador toma.',
+          'Explicar educadamente que as informações de saúde são estritamente confidenciais e protegidas por sigilo profissional, convidando-o cordialmente para as atividades comunitárias abertas da residência.',
+          'Inventar que o morador é um espião secreto do governo.',
+          'Gritar e agredir verbalmente o vizinho.'
+        ],
+        correctIndex: 1,
+        explanation: 'O sigilo profissional é um dever ético legal inegociável. Dados de saúde nunca devem ser divulgados a terceiros não autorizados.'
+      },
+      {
+        id: 'q5-6',
+        question: 'Na metodologia SBAR, o que deve ser apresentado na etapa "R" (Recomendação / Recommendation)?',
+        options: [
+          'A lista de compras do supermercado pessoal do cuidador.',
+          'As ações práticas, encaminhamentos e monitoramentos específicos que o próximo turno ou o médico devem executar para solucionar o problema.',
+          'Uma bronca por escrito no colega do turno anterior.',
+          'A previsão do tempo para a semana seguinte.'
+        ],
+        correctIndex: 1,
+        explanation: 'A letra "R" encerra a comunicação clínica com clareza sobre o plano de ação: o que precisa ser feito, observado ou encaminhado para dar seguimento ao cuidado.'
+      },
+      {
+        id: 'q5-7',
+        question: 'Quando um cuidador identifica um conflito interpessoal entre colegas de equipe na SRT, qual é a postura profissional esperada segundo a Comunicação Não-Violenta (CNV)?',
+        options: [
+          'Fazer fofocas nos grupos de WhatsApp e boicotar o trabalho do colega.',
+          'Buscar o diálogo direto, maduro e respeitoso, expondo os fatos sem ataques pessoais e focando no bem-estar e na segurança dos moradores da casa.',
+          'Abandonar o plantão no meio da noite sem avisar ninguém.',
+          'Pedir para os moradores escolherem qual funcionário eles preferem.'
+        ],
+        correctIndex: 1,
+        explanation: 'A maturidade da equipe reflete diretamente na segurança dos moradores. Conflitos devem ser resolvidos com diálogo transparente e comunicação não-violenta.'
+      },
+      {
+        id: 'q5-8',
+        question: 'Em que circunstância o sigilo profissional do cuidador PODE ser quebrado legalmente?',
+        options: [
+          'Para fofocar com amigos no almoço de domingo.',
+          'Em situações de risco iminente de suicídio, violência grave contra terceiros ou por ordem judicial expressa fundamentada em lei.',
+          'Sempre que o cuidador achar que o morador está mentindo.',
+          'Quando um curioso oferecer dinheiro por informações.'
+        ],
+        correctIndex: 1,
+        explanation: 'A quebra do sigilo é uma exceção ética e jurídica estrita, permitida apenas para salvar vidas, prevenir danos irreparáveis ou cumprir determinações judiciais legais.'
+      },
+      {
+        id: 'q5-9',
+        question: 'Por que o uso de gírias, deboches e apelidos pejorativos ("o doidão da sala", "a birrenta") nos relatórios da SRT é considerado infração ética?',
+        options: [
+          'Apenas porque a prefeitura não gosta de palavras compridas.',
+          'Porque desumaniza o usuário, desqualifica o trabalho da equipe, fere os direitos humanos e compromete a validade jurídica dos registros do SUS.',
+          'Porque os livros de ocorrência são lidos apenas pelos próprios moradores.',
+          'Porque a tinta da caneta azul gasta mais rápido.'
+        ],
+        correctIndex: 1,
+        explanation: 'Linguagem pejorativa perpetua o estigma manicomial e viola os códigos de ética e as diretrizes do SUS sobre o respeito à dignidade humana.'
+      },
+      {
+        id: 'q5-10',
+        question: 'Ao final do curso de 40 horas do Capacita SRT Salomão, qual é o compromisso ético fundamental assumido pelo cuidador de saúde mental?',
+        options: [
+          'Trancar os moradores no quarto para não ter trabalho durante a noite.',
+          'Ser um agente de transformação social, garantindo dignidade, autonomia, escuta humanizada, segurança e defesa intransigente dos direitos humanos no SUS.',
+          'Substituir os médicos do CAPS e alterar receitas por conta própria.',
+          'Tornar a residência terapêutica idêntica a um hospital psiquiátrico fechado.'
+        ],
+        correctIndex: 1,
+        explanation: 'O cuidador capacitado é o guardião cotidiano da Luta Antimanicomial, trabalhando com afeto e técnica para que cada morador viva com liberdade e cidadania plena.'
       }
     ],
     essayTask: {
-      prompt: 'Imagine que você é o cuidador que está encerrando o turno da tarde na SRT Salomão. O morador Seu João, 65 anos, apresentou recusa parcial do jantar, queixa de tontura ao se levantar e teve sua medicação anti-hipertensiva das 18h administrada com sucesso. Redija a passagem de plantão escrita no livro de diário de bordo e o texto verbal utilizando rigorosamente a estrutura SBAR para o cuidador do turno da noite.',
+      prompt: 'Escreva um exemplo completo de Passagem de Plantão utilizando estritamente a metodologia SBAR para um morador da SRT Salomão que apresentou febre de 38,4ºC e tosse produtiva no turno da tarde, destacando: 1) Situação (S); 2) Breve Histórico (B); 3) Avaliação (A); 4) Recomendação (R). Em seguida, justifique por que esse método previne erros graves na assistência.',
       rubric: [
         {
-          criterion: 'Aplicação do Método SBAR',
-          weight: '40%',
-          guideline: 'Identificar explicitamente os 4 tópicos: Situação, Breve Histórico, Avaliação e Recomendação.'
+          criterion: 'Estruturação precisa e completa dos 4 eixos do método SBAR',
+          weight: '45%',
+          guideline: 'Descrever separadamente e com rigor técnico os campos Situation, Background, Assessment e Recommendation.'
         },
         {
-          criterion: 'Qualidade do Registro Escrito',
+          criterion: 'Qualidade técnica da linguagem e dados clínicos',
           weight: '30%',
-          guideline: 'Linguagem objetiva, técnica, sem julgamentos de valor, com data, hora e identificação do profissional.'
+          guideline: 'Uso de termos claros, objetivos, com sinais vitais, horários e condutas assertivas.'
         },
         {
-          criterion: 'Foco na Continuidae do Cuidado',
-          weight: '30%',
-          guideline: 'Indicar as ações necessárias para o turno noturno (verificação de PA, oferta de água, monitoramento de queda).'
+          criterion: 'Justificativa sobre segurança do paciente e comunicação eficaz',
+          weight: '25%',
+          guideline: 'Explicar como a padronização elimina ruídos e previne a descontinuidade do cuidado.'
         }
       ],
-      modelAnswer: 'REGISTRO EM LIVRO DE DIÁRIO DE BORDO - SRT SALOMÃO\nData: 15/08/2026 | Horário: 19:00h | Cuidador: [Nome do Cuidador]\n\nMorador: João da Silva (65 anos, leito 3).\n- SITUAÇÃO: Apresentou queixa de tontura ortostática ao se levantar da poltrona às 17h30min e aceitou apenas 50% do jantar por relatar leve náusea.\n- BREVE HISTÓRICO: Possui histórico de Hipertensão Arterial Sistêmica. Medicação anti-hipertensiva (Enalapril 10mg) das 18h administrada conforme prescrição, sem intercorrências.\n- AVALIAÇÃO: Sinais vitais aferidos às 18h15min: PA: 110x70 mmHg (estável), FC: 72 bpm, afebril (36.4ºC). Sem episódios de queda. No momento encontra-se descansando na sala em atitude tranquila.\n- RECOMENDAÇÃO PARA O PLANTÃO NOTURNO: 1) Auxiliar no levantamento da cama/poltrona mantendo apoio físico para prevenção de quedas; 2) Ofertar xícara de chá morno com biscoito às 21h para compensar o jantar parcial; 3) Reavaliar pressão arterial caso persista a queixa de tontura e notificar a enfermagem do CAPS caso haja alteração.\n\nAssinatura/Carimbo: _______________________'
+      modelAnswer: 'Exemplo prático de Passagem de Plantão SBAR: \n\n• S (Situação): Seu Antônio, 64 anos, apresentou febre de 38,4ºC às 15h30 e tosse produtiva com secreção esverdeada durante o período da tarde.\n• B (Breve Histórico): Morador com histórico de DPOC (Doença Pulmonar Obstrutiva Crônica) e tabagismo de longa data. Fez uso de Dipirona 500mg VO às 15h45 conforme prescrição médica de SOS.\n• A (Avaliação): Às 17h, a temperatura corporal normalizou para 36,6ºC, porém mantém frequência respiratória de 22 irpm e discreta prostração. Aceitou boa hidratação e ceia.\n• R (Recomendação): O plantão noturno deve monitorar a temperatura axilar a cada 4 horas (às 21h, 01h e 05h), manter o morador agasalhado, incentivar a ingesta de água morna e, caso haja novo pico febril ou piora do padrão respiratório, contatar o enfermeiro de sobreaviso do CAPS ou acionar o SAMU 192.\n\nJustificativa de Segurança: O método SBAR elimina a subjetividade e a ambiguidade na troca de turnos. Ao organizar o raciocínio em uma sequência lógica padronizada (Situação, Histórico, Avaliação e Recomendação), garante-se que nenhuma informação clínica vital seja omitida, permitindo que a equipe entrante tome decisões preventivas rápidas e mantenha a continuidade ininterrupta da assistência segura.'
     }
   }
 ];
