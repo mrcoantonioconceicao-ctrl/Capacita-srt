@@ -5,6 +5,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue.svg)](https://www.typescriptlang.org/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.0-38bdf8.svg)](https://tailwindcss.com/)
 [![SUS / RAPS](https://img.shields.io/badge/SUS-Rede_de_Aten%C3%A7%C3%A3o_Psicossocial-green.svg)](https://www.gov.br/saude/pt-br)
+[![LGPD](https://img.shields.io/badge/LGPD-Lei_13.709%2F2018-emerald.svg)](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm)
 
 > Sistema interativo de educação profissional continuada voltado para Cuidadores, Acompanhantes Terapêuticos e Equipes Técnicas de **Serviços de Residência Terapêutica (SRT Tipo I e Tipo II)**. Baseado no modelo real do **Residencial Terapêutico Salomão** (Blumenau / SC) e fundamentado na **Reforma Psiquiátrica Brasileira**.
 
@@ -14,6 +15,7 @@
 
 - [Visão Geral](#-visão-geral)
 - [Fundamentação Legal e Normativa](#-fundamentação-legal-e-normativa)
+- [Privacidade & Termos de Uso (LGPD)](#-privacidade--termos-de-uso-lgpd)
 - [Estrutura do Curso](#-estrutura-do-curso-5-módulos-operacionais--prova-final-de-20-questões)
 - [Avaliações & Provas](#-sistema-de-avaliação-e-testes-didáticos)
 - [Simuladores Práticos & Recursos Interativos](#-simuladores-práticos--recursos-interativos)
@@ -21,8 +23,6 @@
 - [Cadastro do Aluno & Emissão de Certificado](#-cadastro-do-aluno--emissão-de-certificado)
 - [Tecnologias Utilizadas](#-tecnologias-utilizadas)
 - [Como Executar o Projeto Localmente](#-como-executar-o-projeto-localmente)
-- [Estrutura de Arquivos](#-estrutura-de-arquivos-do-projeto)
-- [Instruções para o Repositório GitHub e Commits](#-instruções-para-o-repositório-github-e-commits)
 - [Licença](#-licença)
 
 ---
@@ -33,9 +33,23 @@ O **Capacita SRT Salomão** é uma plataforma educacional desenvolvida para form
 
 ---
 
+## 🔒 Privacidade & Termos de Uso (LGPD)
+
+Para blindar juridicamente o projeto e garantir máxima transparência com os profissionais de saúde mental:
+
+1. **Banner de Consentimento Prévio**:
+   - Exibido no primeiro acesso do aluno com aviso claro de privacidade e cookies de armazenamento local.
+   - Opção para "Aceitar e Continuar" ou acessar a "Política de Privacidade Integral".
+2. **Termos de Uso e Política de Privacidade (Lei nº 13.709/2018 - LGPD)**:
+   - Modal completo acessível pelo rodapé e pelo banner de entrada.
+   - Explicação detalhada dos dados coletados (Nome Completo, E-mail, CPF/Registro, Função e Unidade SRT).
+   - Garantia formal de que os dados são utilizados **exclusivamente para o histórico educacional e emissão de certificado**, sendo **estritamente vedada a comercialização ou compartilhamento com terceiros**.
+
+---
+
 ## 📖 Glossário de Termos Técnicos
 
-A plataforma agora conta com um **Glossário Técnico Consultivo** integrado diretamente no menu de navegação principal, fornecendo aos estudantes definições essenciais e fundamentadas para consulta rápida durante as leituras e exercícios:
+A plataforma conta com um **Glossário Técnico Consultivo** integrado no menu de navegação principal, fornecendo aos estudantes definições essenciais e fundamentadas para consulta rápida durante as leituras e exercícios:
 
 - **Categorias Principais**:
   - 🏢 **Dispositivos da RAPS**: RAPS, SRT Tipo I/II, CAPS III, Matriciamento, UBS, Unidades de Acolhimento.
@@ -43,10 +57,6 @@ A plataforma agora conta com um **Glossário Técnico Consultivo** integrado dir
   - 🧠 **Psicopatologia**: Delírio, Alucinação, Pacing, Solilóquio/Dialogismo, Embotamento Afetivo.
   - 💊 **Farmacologia**: Protocolo dos 9 Certos, Acatisia Motora, Síndrome Neuroléptica Maligna (SNM), Impregnação Neuroléptica.
   - 🤝 **Manejo & Técnica**: Desescalada Verbal (Método Richmond / Projeto BETA), SBAR, Escuta Qualificada, Vínculo Terapêutico.
-- **Funcionalidades do Glossário**:
-  - Filtro dinâmico por categoria e busca instantânea por palavras-chave.
-  - Cartões didáticos com definição sucinta, aprofundamento conceitual, aplicação prática no cotidiano da SRT Salomão e referência normativa oficial.
-  - Botão de cópia rápida para compartilhamento das definições.
 
 ---
 
@@ -54,12 +64,12 @@ A plataforma agora conta com um **Glossário Técnico Consultivo** integrado dir
 
 Todo o conteúdo programático do curso foi estruturado com base nas legislações e diretrizes sanitárias federais e municipais vigentes no Brasil:
 
-1. **Lei Federal nº 10.216/2001** *(Lei Antimanicomial)*: Proteção e direitos das pessoas portadoras de transtornos mentais e redirecionamento do modelo assistencial.
-2. **Portaria GM/MS nº 106/2000**: Criação dos Serviços de Residência Terapêutica (SRTs) no âmbito do SUS.
-3. **Portaria GM/MS nº 3.088/2011**: Instituição da **Rede de Atenção Psicossocial (RAPS)** para pessoas com sofrimento ou transtorno mental.
-4. **Portaria GM/MS nº 2.840/2014**: Atualização do financiamento e funcionamento das SRTs Tipo I e Tipo II.
-5. **RDC ANVISA nº 50/2002**: Normas para infraestrutura física e boas práticas higiênico-sanitárias em domicílios coletivos.
-6. **Diretrizes da RAPS / CAPS II e CAPS III do Município de Blumenau / SC**.
+1. **Lei Federal nº 10.216/2001** *(Lei Antimanicomial)*: Proteção e direitos das pessoas portadoras de transtornos mentais.
+2. **Lei Federal nº 13.709/2018** *(LGPD)*: Proteção e privacidade de dados pessoais dos alunos.
+3. **Portaria GM/MS nº 106/2000**: Criação dos Serviços de Residência Terapêutica (SRTs) no âmbito do SUS.
+4. **Portaria GM/MS nº 3.088/2011**: Instituição da **Rede de Atenção Psicossocial (RAPS)**.
+5. **Portaria GM/MS nº 2.840/2014**: Atualização do funcionamento das SRTs Tipo I e Tipo II.
+6. **RDC ANVISA nº 50/2002**: Normas para infraestrutura física e boas práticas higiênico-sanitárias.
 
 ---
 
@@ -78,11 +88,11 @@ Todo o conteúdo programático do curso foi estruturado com base nas legislaçõ
 
 ## 🛠️ Simuladores Práticos & Recursos Interativos
 
-- 📋 **Simulador de Passagem de Plantão SBAR**: Escreva a passagem de turno no método SBAR e receba nota de qualidade instantânea com feedbacks educativos.
-- 🛡️ **Simulador de Desescalada Verbal em Crises**: Árvore de decisão interativa em tempo real para treino do manejo de surtos sem uso de violência ou contenção física.
-- 💊 **Guia de Bolso dos 9 Certos e Efeitos Colaterais**: Consulta rápida de psicotrópicos, sintomas de emergência extrapiramidal e condutas recomendadas.
+- 📋 **Simulador de Passagem de Plantão SBAR**: Escreva a passagem de turno no método SBAR e receba nota de qualidade instantânea.
+- 🛡️ **Simulador de Desescalada Verbal em Crises**: Árvore de decisão interativa em tempo real para treino do manejo de surtos.
+- 💊 **Guia de Bolso dos 9 Certos e Efeitos Colaterais**: Consulta rápida de psicotrópicos e reações extrapiramidais.
 - 📖 **Glossário de Termos Técnicos**: Dicionário consultivo de saúde mental e RAPS com busca instantânea.
-- 📜 **Compêndio Normativo da Saúde Mental**: Repositório pesquisável das leis e portarias aplicadas ao cotidiano do cuidador.
+- 📜 **Compêndio Normativo da Saúde Mental**: Repositório pesquisável das leis e portarias aplicadas.
 
 ---
 
@@ -92,7 +102,7 @@ Todo o conteúdo programático do curso foi estruturado com base nas legislaçõ
 - **Build Tool**: [Vite 6](https://vitejs.dev/)
 - **Estilização**: [Tailwind CSS 4](https://tailwindcss.com/)
 - **Ícones**: [Lucide React](https://lucide.dev/)
-- **Armazenamento**: LocalStorage com sincronização reativa de progresso
+- **Armazenamento**: LocalStorage seguro com sincronização reativa de progresso
 
 ---
 

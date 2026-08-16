@@ -13,7 +13,9 @@ import { NormsCompendium } from './components/NormsCompendium';
 import { ProgressDashboard } from './components/ProgressDashboard';
 import { CertificateModal } from './components/CertificateModal';
 import { AuthModal } from './components/AuthModal';
-import { BookOpen, CheckCircle2, FileText, ShieldAlert, Pill, Scale, LayoutDashboard, FileCheck2, HelpCircle } from 'lucide-react';
+import { PrivacyPolicyModal } from './components/PrivacyPolicyModal';
+import { CookieConsentBanner } from './components/CookieConsentBanner';
+import { BookOpen, CheckCircle2, FileText, ShieldAlert, Pill, Scale, LayoutDashboard, FileCheck2, ShieldCheck, Lock } from 'lucide-react';
 
 const INITIAL_PROGRESS: UserProgress = {
   completedModules: [],
@@ -42,15 +44,25 @@ export default function App() {
     return INITIAL_PROGRESS;
   });
 
+  const [hasAcceptedConsent, setHasAcceptedConsent] = useState<boolean>(() => {
+    return localStorage.getItem('capacita_srt_lgpd_consent') === 'true';
+  });
+
   const [activeTab, setActiveTab] = useState<'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard' | 'final-exam' | 'glossary'>('modules');
   const [selectedModuleId, setSelectedModuleId] = useState<number>(1);
   const [showCertificateModal, setShowCertificateModal] = useState<boolean>(false);
   const [showAuthModal, setShowAuthModal] = useState<boolean>(false);
+  const [showPrivacyPolicyModal, setShowPrivacyPolicyModal] = useState<boolean>(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState<boolean>(false);
 
   useEffect(() => {
     localStorage.setItem('capacita_srt_progress', JSON.stringify(userProgress));
   }, [userProgress]);
+
+  const handleAcceptConsent = () => {
+    localStorage.setItem('capacita_srt_lgpd_consent', 'true');
+    setHasAcceptedConsent(true);
+  };
 
   const currentModule = modulesData.find((m) => m.id === selectedModuleId) || modulesData[0];
 
@@ -183,7 +195,7 @@ export default function App() {
         />
 
         {/* Content Container */}
-        <main className="flex-1 max-w-6xl w-full mx-auto p-4 md:p-6 lg:p-8 space-y-6 pb-20 lg:pb-8">
+        <main className="flex-1 max-w-6xl w-full mx-auto p-4 md:p-6 lg:p-8 space-y-6 pb-24 lg:pb-8">
           {activeTab === 'modules' && (
             <div className="space-y-6">
               {/* Quick Module Selector Strip */}
@@ -275,8 +287,16 @@ export default function App() {
                 Modelo do Residencial Terapêutico Salomão (Blumenau/SC) • Em conformidade com a Reforma Psiquiátrica Brasileira (Lei 10.216/2001)
               </p>
             </div>
-            <div className="text-[11px] text-slate-400">
-              Sistemas da RAPS Blumenau / SUS • 40 Horas de Carga Horária Certificada
+            <div className="flex flex-col sm:flex-row items-center gap-3 text-[11px] text-slate-500">
+              <span className="text-slate-400">40 Horas de Carga Horária Certificada</span>
+              <span className="hidden sm:inline text-slate-300">•</span>
+              <button
+                onClick={() => setShowPrivacyPolicyModal(true)}
+                className="text-teal-700 hover:text-teal-900 font-bold underline flex items-center space-x-1"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-teal-600" />
+                <span>Termos de Uso & Privacidade (LGPD)</span>
+              </button>
             </div>
           </div>
         </footer>
@@ -362,6 +382,19 @@ export default function App() {
           </button>
         </div>
       </div>
+
+      {/* Initial Cookie & Consent Banner */}
+      {!hasAcceptedConsent && (
+        <CookieConsentBanner
+          onAccept={handleAcceptConsent}
+          onOpenPrivacyPolicy={() => setShowPrivacyPolicyModal(true)}
+        />
+      )}
+
+      {/* Full Privacy Policy Modal */}
+      {showPrivacyPolicyModal && (
+        <PrivacyPolicyModal onClose={() => setShowPrivacyPolicyModal(false)} />
+      )}
 
       {/* Certificate Modal */}
       {showCertificateModal && (
