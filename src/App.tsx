@@ -5,6 +5,7 @@ import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
 import { ModuleViewer } from './components/ModuleViewer';
 import { FinalExamViewer } from './components/FinalExamViewer';
+import { GlossaryViewer } from './components/GlossaryViewer';
 import { HandoverSimulator } from './components/Simulators/HandoverSimulator';
 import { DeescalationSimulator } from './components/Simulators/DeescalationSimulator';
 import { MedicationChecker } from './components/Simulators/MedicationChecker';
@@ -12,7 +13,7 @@ import { NormsCompendium } from './components/NormsCompendium';
 import { ProgressDashboard } from './components/ProgressDashboard';
 import { CertificateModal } from './components/CertificateModal';
 import { AuthModal } from './components/AuthModal';
-import { BookOpen, CheckCircle2, FileText, ShieldAlert, Pill, Scale, LayoutDashboard, FileCheck2 } from 'lucide-react';
+import { BookOpen, CheckCircle2, FileText, ShieldAlert, Pill, Scale, LayoutDashboard, FileCheck2, HelpCircle } from 'lucide-react';
 
 const INITIAL_PROGRESS: UserProgress = {
   completedModules: [],
@@ -41,7 +42,7 @@ export default function App() {
     return INITIAL_PROGRESS;
   });
 
-  const [activeTab, setActiveTab] = useState<'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard' | 'final-exam'>('modules');
+  const [activeTab, setActiveTab] = useState<'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard' | 'final-exam' | 'glossary'>('modules');
   const [selectedModuleId, setSelectedModuleId] = useState<number>(1);
   const [showCertificateModal, setShowCertificateModal] = useState<boolean>(false);
   const [showAuthModal, setShowAuthModal] = useState<boolean>(false);
@@ -238,6 +239,7 @@ export default function App() {
             />
           )}
 
+          {activeTab === 'glossary' && <GlossaryViewer />}
           {activeTab === 'handover' && <HandoverSimulator />}
           {activeTab === 'deescalation' && <DeescalationSimulator />}
           {activeTab === 'meds' && <MedicationChecker />}
@@ -309,6 +311,19 @@ export default function App() {
 
           <button
             onClick={() => {
+              setActiveTab('glossary');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className={`flex flex-col items-center py-1 px-2 rounded-lg text-[10px] transition-colors ${
+              activeTab === 'glossary' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            <BookOpen className="w-4 h-4 mb-0.5 text-teal-300" />
+            <span>Glossário</span>
+          </button>
+
+          <button
+            onClick={() => {
               setActiveTab('handover');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
@@ -331,19 +346,6 @@ export default function App() {
           >
             <ShieldAlert className="w-4 h-4 mb-0.5" />
             <span>Crise</span>
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab('meds');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className={`flex flex-col items-center py-1 px-2 rounded-lg text-[10px] transition-colors ${
-              activeTab === 'meds' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
-            }`}
-          >
-            <Pill className="w-4 h-4 mb-0.5" />
-            <span>Remédios</span>
           </button>
 
           <button

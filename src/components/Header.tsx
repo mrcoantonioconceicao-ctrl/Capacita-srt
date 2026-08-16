@@ -1,11 +1,11 @@
 import React from 'react';
-import { Award, Menu, BookOpen, FileText, ShieldAlert, Pill, Scale, LayoutDashboard, HeartHandshake, User, LogIn, FileCheck2 } from 'lucide-react';
+import { Award, Menu, BookOpen, FileText, ShieldAlert, Pill, Scale, LayoutDashboard, HeartHandshake, User, LogIn, FileCheck2, HelpCircle } from 'lucide-react';
 import { UserProgress } from '../types/course';
 
 interface HeaderProps {
-  currentTab: 'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard' | 'final-exam';
+  currentTab: 'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard' | 'final-exam' | 'glossary';
   userProgress: UserProgress;
-  onTabChange: (tab: 'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard' | 'final-exam') => void;
+  onTabChange: (tab: 'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard' | 'final-exam' | 'glossary') => void;
   onOpenCertificate: () => void;
   onOpenAuthModal: () => void;
   onToggleMobileSidebar: () => void;
@@ -110,6 +110,18 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
 
           <button
+            onClick={() => onTabChange('glossary')}
+            className={`px-3 py-1.5 rounded-md text-xs font-semibold whitespace-nowrap shrink-0 transition-colors flex items-center space-x-1.5 ${
+              currentTab === 'glossary'
+                ? 'bg-teal-600 text-white shadow-xs'
+                : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+            }`}
+          >
+            <BookOpen className="w-3.5 h-3.5" />
+            <span>Glossário</span>
+          </button>
+
+          <button
             onClick={() => onTabChange('norms')}
             className={`px-3 py-1.5 rounded-md text-xs font-semibold whitespace-nowrap shrink-0 transition-colors flex items-center space-x-1.5 ${
               currentTab === 'norms'
@@ -188,6 +200,14 @@ export const Header: React.FC<HeaderProps> = ({
           }`}
         >
           Prova Final (20Q)
+        </button>
+        <button
+          onClick={() => onTabChange('glossary')}
+          className={`px-3 py-1 rounded-md text-xs font-semibold whitespace-nowrap shrink-0 transition-colors ${
+            currentTab === 'glossary' ? 'bg-teal-600 text-white' : 'text-slate-700 hover:bg-slate-200'
+          }`}
+        >
+          Glossário
         </button>
         <button
           onClick={() => onTabChange('handover')}

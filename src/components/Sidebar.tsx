@@ -19,12 +19,12 @@ import {
 } from 'lucide-react';
 
 interface SidebarProps {
-  currentTab: 'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard' | 'final-exam';
+  currentTab: 'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard' | 'final-exam' | 'glossary';
   selectedModuleId: number;
   completedModules: number[];
   completedPercent: number;
   userProgress: UserProgress;
-  onTabChange: (tab: 'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard' | 'final-exam') => void;
+  onTabChange: (tab: 'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard' | 'final-exam' | 'glossary') => void;
   onSelectModule: (moduleId: number) => void;
   onOpenCertificate: () => void;
   onOpenAuthModal: () => void;
@@ -275,6 +275,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </div>
 
           <div className="space-y-1">
+            <button
+              onClick={() => {
+                onTabChange('glossary');
+                if (onCloseMobile) onCloseMobile();
+              }}
+              className={`w-full text-left px-3 py-2.5 rounded-lg font-medium transition-all flex items-center gap-2.5 ${
+                currentTab === 'glossary'
+                  ? 'bg-teal-600 text-white shadow-md'
+                  : 'text-slate-300 hover:bg-slate-800/80 hover:text-white'
+              }`}
+            >
+              <BookOpen className="w-4 h-4 shrink-0 text-teal-400" />
+              <span className="truncate">Glossário Técnico</span>
+            </button>
+
             <button
               onClick={() => {
                 onTabChange('norms');
