@@ -15,34 +15,12 @@ import { CertificateModal } from './components/CertificateModal';
 import { AuthModal } from './components/AuthModal';
 import { PrivacyPolicyModal } from './components/PrivacyPolicyModal';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
+import { DailyTipBanner } from './components/DailyTipBanner';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import { BookOpen, CheckCircle2, FileText, ShieldAlert, Pill, Scale, LayoutDashboard, FileCheck2, ShieldCheck, Lock } from 'lucide-react';
 
-const INITIAL_PROGRESS: UserProgress = {
-  completedModules: [],
-  quizScores: {},
-  essayAnswers: {},
-  essaySubmitted: {},
-  userName: 'Cuidador(a) de Saúde Mental',
-  userRole: 'Cuidador de Residência Terapêutica (SRT)',
-  userEmail: '',
-  cpfOrRegistration: '',
-  srtUnit: 'Residencial Terapêutico Salomão (Blumenau/SC)',
-  isRegistered: false,
-  startDate: new Date().toLocaleDateString('pt-BR')
-};
-
-export default function App() {
-  const [userProgress, setUserProgress] = useState<UserProgress>(() => {
-    const saved = localStorage.getItem('capacita_srt_progress');
-    if (saved) {
-      try {
-        return JSON.parse(saved);
-      } catch (e) {
-        return INITIAL_PROGRESS;
-      }
-    }
-    return INITIAL_PROGRESS;
-  });
+function AppContent() {
+  const { userProgress, setUserProgress, saveProgressToCloud } = useAuth();
 
   const [hasAcceptedConsent, setHasAcceptedConsent] = useState<boolean>(() => {
     return localStorage.getItem('capacita_srt_lgpd_consent') === 'true';
@@ -54,10 +32,6 @@ export default function App() {
   const [showAuthModal, setShowAuthModal] = useState<boolean>(false);
   const [showPrivacyPolicyModal, setShowPrivacyPolicyModal] = useState<boolean>(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState<boolean>(false);
-
-  useEffect(() => {
-    localStorage.setItem('capacita_srt_progress', JSON.stringify(userProgress));
-  }, [userProgress]);
 
   const handleAcceptConsent = () => {
     localStorage.setItem('capacita_srt_lgpd_consent', 'true');
@@ -74,12 +48,14 @@ export default function App() {
         ? [...prev.completedModules, moduleId]
         : prev.completedModules;
 
-      return {
+      const nextProg: UserProgress = {
         ...prev,
         quizScores: updatedScores,
         completedModules: newCompleted,
         completionDate: newCompleted.length === 5 ? new Date().toLocaleDateString('pt-BR') : prev.completionDate
       };
+      saveProgressToCloud(nextProg);
+      return nextProg;
     });
   };
 
@@ -92,28 +68,38 @@ export default function App() {
         ? [...prev.completedModules, moduleId]
         : prev.completedModules;
 
-      return {
+      const nextProg: UserProgress = {
         ...prev,
         essayAnswers: updatedAnswers,
         essaySubmitted: updatedSubmitted,
         completedModules: newCompleted,
         completionDate: newCompleted.length === 5 ? new Date().toLocaleDateString('pt-BR') : prev.completionDate
       };
+      saveProgressToCloud(nextProg);
+      return nextProg;
     });
   };
 
   const handleFinalExamCompleted = (score: number, passed: boolean, answers: Record<string, number>) => {
-    setUserProgress((prev) => ({
-      ...prev,
-      finalExamScore: score,
-      finalExamPassed: passed,
-      finalExamAnswers: answers,
-      completionDate: prev.completionDate || new Date().toLocaleDateString('pt-BR')
-    }));
+    setUserProgress((prev) => {
+      const nextProg: UserProgress = {
+        ...prev,
+        finalExamScore: score,
+        finalExamPassed: passed,
+        finalExamAnswers: answers,
+        completionDate: prev.completionDate || new Date().toLocaleDateString('pt-BR')
+      };
+      saveProgressToCloud(nextProg);
+      return nextProg;
+    });
   };
 
   const handleUpdateUserName = (name: string) => {
-    setUserProgress((prev) => ({ ...prev, userName: name }));
+    setUserProgress((prev) => {
+      const nextProg = { ...prev, userName: name };
+      saveProgressToCloud(nextProg);
+      return nextProg;
+    });
   };
 
   const handleSaveProfile = (profileData: {
@@ -123,288 +109,200 @@ export default function App() {
     cpfOrRegistration: string;
     srtUnit: string;
   }) => {
-    setUserProgress((prev) => ({
-      ...prev,
-      ...profileData,
-      isRegistered: true
-    }));
+    setUserProgress((prev) => {
+      const nextProg = {
+        ...prev,
+        ...profileData,
+        isRegistered: true
+      };
+      saveProgressToCloud(nextProg);
+      return nextProg;
+    });
   };
 
   const handleNextModule = () => {
     if (selectedModuleId < 5) {
-      setSelectedModuleId(selectedModuleId + 1);
+      setSelectedModuleId((prev) => prev + 1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const handlePrevModule = () => {
     if (selectedModuleId > 1) {
-      setSelectedModuleId(selectedModuleId - 1);
+      setSelectedModuleId((prev) => prev - 1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
-  const completedPercent = Math.round((userProgress.completedModules.length / 5) * 100);
+  const completedModulesCount = userProgress.completedModules.length;
+  const completedPercent = Math.round((completedModulesCount / modulesData.length) * 100);
 
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-900 flex flex-col lg:flex-row font-sans antialiased">
-      {/* Sidebar Overlay on Mobile */}
-      {isMobileSidebarOpen && (
-        <div
-          onClick={() => setIsMobileSidebarOpen(false)}
-          className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-40 lg:hidden"
-        />
-      )}
-
-      {/* Sidebar Component (Desktop + Mobile Drawer) */}
-      <Sidebar
-        currentTab={activeTab}
-        selectedModuleId={selectedModuleId}
-        completedModules={userProgress.completedModules}
-        completedPercent={completedPercent}
-        userProgress={userProgress}
-        onTabChange={(tab) => {
-          setActiveTab(tab);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
-        onSelectModule={(id) => {
-          setSelectedModuleId(id);
-          setActiveTab('modules');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
-        onOpenCertificate={() => setShowCertificateModal(true)}
-        onOpenAuthModal={() => setShowAuthModal(true)}
-        isMobileOpen={isMobileSidebarOpen}
-        onCloseMobile={() => setIsMobileSidebarOpen(false)}
-      />
-
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0">
-        {/* Top Header Bar */}
-        <Header
+    <div className="min-h-screen bg-slate-100 flex flex-col font-sans text-slate-800 antialiased selection:bg-teal-500 selection:text-white">
+      <div className="flex-1 flex flex-col lg:flex-row">
+        {/* Sidebar Navigation */}
+        <Sidebar
           currentTab={activeTab}
+          selectedModuleId={selectedModuleId}
+          completedModules={userProgress.completedModules}
+          completedPercent={completedPercent}
           userProgress={userProgress}
           onTabChange={(tab) => {
             setActiveTab(tab);
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
+          onSelectModule={(id) => setSelectedModuleId(id)}
           onOpenCertificate={() => setShowCertificateModal(true)}
           onOpenAuthModal={() => setShowAuthModal(true)}
-          onToggleMobileSidebar={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
-          completedPercent={completedPercent}
+          isMobileOpen={isMobileSidebarOpen}
+          onCloseMobile={() => setIsMobileSidebarOpen(false)}
         />
 
-        {/* Content Container */}
-        <main className="flex-1 max-w-6xl w-full mx-auto p-4 md:p-6 lg:p-8 space-y-6 pb-24 lg:pb-8">
-          {activeTab === 'modules' && (
-            <div className="space-y-6">
-              {/* Quick Module Selector Strip */}
-              <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between overflow-x-auto gap-2 scrollbar-none">
-                <div className="text-xs font-bold text-slate-500 uppercase tracking-wider shrink-0 px-2 flex items-center space-x-1.5">
-                  <BookOpen className="w-4 h-4 text-teal-600" />
-                  <span className="hidden sm:inline">Módulos de Formação:</span>
-                  <span className="sm:hidden">Módulos:</span>
-                </div>
-                <div className="flex items-center space-x-2 overflow-x-auto">
-                  {modulesData.map((m) => {
-                    const isSelected = m.id === selectedModuleId;
-                    const isCompleted = userProgress.completedModules.includes(m.id);
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col min-w-0">
+          {/* Header */}
+          <Header
+            currentTab={activeTab}
+            userProgress={userProgress}
+            onTabChange={(tab) => {
+              setActiveTab(tab);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onOpenCertificate={() => setShowCertificateModal(true)}
+            onOpenAuthModal={() => setShowAuthModal(true)}
+            onToggleMobileSidebar={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
+            completedPercent={completedPercent}
+          />
 
-                    return (
-                      <button
-                        key={m.id}
-                        onClick={() => setSelectedModuleId(m.id)}
-                        className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap shrink-0 transition-all flex items-center space-x-1.5 ${
-                          isSelected
-                            ? 'bg-teal-600 text-white shadow-xs'
-                            : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-                        }`}
-                      >
-                        {isCompleted && <CheckCircle2 className="w-3.5 h-3.5 text-teal-300" />}
-                        <span>{m.id}. {m.shortTitle}</span>
-                      </button>
-                    );
-                  })}
+          {/* Content Container */}
+          <main className="flex-1 max-w-6xl w-full mx-auto p-4 md:p-6 lg:p-8 space-y-6 pb-24 lg:pb-8">
+            {activeTab === 'modules' && (
+              <div className="space-y-6">
+                {/* Daily Tip Banner - Luta Antimanicomial Reflection */}
+                <DailyTipBanner />
+
+                {/* Quick Module Selector Strip */}
+                <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between overflow-x-auto gap-2 scrollbar-none">
+                  <div className="text-xs font-bold text-slate-500 uppercase tracking-wider shrink-0 px-2 flex items-center space-x-1.5">
+                    <BookOpen className="w-4 h-4 text-teal-600" />
+                    <span className="hidden sm:inline">Módulos de Formação:</span>
+                    <span className="sm:hidden">Módulos:</span>
+                  </div>
+                  <div className="flex items-center space-x-2 overflow-x-auto">
+                    {modulesData.map((m) => {
+                      const isSelected = m.id === selectedModuleId;
+                      const isCompleted = userProgress.completedModules.includes(m.id);
+
+                      return (
+                        <button
+                          key={m.id}
+                          onClick={() => setSelectedModuleId(m.id)}
+                          className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap shrink-0 transition-all flex items-center space-x-1.5 ${
+                            isSelected
+                              ? 'bg-teal-600 text-white shadow-xs'
+                              : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                          }`}
+                        >
+                          {isCompleted && <CheckCircle2 className="w-3.5 h-3.5 text-teal-300" />}
+                          <span>{m.id}. {m.shortTitle}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
+
+                {/* Active Module Content */}
+                <ModuleViewer
+                  module={currentModule}
+                  userProgress={userProgress}
+                  onQuizCompleted={handleQuizCompleted}
+                  onEssaySubmitted={handleEssaySubmitted}
+                  onNextModule={handleNextModule}
+                  onPrevModule={handlePrevModule}
+                  isFirstModule={selectedModuleId === 1}
+                  isLastModule={selectedModuleId === 5}
+                />
               </div>
+            )}
 
-              {/* Active Module Content */}
-              <ModuleViewer
-                module={currentModule}
+            {activeTab === 'final-exam' && (
+              <FinalExamViewer
                 userProgress={userProgress}
-                onQuizCompleted={handleQuizCompleted}
-                onEssaySubmitted={handleEssaySubmitted}
-                onNextModule={handleNextModule}
-                onPrevModule={handlePrevModule}
-                isFirstModule={selectedModuleId === 1}
-                isLastModule={selectedModuleId === 5}
+                onExamCompleted={handleFinalExamCompleted}
+                onOpenCertificate={() => setShowCertificateModal(true)}
+                onGoToModules={() => setActiveTab('modules')}
               />
-            </div>
-          )}
+            )}
 
-          {activeTab === 'final-exam' && (
-            <FinalExamViewer
-              userProgress={userProgress}
-              onExamCompleted={handleFinalExamCompleted}
-              onOpenCertificate={() => setShowCertificateModal(true)}
-              onGoToModules={() => setActiveTab('modules')}
-            />
-          )}
+            {activeTab === 'glossary' && <GlossaryViewer />}
 
-          {activeTab === 'glossary' && <GlossaryViewer />}
-          {activeTab === 'handover' && <HandoverSimulator />}
-          {activeTab === 'deescalation' && <DeescalationSimulator />}
-          {activeTab === 'meds' && <MedicationChecker />}
-          {activeTab === 'norms' && <NormsCompendium />}
-          {activeTab === 'dashboard' && (
-            <ProgressDashboard
-              modules={modulesData}
-              userProgress={userProgress}
-              onUpdateUserName={handleUpdateUserName}
-              onSelectModule={(id) => {
-                setSelectedModuleId(id);
-                setActiveTab('modules');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              onOpenCertificate={() => setShowCertificateModal(true)}
-              onOpenAuthModal={() => setShowAuthModal(true)}
-              onOpenFinalExam={() => {
-                setActiveTab('final-exam');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-            />
-          )}
-        </main>
+            {activeTab === 'handover' && <HandoverSimulator />}
 
-        {/* Footer */}
-        <footer className="bg-white border-t border-slate-200 py-6 text-slate-500 text-xs mt-auto">
-          <div className="max-w-6xl mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
-            <div>
-              <p className="font-semibold text-slate-700">
-                Capacita SRT Salomão — Programa de Educação Profissional Continuada em Saúde Mental
-              </p>
-              <p className="text-[11px] text-slate-400 mt-0.5">
-                Modelo do Residencial Terapêutico Salomão (Blumenau/SC) • Em conformidade com a Reforma Psiquiátrica Brasileira (Lei 10.216/2001)
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row items-center gap-3 text-[11px] text-slate-500">
-              <span className="text-slate-400">40 Horas de Carga Horária Certificada</span>
-              <span className="hidden sm:inline text-slate-300">•</span>
-              <button
-                onClick={() => setShowPrivacyPolicyModal(true)}
-                className="text-teal-700 hover:text-teal-900 font-bold underline flex items-center space-x-1"
-              >
-                <ShieldCheck className="w-3.5 h-3.5 text-teal-600" />
-                <span>Termos de Uso & Privacidade (LGPD)</span>
-              </button>
-            </div>
-          </div>
-        </footer>
+            {activeTab === 'deescalation' && <DeescalationSimulator />}
 
-        {/* Bottom Mobile Floating Navigation Bar (< lg) */}
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-slate-900 border-t border-slate-800 p-2 z-30 flex items-center justify-around text-white shadow-lg">
-          <button
-            onClick={() => {
-              setActiveTab('modules');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className={`flex flex-col items-center py-1 px-2 rounded-lg text-[10px] transition-colors ${
-              activeTab === 'modules' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
-            }`}
-          >
-            <BookOpen className="w-4 h-4 mb-0.5" />
-            <span>Módulos</span>
-          </button>
+            {activeTab === 'meds' && <MedicationChecker />}
 
-          <button
-            onClick={() => {
-              setActiveTab('final-exam');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className={`flex flex-col items-center py-1 px-2 rounded-lg text-[10px] transition-colors ${
-              activeTab === 'final-exam' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
-            }`}
-          >
-            <FileCheck2 className="w-4 h-4 mb-0.5" />
-            <span>Prova (20Q)</span>
-          </button>
+            {activeTab === 'norms' && <NormsCompendium />}
 
-          <button
-            onClick={() => {
-              setActiveTab('glossary');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className={`flex flex-col items-center py-1 px-2 rounded-lg text-[10px] transition-colors ${
-              activeTab === 'glossary' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
-            }`}
-          >
-            <BookOpen className="w-4 h-4 mb-0.5 text-teal-300" />
-            <span>Glossário</span>
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab('handover');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className={`flex flex-col items-center py-1 px-2 rounded-lg text-[10px] transition-colors ${
-              activeTab === 'handover' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
-            }`}
-          >
-            <FileText className="w-4 h-4 mb-0.5" />
-            <span>SBAR</span>
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab('deescalation');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className={`flex flex-col items-center py-1 px-2 rounded-lg text-[10px] transition-colors ${
-              activeTab === 'deescalation' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
-            }`}
-          >
-            <ShieldAlert className="w-4 h-4 mb-0.5" />
-            <span>Crise</span>
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab('dashboard');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className={`flex flex-col items-center py-1 px-2 rounded-lg text-[10px] transition-colors ${
-              activeTab === 'dashboard' ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-white'
-            }`}
-          >
-            <LayoutDashboard className="w-4 h-4 mb-0.5" />
-            <span>Painel</span>
-          </button>
+            {activeTab === 'dashboard' && (
+              <ProgressDashboard
+                modules={modulesData}
+                userProgress={userProgress}
+                onUpdateUserName={handleUpdateUserName}
+                onSelectModule={(id) => {
+                  setSelectedModuleId(id);
+                  setActiveTab('modules');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                onOpenCertificate={() => setShowCertificateModal(true)}
+                onOpenAuthModal={() => setShowAuthModal(true)}
+                onOpenFinalExam={() => {
+                  setActiveTab('final-exam');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              />
+            )}
+          </main>
         </div>
       </div>
 
-      {/* Initial Cookie & Consent Banner */}
-      {!hasAcceptedConsent && (
-        <CookieConsentBanner
-          onAccept={handleAcceptConsent}
-          onOpenPrivacyPolicy={() => setShowPrivacyPolicyModal(true)}
-        />
-      )}
+      {/* Footer Legal & Compliance */}
+      <footer className="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 text-xs">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="space-y-1 text-center md:text-left">
+            <p className="font-bold text-slate-200">
+              Capacita SRT Salomão • Plataforma de Capacitação em Saúde Mental
+            </p>
+            <p className="text-slate-500 text-[11px]">
+              Residencial Terapêutico Salomão • Blumenau/SC • Em conformidade com a Lei nº 10.216/2001 e Portaria GM/MS nº 106/2000.
+            </p>
+          </div>
 
-      {/* Full Privacy Policy Modal */}
-      {showPrivacyPolicyModal && (
-        <PrivacyPolicyModal onClose={() => setShowPrivacyPolicyModal(false)} />
-      )}
+          <div className="flex items-center space-x-4 text-[11px]">
+            <button
+              onClick={() => setShowPrivacyPolicyModal(true)}
+              className="text-slate-400 hover:text-teal-400 underline transition-colors"
+            >
+              Termos de Uso e Privacidade (LGPD)
+            </button>
+            <span>•</span>
+            <span className="text-slate-500">Certificado Oficial 40h</span>
+          </div>
+        </div>
+      </footer>
 
-      {/* Certificate Modal */}
+      {/* Modals & Banners */}
       {showCertificateModal && (
         <CertificateModal
           userProgress={userProgress}
           onClose={() => setShowCertificateModal(false)}
+          onOpenAuthModal={() => {
+            setShowCertificateModal(false);
+            setShowAuthModal(true);
+          }}
         />
       )}
 
-      {/* Student Auth / Registration Modal */}
       {showAuthModal && (
         <AuthModal
           userProgress={userProgress}
@@ -412,6 +310,25 @@ export default function App() {
           onClose={() => setShowAuthModal(false)}
         />
       )}
+
+      {showPrivacyPolicyModal && (
+        <PrivacyPolicyModal onClose={() => setShowPrivacyPolicyModal(false)} />
+      )}
+
+      {!hasAcceptedConsent && (
+        <CookieConsentBanner
+          onAccept={handleAcceptConsent}
+          onOpenPrivacyModal={() => setShowPrivacyPolicyModal(true)}
+        />
+      )}
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }

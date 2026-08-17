@@ -1,0 +1,65 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "Perfil do Aluno",
+      "description": "Dados cadastrais do usuário cadastrado na plataforma",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "UID do usuário no Firebase Auth" },
+        "userName": { "type": "string", "maxLength": 100, "description": "Nome completo do aluno" },
+        "userEmail": { "type": "string", "maxLength": 150, "description": "E-mail cadastrado" },
+        "userRole": { "type": "string", "maxLength": 100, "description": "Cargo ou função" },
+        "cpfOrRegistration": { "type": "string", "maxLength": 30, "description": "CPF ou Registro profissional" },
+        "srtUnit": { "type": "string", "maxLength": 150, "description": "Unidade SRT de atuação" },
+        "isRegistered": { "type": "boolean", "description": "Status de cadastro finalizado" },
+        "createdAt": { "type": "string", "description": "Data de criação do perfil" },
+        "updatedAt": { "type": "string", "description": "Data de atualização" }
+      },
+      "required": ["userId", "userName", "userEmail"]
+    },
+    "UserProgressData": {
+      "title": "Progresso do Aluno",
+      "description": "Histórico isolado de módulos concluídos, quizzes, redações e prova final do aluno",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "UID do usuário" },
+        "completedModules": {
+          "type": "array",
+          "description": "Lista de IDs dos módulos concluídos"
+        },
+        "quizScores": {
+          "type": "object",
+          "description": "Mapa de pontuações de quiz por módulo ID"
+        },
+        "essayAnswers": {
+          "type": "object",
+          "description": "Respostas dissertativas dos módulos"
+        },
+        "essaySubmitted": {
+          "type": "object",
+          "description": "Status de submissão dissertativa por módulo"
+        },
+        "finalExamScore": { "type": "number", "description": "Nota na prova final" },
+        "finalExamPassed": { "type": "boolean", "description": "Aprovação na prova final" },
+        "finalExamAnswers": {
+          "type": "object",
+          "description": "Respostas marcadas na prova final"
+        },
+        "completionDate": { "type": "string", "description": "Data de conclusão do curso" },
+        "startDate": { "type": "string", "description": "Data de início do curso" },
+        "updatedAt": { "type": "string", "description": "Timestamp de última alteração" }
+      },
+      "required": ["userId"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Documento de perfil individual do aluno"
+    },
+    "/users/{userId}/progress/data": {
+      "schema": "UserProgressData",
+      "description": "Progresso e notas individuais e isolados por aluno"
+    }
+  }
+}

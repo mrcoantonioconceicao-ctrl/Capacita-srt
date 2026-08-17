@@ -88,6 +88,7 @@ Todo o conteúdo programático do curso foi estruturado com base nas legislaçõ
 
 ## 🛠️ Simuladores Práticos & Recursos Interativos
 
+- 💡 **Dica do Dia (Luta Antimanicomial)**: Componente na tela inicial de módulos que sorteia reflexões e conceitos de pensadores como Nise da Silveira, Saraceno, Paulo Amarante e leis da RAPS.
 - 📋 **Simulador de Passagem de Plantão SBAR**: Escreva a passagem de turno no método SBAR e receba nota de qualidade instantânea.
 - 🛡️ **Simulador de Desescalada Verbal em Crises**: Árvore de decisão interativa em tempo real para treino do manejo de surtos.
 - 💊 **Guia de Bolso dos 9 Certos e Efeitos Colaterais**: Consulta rápida de psicotrópicos e reações extrapiramidais.

@@ -15,8 +15,11 @@ import {
   User,
   UserPlus,
   FileCheck2,
-  Sparkles
+  Sparkles,
+  LogOut,
+  UserCheck
 } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 interface SidebarProps {
   currentTab: 'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard' | 'final-exam' | 'glossary';
@@ -45,6 +48,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   isMobileOpen = false,
   onCloseMobile
 }) => {
+  const { currentUser, logout } = useAuth();
   const isFinalExamPassed = userProgress.finalExamPassed;
   const hasFinalExamScore = userProgress.finalExamScore !== undefined;
 
@@ -84,7 +88,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Student Profile Card */}
         <div className="bg-slate-800/90 p-3 rounded-xl border border-slate-700/80 space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] uppercase tracking-wider font-bold text-slate-400">Perfil do Aluno</span>
+            <span className="text-[10px] uppercase tracking-wider font-bold text-slate-400">
+              {currentUser ? 'Aluno Conectado' : 'Perfil do Aluno'}
+            </span>
             <button
               onClick={() => {
                 onOpenAuthModal();
@@ -92,21 +98,36 @@ export const Sidebar: React.FC<SidebarProps> = ({
               }}
               className="text-[10px] text-teal-400 hover:text-teal-300 font-bold underline"
             >
-              {userProgress.isRegistered ? 'Editar' : 'Cadastrar'}
+              {currentUser ? 'Perfil' : userProgress.isRegistered ? 'Editar' : 'Entrar'}
             </button>
           </div>
 
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-full bg-teal-600/30 border border-teal-500/50 flex items-center justify-center text-teal-400 shrink-0">
-              <User className="w-4 h-4" />
+              {currentUser ? <UserCheck className="w-4 h-4 text-teal-300" /> : <User className="w-4 h-4" />}
             </div>
             <div className="min-w-0 flex-1">
-              <div className="font-bold text-slate-200 truncate">{userProgress.userName}</div>
-              <div className="text-[10px] text-slate-400 truncate">{userProgress.userRole}</div>
+              <div className="font-bold text-slate-200 truncate">
+                {currentUser ? (currentUser.displayName || userProgress.userName || 'Aluno Autenticado') : userProgress.userName}
+              </div>
+              <div className="text-[10px] text-slate-400 truncate">
+                {currentUser ? currentUser.email : userProgress.userRole}
+              </div>
             </div>
           </div>
 
-          {!userProgress.isRegistered && (
+          {currentUser ? (
+            <button
+              onClick={async () => {
+                await logout();
+              }}
+              className="w-full py-1.5 bg-rose-500/15 text-rose-300 hover:bg-rose-500/25 border border-rose-500/30 rounded-lg text-[11px] font-bold transition-colors flex items-center justify-center gap-1.5"
+              title="Trocar de aluno ou encerrar sessão"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span>Sair / Trocar de Aluno</span>
+            </button>
+          ) : (
             <button
               onClick={() => {
                 onOpenAuthModal();
@@ -115,7 +136,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               className="w-full py-1.5 bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 border border-amber-500/40 rounded-lg text-[11px] font-bold transition-colors flex items-center justify-center gap-1.5"
             >
               <UserPlus className="w-3.5 h-3.5" />
-              <span>Cadastrar Aluno</span>
+              <span>Entrar / Cadastrar Aluno</span>
             </button>
           )}
         </div>

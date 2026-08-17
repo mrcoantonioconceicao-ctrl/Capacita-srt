@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { UserProgress, Module } from '../types/course';
+import { ANTIMANICOMIAL_TIPS } from './DailyTipBanner';
 import {
   Award,
   CheckCircle2,
@@ -32,38 +33,7 @@ interface ProgressDashboardProps {
   onOpenFinalExam?: () => void;
 }
 
-const DAILY_TIPS = [
-  {
-    quote: "O cuidador na SRT não faz PELO morador, ele faz COM o morador. A verdadeira reabilitação nasce no resgate dos gestos simples do cotidiano.",
-    author: "Diretrizes de Reabilitação Psicossocial (Saraceno)",
-    tag: "Autonomia & Dignidade"
-  },
-  {
-    quote: "Trancar não é cuidar. Cuidar em liberdade é construir vínculos, respeitar a singularidade e garantir o direito inalienável de habitar a cidade.",
-    author: "Lei Antimanicomial nº 10.216/2001",
-    tag: "Luta Antimanicomial"
-  },
-  {
-    quote: "A Residência Terapêutica é um LAR, não um hospital. Cada escolha do morador — do tempero do almoço à cor da toalha — é uma vitória da cidadania.",
-    author: "Modelo Residencial Salomão",
-    tag: "Cotidiano Domiciliar"
-  },
-  {
-    quote: "Escuta qualificada não exige respostas prontas. Às vezes, o maior gesto de cuidado é estar presente com calma, segurança e sem julgamento.",
-    author: "Cuidado Antimanicomial Humanizado",
-    tag: "Vínculo Humano"
-  },
-  {
-    quote: "Na hora da crise, o tom de voz do cuidador é a ponte para a calma. A desescalada verbal acolhe a dor sem jamais usar a violência do isolamento.",
-    author: "Protocolo de Manejo de Crises (Richmond / Projeto BETA)",
-    tag: "Manejo Humanizado"
-  },
-  {
-    quote: "Remédio sem escuta é apenas controle mecânico. A medicação humanizada apoia a saúde, mas a convivência afetuosa é o verdadeiro remédio.",
-    author: "Rede de Atenção Psicossocial (RAPS)",
-    tag: "Gestão do Cuidado"
-  }
-];
+  const DAILY_TIPS = ANTIMANICOMIAL_TIPS;
 
 export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
   modules,

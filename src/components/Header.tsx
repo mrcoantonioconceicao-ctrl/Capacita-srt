@@ -1,6 +1,7 @@
 import React from 'react';
-import { Award, Menu, BookOpen, FileText, ShieldAlert, Pill, Scale, LayoutDashboard, HeartHandshake, User, LogIn, FileCheck2, HelpCircle } from 'lucide-react';
+import { Award, Menu, BookOpen, FileText, ShieldAlert, Pill, Scale, LayoutDashboard, HeartHandshake, User, LogIn, FileCheck2, UserCheck } from 'lucide-react';
 import { UserProgress } from '../types/course';
+import { useAuth } from '../context/AuthContext';
 
 interface HeaderProps {
   currentTab: 'modules' | 'handover' | 'deescalation' | 'meds' | 'norms' | 'dashboard' | 'final-exam' | 'glossary';
@@ -21,6 +22,8 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleMobileSidebar,
   completedPercent
 }) => {
+  const { currentUser } = useAuth();
+
   return (
     <header className="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-3">
@@ -151,21 +154,28 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={onOpenAuthModal}
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center space-x-1.5 border ${
-              userProgress.isRegistered
+              currentUser
+                ? 'bg-teal-50 border-teal-300 text-teal-900 hover:bg-teal-100'
+                : userProgress.isRegistered
                 ? 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-800'
                 : 'bg-amber-50 hover:bg-amber-100 border-amber-300 text-amber-900'
             }`}
-            title={userProgress.isRegistered ? "Editar Perfil do Aluno" : "Cadastrar Aluno"}
+            title={currentUser ? `Aluno: ${currentUser.displayName || currentUser.email}` : "Entrar / Trocar Aluno"}
           >
-            {userProgress.isRegistered ? (
+            {currentUser ? (
               <>
-                <User className="w-3.5 h-3.5 text-teal-600" />
+                <UserCheck className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+                <span className="max-w-[100px] sm:max-w-[140px] truncate">{currentUser.displayName || userProgress.userName || 'Aluno'}</span>
+              </>
+            ) : userProgress.isRegistered ? (
+              <>
+                <User className="w-3.5 h-3.5 text-slate-600 shrink-0" />
                 <span className="max-w-[100px] sm:max-w-[140px] truncate">{userProgress.userName}</span>
               </>
             ) : (
               <>
-                <LogIn className="w-3.5 h-3.5 text-amber-600" />
-                <span>Cadastrar Aluno</span>
+                <LogIn className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                <span>Entrar / Cadastrar</span>
               </>
             )}
           </button>
