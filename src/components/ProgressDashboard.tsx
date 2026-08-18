@@ -310,9 +310,9 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
                       </span>
                     </div>
                     <div className="flex items-center space-x-1 text-slate-600 justify-end">
-                      <FileText className="w-3.5 h-3.5 text-teal-600" />
+                      <Sparkles className="w-3.5 h-3.5 text-teal-600" />
                       <span>
-                        Estudo de Caso: {essaySubmitted ? 'Respondido' : 'Pendente'}
+                        Prova Dissertativa IA: {userProgress.essayEvaluations?.[m.id] ? `${userProgress.essayEvaluations[m.id].score}/100` : essaySubmitted ? 'Enviado' : 'Pendente'}
                       </span>
                     </div>
                   </div>

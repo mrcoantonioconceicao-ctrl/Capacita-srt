@@ -10,13 +10,14 @@ import {
 } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { auth, googleProvider, db, handleFirestoreError, OperationType } from '../lib/firebase';
-import { UserProgress } from '../types/course';
+import { UserProgress, EssayEvaluation } from '../types/course';
 
 export const INITIAL_PROGRESS: UserProgress = {
   completedModules: [],
   quizScores: {},
   essayAnswers: {},
   essaySubmitted: {},
+  essayEvaluations: {},
   userName: 'Cuidador(a) de Saúde Mental',
   userRole: 'Cuidador de Residência Terapêutica (SRT)',
   userEmail: '',
@@ -43,7 +44,15 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [userProgress, setUserProgress] = useState<UserProgress>(INITIAL_PROGRESS);
+  const [userProgress, setUserProgress] = useState<UserProgress>(() => {
+    try {
+      const saved = localStorage.getItem('capacita_srt_progress');
+      if (saved) return { ...INITIAL_PROGRESS, ...JSON.parse(saved) };
+    } catch (e) {
+      console.warn('Error reading initial local storage:', e);
+    }
+    return INITIAL_PROGRESS;
+  });
 
   // Load user progress from Firestore or LocalStorage on Auth change
   useEffect(() => {
@@ -54,26 +63,63 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const progressPath = `users/${user.uid}/progress/data`;
         const profilePath = `users/${user.uid}`;
         try {
+          // Read local storage in case the user answered questions as guest or while offline
+          const savedLocalRaw = localStorage.getItem('capacita_srt_progress');
+          let localProg: UserProgress | null = null;
+          if (savedLocalRaw) {
+            try {
+              localProg = JSON.parse(savedLocalRaw);
+            } catch (e) {}
+          }
+
           const progressSnap = await getDoc(doc(db, progressPath));
           const profileSnap = await getDoc(doc(db, profilePath));
 
           if (progressSnap.exists()) {
             const data = progressSnap.data() as UserProgress;
-            setUserProgress({
+            // Merge cloud data with local progress so answers are never lost
+            const mergedQuizScores = { ...(data.quizScores || {}), ...(localProg?.quizScores || {}) };
+            const mergedEssayAnswers = { ...(data.essayAnswers || {}), ...(localProg?.essayAnswers || {}) };
+            const mergedEssaySubmitted = { ...(data.essaySubmitted || {}), ...(localProg?.essaySubmitted || {}) };
+            const mergedEssayEvaluations = { ...(data.essayEvaluations || {}), ...(localProg?.essayEvaluations || {}) };
+            const mergedCompleted = Array.from(
+              new Set([...(data.completedModules || []), ...(localProg?.completedModules || [])])
+            );
+
+            const merged: UserProgress = {
               ...INITIAL_PROGRESS,
               ...data,
-              userName: user.displayName || data.userName || user.email?.split('@')[0] || INITIAL_PROGRESS.userName,
-              userEmail: user.email || data.userEmail || ''
-            });
+              quizScores: mergedQuizScores,
+              essayAnswers: mergedEssayAnswers,
+              essaySubmitted: mergedEssaySubmitted,
+              essayEvaluations: mergedEssayEvaluations,
+              completedModules: mergedCompleted,
+              finalExamScore: data.finalExamScore ?? localProg?.finalExamScore ?? undefined,
+              finalExamPassed: data.finalExamPassed ?? localProg?.finalExamPassed ?? undefined,
+              finalExamAnswers: data.finalExamAnswers || localProg?.finalExamAnswers || {},
+              userName: user.displayName || data.userName || localProg?.userName || INITIAL_PROGRESS.userName,
+              userEmail: user.email || data.userEmail || localProg?.userEmail || '',
+              userRole: data.userRole || localProg?.userRole || INITIAL_PROGRESS.userRole,
+              cpfOrRegistration: data.cpfOrRegistration || localProg?.cpfOrRegistration || '',
+              srtUnit: data.srtUnit || localProg?.srtUnit || INITIAL_PROGRESS.srtUnit,
+              isRegistered: true
+            };
+
+            setUserProgress(merged);
+            localStorage.setItem('capacita_srt_progress', JSON.stringify(merged));
+            await saveProgressToCloudForUser(user.uid, merged);
           } else {
-            // First time login for this user: initialize progress with default/user info
+            // First time login for this user: initialize progress preserving any local answers
             const newProgress: UserProgress = {
               ...INITIAL_PROGRESS,
-              userName: user.displayName || user.email?.split('@')[0] || 'Aluno Capacita SRT',
-              userEmail: user.email || '',
-              startDate: new Date().toLocaleDateString('pt-BR')
+              ...(localProg || {}),
+              userName: user.displayName || localProg?.userName || user.email?.split('@')[0] || 'Aluno Capacita SRT',
+              userEmail: user.email || localProg?.userEmail || '',
+              isRegistered: true,
+              startDate: localProg?.startDate || new Date().toLocaleDateString('pt-BR')
             };
             setUserProgress(newProgress);
+            localStorage.setItem('capacita_srt_progress', JSON.stringify(newProgress));
             await saveProgressToCloudForUser(user.uid, newProgress);
           }
 
@@ -82,8 +128,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
               userId: user.uid,
               userName: user.displayName || user.email || 'Aluno',
               userEmail: user.email || '',
-              userRole: 'Cuidador de Residência Terapêutica (SRT)',
-              srtUnit: 'Residencial Terapêutico Salomão (Blumenau/SC)',
+              userRole: localProg?.userRole || 'Cuidador de Residência Terapêutica (SRT)',
+              srtUnit: localProg?.srtUnit || 'Residencial Terapêutico Salomão (Blumenau/SC)',
               createdAt: new Date().toISOString(),
               updatedAt: new Date().toISOString()
             });
@@ -96,7 +142,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const savedLocal = localStorage.getItem('capacita_srt_progress');
         if (savedLocal) {
           try {
-            setUserProgress(JSON.parse(savedLocal));
+            setUserProgress({ ...INITIAL_PROGRESS, ...JSON.parse(savedLocal) });
           } catch (e) {
             setUserProgress(INITIAL_PROGRESS);
           }
@@ -119,6 +165,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         quizScores: progress.quizScores || {},
         essayAnswers: progress.essayAnswers || {},
         essaySubmitted: progress.essaySubmitted || {},
+        essayEvaluations: progress.essayEvaluations || {},
         finalExamScore: progress.finalExamScore ?? null,
         finalExamPassed: progress.finalExamPassed ?? null,
         finalExamAnswers: progress.finalExamAnswers || {},
@@ -133,15 +180,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         updatedAt: new Date().toISOString()
       });
     } catch (error) {
-      handleFirestoreError(error, OperationType.WRITE, path);
+      console.warn('Could not save to Firestore, local state preserved:', error);
     }
   };
 
   const saveProgressToCloud = async (updatedProgress: UserProgress) => {
+    // Always persist to localStorage first so progress is NEVER lost
+    try {
+      localStorage.setItem('capacita_srt_progress', JSON.stringify(updatedProgress));
+    } catch (e) {
+      console.warn('LocalStorage error:', e);
+    }
+
     if (currentUser) {
       await saveProgressToCloudForUser(currentUser.uid, updatedProgress);
-    } else {
-      localStorage.setItem('capacita_srt_progress', JSON.stringify(updatedProgress));
     }
   };
 
@@ -178,7 +230,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const logout = async () => {
     try {
       await signOut(auth);
+      // Keep initial progress or clear local guest cache on explicit logout
       setUserProgress(INITIAL_PROGRESS);
+      localStorage.removeItem('capacita_srt_progress');
     } catch (error) {
       console.error('Logout Error:', error);
     }

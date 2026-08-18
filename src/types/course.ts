@@ -58,11 +58,22 @@ export interface FinalExamQuestion {
   explanation: string;
 }
 
+export interface EssayEvaluation {
+  score: number; // 0 to 100
+  passed: boolean;
+  feedback: string;
+  strengths: string[];
+  improvements: string[];
+  normativeAnalysis: string;
+  evaluatedAt: string;
+}
+
 export interface UserProgress {
   completedModules: number[];
   quizScores: Record<number, number>; // moduleId -> score out of 10
   essayAnswers: Record<number, string>;
   essaySubmitted: Record<number, boolean>;
+  essayEvaluations?: Record<number, EssayEvaluation>;
   finalExamScore?: number; // score out of 20
   finalExamPassed?: boolean;
   finalExamAnswers?: Record<string, number>;

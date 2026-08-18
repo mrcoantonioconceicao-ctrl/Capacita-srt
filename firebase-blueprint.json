@@ -39,6 +39,10 @@
           "type": "object",
           "description": "Status de submissão dissertativa por módulo"
         },
+        "essayEvaluations": {
+          "type": "object",
+          "description": "Avaliações e pareceres emitidos pela IA para as provas dissertativas"
+        },
         "finalExamScore": { "type": "number", "description": "Nota na prova final" },
         "finalExamPassed": { "type": "boolean", "description": "Aprovação na prova final" },
         "finalExamAnswers": {

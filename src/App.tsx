@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { modulesData } from './data/modulesData';
-import { UserProgress } from './types/course';
+import { UserProgress, EssayEvaluation } from './types/course';
 import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
 import { ModuleViewer } from './components/ModuleViewer';
@@ -59,10 +59,13 @@ function AppContent() {
     });
   };
 
-  const handleEssaySubmitted = (moduleId: number, answerText: string) => {
+  const handleEssaySubmitted = (moduleId: number, answerText: string, evaluation?: EssayEvaluation) => {
     setUserProgress((prev) => {
       const updatedAnswers = { ...prev.essayAnswers, [moduleId]: answerText };
       const updatedSubmitted = { ...prev.essaySubmitted, [moduleId]: true };
+      const updatedEvaluations = evaluation
+        ? { ...(prev.essayEvaluations || {}), [moduleId]: evaluation }
+        : prev.essayEvaluations;
       const isQuizDone = prev.quizScores[moduleId] !== undefined;
       const newCompleted = isQuizDone && !prev.completedModules.includes(moduleId)
         ? [...prev.completedModules, moduleId]
@@ -72,6 +75,7 @@ function AppContent() {
         ...prev,
         essayAnswers: updatedAnswers,
         essaySubmitted: updatedSubmitted,
+        essayEvaluations: updatedEvaluations,
         completedModules: newCompleted,
         completionDate: newCompleted.length === 5 ? new Date().toLocaleDateString('pt-BR') : prev.completionDate
       };

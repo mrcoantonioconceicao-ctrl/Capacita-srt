@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Module, UserProgress } from '../types/course';
+import { Module, UserProgress, EssayEvaluation } from '../types/course';
 import { QuizComponent } from './QuizComponent';
 import { EssayComponent } from './EssayComponent';
 import {
@@ -12,14 +12,15 @@ import {
   Scale,
   CheckCircle2,
   Lightbulb,
-  ShieldCheck
+  ShieldCheck,
+  Sparkles
 } from 'lucide-react';
 
 interface ModuleViewerProps {
   module: Module;
   userProgress: UserProgress;
   onQuizCompleted: (moduleId: number, score: number) => void;
-  onEssaySubmitted: (moduleId: number, answerText: string) => void;
+  onEssaySubmitted: (moduleId: number, answerText: string, evaluation?: EssayEvaluation) => void;
   onNextModule: () => void;
   onPrevModule: () => void;
   isFirstModule: boolean;
@@ -45,11 +46,12 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
   const quizScore = userProgress.quizScores[module.id];
   const essayAnswer = userProgress.essayAnswers[module.id];
   const essaySubmitted = userProgress.essaySubmitted[module.id];
+  const essayEval = userProgress.essayEvaluations?.[module.id];
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
       {/* Header Banner */}
-      <div className="bg-white border border-slate-200 rounded-xl p-6 md:p-8 space-y-4 shadow-sm">
+      <div className="bg-white border border-slate-200 rounded-xl p-6 md:p-8 space-y-4 shadow-xs">
         <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
           <span className="px-3 py-1 rounded-md bg-teal-50 text-teal-700 font-bold border border-teal-200">
             Módulo Operacional 0{module.id}
@@ -88,7 +90,7 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
             onClick={() => setActiveTab('theory')}
             className={`px-4 py-2.5 rounded-lg text-xs font-semibold transition-all flex items-center space-x-2 ${
               activeTab === 'theory'
-                ? 'bg-teal-600 text-white shadow-sm'
+                ? 'bg-teal-600 text-white shadow-xs'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
             }`}
           >
@@ -100,7 +102,7 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
             onClick={() => setActiveTab('case')}
             className={`px-4 py-2.5 rounded-lg text-xs font-semibold transition-all flex items-center space-x-2 ${
               activeTab === 'case'
-                ? 'bg-teal-600 text-white shadow-sm'
+                ? 'bg-teal-600 text-white shadow-xs'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
             }`}
           >
@@ -112,7 +114,7 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
             onClick={() => setActiveTab('quiz')}
             className={`px-4 py-2.5 rounded-lg text-xs font-semibold transition-all flex items-center space-x-2 ${
               activeTab === 'quiz'
-                ? 'bg-teal-600 text-white shadow-sm'
+                ? 'bg-teal-600 text-white shadow-xs'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
             }`}
           >
@@ -129,24 +131,31 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
             onClick={() => setActiveTab('essay')}
             className={`px-4 py-2.5 rounded-lg text-xs font-semibold transition-all flex items-center space-x-2 ${
               activeTab === 'essay'
-                ? 'bg-teal-600 text-white shadow-sm'
+                ? 'bg-teal-600 text-white shadow-xs'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
             }`}
           >
             <FileEdit className="w-4 h-4" />
-            <span>4. Estudo Dissertativo</span>
-            {essaySubmitted && (
+            <span>4. Prova Dissertativa com IA</span>
+            {essayEval ? (
+              <span className={`ml-1 px-1.5 py-0.5 rounded font-bold text-[10px] flex items-center gap-1 ${
+                essayEval.score >= 70 ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
+              }`}>
+                <Sparkles className="w-3 h-3" />
+                <span>{essayEval.score}/100</span>
+              </span>
+            ) : essaySubmitted ? (
               <span className="ml-1 px-1.5 py-0.5 rounded bg-teal-100 text-teal-800 font-bold text-[10px]">
                 Enviado
               </span>
-            )}
+            ) : null}
           </button>
         </div>
       </div>
 
       {/* Tab 1: Conteúdo Teórico-Prático */}
       {activeTab === 'theory' && (
-        <div className="bg-white border border-slate-200 rounded-xl p-6 md:p-8 space-y-8 shadow-sm">
+        <div className="bg-white border border-slate-200 rounded-xl p-6 md:p-8 space-y-8 shadow-xs">
           {module.contentSections.map((section, idx) => (
             <div key={idx} className="space-y-4 pb-6 border-b border-slate-200 last:border-b-0 last:pb-0">
               <h2 className="text-xl font-bold text-slate-800 flex items-center space-x-2">
@@ -202,7 +211,7 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
           <div className="flex justify-end pt-4">
             <button
               onClick={() => setActiveTab('case')}
-              className="bg-teal-600 hover:bg-teal-700 text-white font-medium px-5 py-2.5 rounded-lg text-xs transition-colors flex items-center space-x-2 shadow-sm"
+              className="bg-teal-600 hover:bg-teal-700 text-white font-medium px-5 py-2.5 rounded-lg text-xs transition-colors flex items-center space-x-2 shadow-xs cursor-pointer"
             >
               <span>Avançar para Estudo de Caso</span>
               <ArrowRight className="w-4 h-4" />
@@ -251,7 +260,7 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+          <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-xs space-y-4">
             <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">
               Perguntas Guiadas para Reflexão e Conduta:
             </div>
@@ -275,7 +284,7 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
             <div className="flex justify-end pt-2">
               <button
                 onClick={() => setActiveTab('quiz')}
-                className="bg-teal-600 hover:bg-teal-700 text-white font-medium px-5 py-2.5 rounded-lg text-xs transition-colors flex items-center space-x-2 shadow-sm"
+                className="bg-teal-600 hover:bg-teal-700 text-white font-medium px-5 py-2.5 rounded-lg text-xs transition-colors flex items-center space-x-2 shadow-xs cursor-pointer"
               >
                 <span>Ir para o Teste de Fixação (10Q)</span>
                 <ArrowRight className="w-4 h-4" />
@@ -287,38 +296,41 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
 
       {/* Tab 3: Teste de Fixação (10 Questões) */}
       {activeTab === 'quiz' && (
-        <div className="bg-white border border-slate-200 rounded-xl p-6 md:p-8 shadow-sm space-y-6">
+        <div className="bg-white border border-slate-200 rounded-xl p-6 md:p-8 shadow-xs space-y-6">
           <QuizComponent
             questions={module.quiz}
             moduleId={module.id}
             onQuizCompleted={onQuizCompleted}
             savedScore={quizScore}
+            onGoToEssay={() => setActiveTab('essay')}
           />
         </div>
       )}
 
-      {/* Tab 4: Prova Dissertativa */}
+      {/* Tab 4: Prova Dissertativa com IA */}
       {activeTab === 'essay' && (
-        <div className="bg-white border border-slate-200 rounded-xl p-6 md:p-8 shadow-sm">
+        <div className="bg-white border border-slate-200 rounded-xl p-6 md:p-8 shadow-xs">
           <EssayComponent
             essayTask={module.essayTask}
             moduleId={module.id}
+            moduleTitle={module.title}
             onEssaySubmitted={onEssaySubmitted}
             savedAnswer={essayAnswer}
+            savedEvaluation={essayEval}
             isAlreadySubmitted={essaySubmitted}
           />
         </div>
       )}
 
       {/* Bottom Navigation */}
-      <div className="flex items-center justify-between p-4 bg-white border border-slate-200 rounded-xl shadow-sm">
+      <div className="flex items-center justify-between p-4 bg-white border border-slate-200 rounded-xl shadow-xs">
         <button
           onClick={onPrevModule}
           disabled={isFirstModule}
           className={`px-4 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition-colors ${
             isFirstModule
               ? 'opacity-40 cursor-not-allowed bg-slate-100 text-slate-400'
-              : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+              : 'bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer'
           }`}
         >
           <ArrowLeft className="w-4 h-4" />
@@ -335,7 +347,7 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
           className={`px-4 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition-colors ${
             isLastModule
               ? 'opacity-40 cursor-not-allowed bg-slate-100 text-slate-400'
-              : 'bg-teal-600 text-white hover:bg-teal-700 shadow-sm'
+              : 'bg-teal-600 text-white hover:bg-teal-700 shadow-xs cursor-pointer'
           }`}
         >
           <span>Próximo Módulo</span>

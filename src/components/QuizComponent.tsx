@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { QuizQuestion } from '../types/course';
-import { CheckCircle2, XCircle, Award } from 'lucide-react';
+import { CheckCircle2, XCircle, Award, Sparkles, ArrowRight, ShieldCheck } from 'lucide-react';
 
 interface QuizComponentProps {
   questions: QuizQuestion[];
   moduleId: number;
   onQuizCompleted: (moduleId: number, score: number) => void;
   savedScore?: number;
+  onGoToEssay?: () => void;
 }
 
 export const QuizComponent: React.FC<QuizComponentProps> = ({
   questions,
   moduleId,
   onQuizCompleted,
-  savedScore
+  savedScore,
+  onGoToEssay
 }) => {
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, number>>({});
   const [submitted, setSubmitted] = useState<boolean>(savedScore !== undefined);
@@ -53,18 +55,50 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between p-4 bg-slate-50 border border-slate-200 rounded-lg">
+      {/* Header Banner */}
+      <div className="flex flex-wrap items-center justify-between p-4 bg-slate-50 border border-slate-200 rounded-lg gap-2">
         <div className="flex items-center space-x-2">
           <Award className="w-5 h-5 text-teal-600" />
-          <h3 className="font-bold text-sm text-slate-800 uppercase tracking-wider">Teste de Fixação de Múltipla Escolha</h3>
+          <h3 className="font-bold text-sm text-slate-800 uppercase tracking-wider">
+            Teste de Fixação de Múltipla Escolha ({questions.length} Questões)
+          </h3>
         </div>
         {submitted && (
-          <span className="text-xs font-bold px-3 py-1 rounded bg-teal-100 text-teal-800 border border-teal-200">
-            Pontuação: {score} / {questions.length} ({Math.round((score / questions.length) * 100)}%)
+          <span className="text-xs font-bold px-3 py-1 rounded bg-teal-100 text-teal-800 border border-teal-200 flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-teal-600" />
+            <span>Nota Salva: {score} / {questions.length} ({Math.round((score / questions.length) * 100)}%)</span>
           </span>
         )}
       </div>
 
+      {submitted && (
+        <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-emerald-950">
+          <div className="flex items-center space-x-3">
+            <div className="w-9 h-9 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-sm shrink-0">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="text-xs font-bold text-emerald-900">
+                {score === questions.length ? '🎉 Parabéns! Você gabaritou o teste de fixação!' : 'Gabarito conferido e pontuação registrada!'}
+              </div>
+              <div className="text-[11px] text-emerald-800">
+                Sua nota ({score}/{questions.length}) foi gravada no seu perfil e salva automaticamente na nuvem.
+              </div>
+            </div>
+          </div>
+          {onGoToEssay && (
+            <button
+              onClick={onGoToEssay}
+              className="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold rounded-lg transition-colors flex items-center space-x-1.5 shrink-0 shadow-xs"
+            >
+              <span>Ir p/ Estudo Dissertativo</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* Questions list */}
       <div className="space-y-6">
         {questions.map((q, qIndex) => {
           const selectedIdx = selectedAnswers[q.id];
@@ -148,27 +182,29 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
         })}
       </div>
 
-      <div className="flex items-center space-x-4 pt-4 border-t border-slate-200">
+      <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-200">
         {!submitted ? (
           <button
             disabled={!allQuestionsAnswered}
             onClick={handleSubmitQuiz}
-            className={`font-semibold px-6 py-2.5 rounded text-xs uppercase tracking-wider transition-all flex items-center space-x-2 ${
+            className={`font-semibold px-6 py-2.5 rounded-lg text-xs uppercase tracking-wider transition-all flex items-center space-x-2 ${
               allQuestionsAnswered
-                ? 'bg-teal-600 hover:bg-teal-700 text-white shadow'
+                ? 'bg-teal-600 hover:bg-teal-700 text-white shadow-sm cursor-pointer'
                 : 'bg-slate-200 text-slate-400 cursor-not-allowed'
             }`}
           >
             <CheckCircle2 className="w-4 h-4" />
-            <span>Verificar Gabarito</span>
+            <span>{allQuestionsAnswered ? 'Verificar Gabarito e Salvar Nota' : `Responda todas as ${questions.length} questões (${Object.keys(selectedAnswers).length}/${questions.length})`}</span>
           </button>
         ) : (
-          <button
-            onClick={handleRetakeQuiz}
-            className="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold px-5 py-2.5 rounded text-xs transition-colors"
-          >
-            Refazer Teste de Fixação
-          </button>
+          <div className="flex items-center space-x-3">
+            <button
+              onClick={handleRetakeQuiz}
+              className="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold px-5 py-2.5 rounded-lg text-xs transition-colors"
+            >
+              Refazer Teste de Fixação
+            </button>
+          </div>
         )}
       </div>
     </div>
