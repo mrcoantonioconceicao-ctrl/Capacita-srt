@@ -31,6 +31,10 @@
           "type": "object",
           "description": "Mapa de pontuações de quiz por módulo ID"
         },
+        "quizAnswers": {
+          "type": "object",
+          "description": "Respostas marcadas em cada teste de fixação por módulo ID"
+        },
         "essayAnswers": {
           "type": "object",
           "description": "Respostas dissertativas dos módulos"

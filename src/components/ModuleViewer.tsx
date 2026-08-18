@@ -19,7 +19,7 @@ import {
 interface ModuleViewerProps {
   module: Module;
   userProgress: UserProgress;
-  onQuizCompleted: (moduleId: number, score: number) => void;
+  onQuizCompleted: (moduleId: number, score: number, answers?: Record<string, number>) => void;
   onEssaySubmitted: (moduleId: number, answerText: string, evaluation?: EssayEvaluation) => void;
   onNextModule: () => void;
   onPrevModule: () => void;
@@ -302,6 +302,7 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
             moduleId={module.id}
             onQuizCompleted={onQuizCompleted}
             savedScore={quizScore}
+            savedAnswers={userProgress.quizAnswers?.[module.id]}
             onGoToEssay={() => setActiveTab('essay')}
           />
         </div>

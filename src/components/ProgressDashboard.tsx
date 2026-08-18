@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { UserProgress, Module } from '../types/course';
 import { ANTIMANICOMIAL_TIPS } from './DailyTipBanner';
+import { AdminEssayDashboard } from './AdminEssayDashboard';
 import {
   Award,
   CheckCircle2,
@@ -20,7 +21,9 @@ import {
   Edit3,
   FileCheck2,
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  ShieldCheck,
+  BarChart3
 } from 'lucide-react';
 
 interface ProgressDashboardProps {
@@ -33,7 +36,7 @@ interface ProgressDashboardProps {
   onOpenFinalExam?: () => void;
 }
 
-  const DAILY_TIPS = ANTIMANICOMIAL_TIPS;
+const DAILY_TIPS = ANTIMANICOMIAL_TIPS;
 
 export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
   modules,
@@ -44,6 +47,7 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
   onOpenAuthModal,
   onOpenFinalExam
 }) => {
+  const [viewMode, setViewMode] = useState<'student' | 'admin'>('student');
   const [tipIndex, setTipIndex] = useState<number>(0);
   const [copied, setCopied] = useState<boolean>(false);
 
@@ -66,40 +70,78 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
   const hasFinalExamScore = userProgress.finalExamScore !== undefined;
 
   return (
-    <div className="bg-white border border-slate-200 rounded-xl p-6 md:p-8 space-y-8 shadow-sm max-w-5xl mx-auto text-slate-800">
-      {/* Header Banner */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-200">
-        <div className="space-y-1">
-          <div className="flex items-center space-x-2 text-xs font-bold text-teal-700 uppercase tracking-wider">
-            <BarChart2 className="w-4 h-4" />
-            <span>Painel do Aluno & Capacitação Continuada (40h)</span>
-          </div>
-          <h2 className="text-2xl font-bold text-slate-800">Residencial Terapêutico Salomão</h2>
-          <p className="text-xs text-slate-500">
-            Acompanhe seu progresso de aprendizagem nos 5 módulos e na Prova Final Integradora
-          </p>
+    <div className="space-y-6 max-w-5xl mx-auto">
+      {/* View Switcher Bar */}
+      <div className="flex items-center justify-between bg-white p-2.5 rounded-xl border border-slate-200 shadow-xs flex-wrap gap-2">
+        <div className="flex items-center space-x-2 text-xs font-bold text-slate-700 px-2">
+          <BarChart3 className="w-4 h-4 text-teal-600" />
+          <span>Selecione o Modo de Visualização:</span>
         </div>
 
-        <div className="flex items-center space-x-4 bg-slate-50 p-4 rounded-lg border border-slate-200">
-          <div className="text-center">
-            <span className="text-2xl font-extrabold text-teal-600">{progressPercent}%</span>
-            <span className="text-[10px] text-slate-500 block uppercase font-bold">Módulos</span>
-          </div>
-          <div className="w-32 bg-slate-200 h-2 rounded-full overflow-hidden">
-            <div
-              className="bg-teal-600 h-full transition-all duration-500"
-              style={{ width: `${progressPercent}%` }}
-            />
-          </div>
+        <div className="flex items-center space-x-2 bg-slate-100 p-1 rounded-lg border border-slate-200 text-xs font-bold">
           <button
-            onClick={onOpenCertificate}
-            className="bg-teal-600 hover:bg-teal-700 text-white font-semibold px-4 py-2 rounded text-xs transition-colors flex items-center space-x-1.5 shadow-xs"
+            onClick={() => setViewMode('student')}
+            className={`px-4 py-2 rounded-md transition-all flex items-center space-x-2 cursor-pointer ${
+              viewMode === 'student'
+                ? 'bg-teal-600 text-white shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
           >
-            <Award className="w-4 h-4" />
-            <span>Ver Certificado</span>
+            <User className="w-4 h-4" />
+            <span>Meu Progresso (Aluno)</span>
+          </button>
+
+          <button
+            onClick={() => setViewMode('admin')}
+            className={`px-4 py-2 rounded-md transition-all flex items-center space-x-2 cursor-pointer ${
+              viewMode === 'admin'
+                ? 'bg-teal-600 text-white shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            <BarChart3 className="w-4 h-4" />
+            <span>Painel Admin (Notas & Recharts)</span>
           </button>
         </div>
       </div>
+
+      {viewMode === 'admin' ? (
+        <AdminEssayDashboard currentUserProgress={userProgress} />
+      ) : (
+        <div className="bg-white border border-slate-200 rounded-xl p-6 md:p-8 space-y-8 shadow-sm text-slate-800">
+          {/* Header Banner */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-200">
+            <div className="space-y-1">
+              <div className="flex items-center space-x-2 text-xs font-bold text-teal-700 uppercase tracking-wider">
+                <BarChart2 className="w-4 h-4" />
+                <span>Painel do Aluno & Capacitação Continuada (40h)</span>
+              </div>
+              <h2 className="text-2xl font-bold text-slate-800">Residencial Terapêutico Salomão</h2>
+              <p className="text-xs text-slate-500">
+                Acompanhe seu progresso de aprendizagem nos 5 módulos e na Prova Final Integradora
+              </p>
+            </div>
+
+            <div className="flex items-center space-x-4 bg-slate-50 p-4 rounded-lg border border-slate-200">
+              <div className="text-center">
+                <span className="text-2xl font-extrabold text-teal-600">{progressPercent}%</span>
+                <span className="text-[10px] text-slate-500 block uppercase font-bold">Módulos</span>
+              </div>
+              <div className="w-32 bg-slate-200 h-2 rounded-full overflow-hidden">
+                <div
+                  className="bg-teal-600 h-full transition-all duration-500"
+                  style={{ width: `${progressPercent}%` }}
+                />
+              </div>
+              <button
+                onClick={onOpenCertificate}
+                className="bg-teal-600 hover:bg-teal-700 text-white font-semibold px-4 py-2 rounded text-xs transition-colors flex items-center space-x-1.5 shadow-xs"
+              >
+                <Award className="w-4 h-4" />
+                <span>Ver Certificado</span>
+              </button>
+            </div>
+          </div>
 
       {/* Final Exam Highlight Banner */}
       <div className="bg-gradient-to-r from-teal-900 via-slate-900 to-slate-800 text-white p-6 rounded-2xl shadow-md space-y-4">
@@ -340,6 +382,8 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
           })}
         </div>
       </div>
+        </div>
+      )}
     </div>
   );
 };

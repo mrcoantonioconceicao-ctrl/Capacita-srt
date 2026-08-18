@@ -58,6 +58,21 @@ export interface FinalExamQuestion {
   explanation: string;
 }
 
+export interface CriterionEvaluation {
+  criterion: string;
+  scoreAwarded: number;
+  maxScore: number;
+  comment: string;
+}
+
+export interface AntiAsylumFeedback {
+  overview: string;
+  deinstitutionalizationPoints: string[];
+  riskOfAsylumPracticesIdentified: string[];
+  emancipatoryPracticesRecommended: string[];
+  keyTakeawayLesson: string;
+}
+
 export interface EssayEvaluation {
   score: number; // 0 to 100
   passed: boolean;
@@ -65,12 +80,15 @@ export interface EssayEvaluation {
   strengths: string[];
   improvements: string[];
   normativeAnalysis: string;
+  antiAsylumFeedback?: AntiAsylumFeedback;
+  criterionBreakdown?: CriterionEvaluation[];
   evaluatedAt: string;
 }
 
 export interface UserProgress {
   completedModules: number[];
   quizScores: Record<number, number>; // moduleId -> score out of 10
+  quizAnswers?: Record<number, Record<string, number>>; // moduleId -> questionId -> selectedOptionIndex
   essayAnswers: Record<number, string>;
   essaySubmitted: Record<number, boolean>;
   essayEvaluations?: Record<number, EssayEvaluation>;

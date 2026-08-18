@@ -17,10 +17,11 @@ import { PrivacyPolicyModal } from './components/PrivacyPolicyModal';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { DailyTipBanner } from './components/DailyTipBanner';
 import { AuthProvider, useAuth } from './context/AuthContext';
-import { BookOpen, CheckCircle2, FileText, ShieldAlert, Pill, Scale, LayoutDashboard, FileCheck2, ShieldCheck, Lock } from 'lucide-react';
+import { RegistrationGatekeeper } from './components/RegistrationGatekeeper';
+import { BookOpen, CheckCircle2, FileText, ShieldAlert, Pill, Scale, LayoutDashboard, FileCheck2, ShieldCheck, Lock, Loader2 } from 'lucide-react';
 
 function AppContent() {
-  const { userProgress, setUserProgress, saveProgressToCloud } = useAuth();
+  const { currentUser, loading, userProgress, setUserProgress, saveProgressToCloud } = useAuth();
 
   const [hasAcceptedConsent, setHasAcceptedConsent] = useState<boolean>(() => {
     return localStorage.getItem('capacita_srt_lgpd_consent') === 'true';
@@ -38,11 +39,44 @@ function AppContent() {
     setHasAcceptedConsent(true);
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center text-white space-y-4 p-4">
+        <Loader2 className="w-10 h-10 text-teal-400 animate-spin" />
+        <div className="text-center space-y-1">
+          <h2 className="text-base font-bold tracking-wide">Capacita SRT Salomão</h2>
+          <p className="text-xs text-slate-400">Carregando ambiente de aprendizagem...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Mandatory gatekeeper: student must register / login first before accessing any content
+  if (!currentUser) {
+    return (
+      <>
+        <RegistrationGatekeeper onOpenPrivacyPolicy={() => setShowPrivacyPolicyModal(true)} />
+        {showPrivacyPolicyModal && (
+          <PrivacyPolicyModal onClose={() => setShowPrivacyPolicyModal(false)} />
+        )}
+        {!hasAcceptedConsent && (
+          <CookieConsentBanner
+            onAccept={handleAcceptConsent}
+            onOpenPrivacyModal={() => setShowPrivacyPolicyModal(true)}
+          />
+        )}
+      </>
+    );
+  }
+
   const currentModule = modulesData.find((m) => m.id === selectedModuleId) || modulesData[0];
 
-  const handleQuizCompleted = (moduleId: number, score: number) => {
+  const handleQuizCompleted = (moduleId: number, score: number, answers?: Record<string, number>) => {
     setUserProgress((prev) => {
       const updatedScores = { ...prev.quizScores, [moduleId]: score };
+      const updatedAnswers = answers
+        ? { ...(prev.quizAnswers || {}), [moduleId]: answers }
+        : prev.quizAnswers;
       const isEssayDone = prev.essaySubmitted[moduleId];
       const newCompleted = isEssayDone && !prev.completedModules.includes(moduleId)
         ? [...prev.completedModules, moduleId]
@@ -51,6 +85,7 @@ function AppContent() {
       const nextProg: UserProgress = {
         ...prev,
         quizScores: updatedScores,
+        quizAnswers: updatedAnswers,
         completedModules: newCompleted,
         completionDate: newCompleted.length === 5 ? new Date().toLocaleDateString('pt-BR') : prev.completionDate
       };

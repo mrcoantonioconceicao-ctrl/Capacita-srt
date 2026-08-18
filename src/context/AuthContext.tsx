@@ -15,6 +15,7 @@ import { UserProgress, EssayEvaluation } from '../types/course';
 export const INITIAL_PROGRESS: UserProgress = {
   completedModules: [],
   quizScores: {},
+  quizAnswers: {},
   essayAnswers: {},
   essaySubmitted: {},
   essayEvaluations: {},
@@ -33,7 +34,14 @@ interface AuthContextType {
   userProgress: UserProgress;
   setUserProgress: React.Dispatch<React.SetStateAction<UserProgress>>;
   signInWithGoogle: () => Promise<void>;
-  signUpWithEmail: (email: string, pass: string, name: string) => Promise<void>;
+  signUpWithEmail: (
+    email: string,
+    pass: string,
+    name: string,
+    role?: string,
+    cpf?: string,
+    srtUnit?: string
+  ) => Promise<void>;
   signInWithEmail: (email: string, pass: string) => Promise<void>;
   logout: () => Promise<void>;
   saveProgressToCloud: (progress: UserProgress) => Promise<void>;
@@ -79,6 +87,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             const data = progressSnap.data() as UserProgress;
             // Merge cloud data with local progress so answers are never lost
             const mergedQuizScores = { ...(data.quizScores || {}), ...(localProg?.quizScores || {}) };
+            const mergedQuizAnswers = { ...(data.quizAnswers || {}), ...(localProg?.quizAnswers || {}) };
             const mergedEssayAnswers = { ...(data.essayAnswers || {}), ...(localProg?.essayAnswers || {}) };
             const mergedEssaySubmitted = { ...(data.essaySubmitted || {}), ...(localProg?.essaySubmitted || {}) };
             const mergedEssayEvaluations = { ...(data.essayEvaluations || {}), ...(localProg?.essayEvaluations || {}) };
@@ -90,6 +99,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
               ...INITIAL_PROGRESS,
               ...data,
               quizScores: mergedQuizScores,
+              quizAnswers: mergedQuizAnswers,
               essayAnswers: mergedEssayAnswers,
               essaySubmitted: mergedEssaySubmitted,
               essayEvaluations: mergedEssayEvaluations,
@@ -163,6 +173,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         userId: uid,
         completedModules: progress.completedModules || [],
         quizScores: progress.quizScores || {},
+        quizAnswers: progress.quizAnswers || {},
         essayAnswers: progress.essayAnswers || {},
         essaySubmitted: progress.essaySubmitted || {},
         essayEvaluations: progress.essayEvaluations || {},
@@ -206,11 +217,46 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const signUpWithEmail = async (email: string, pass: string, name: string) => {
+  const signUpWithEmail = async (
+    email: string,
+    pass: string,
+    name: string,
+    role?: string,
+    cpf?: string,
+    srtUnit?: string
+  ) => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, pass);
       if (res.user) {
         await updateProfile(res.user, { displayName: name });
+        const userRole = role || 'Cuidador de Residência Terapêutica (SRT)';
+        const userCpf = cpf || '';
+        const userSrtUnit = srtUnit || 'Residencial Terapêutico Salomão (Blumenau/SC)';
+
+        const profilePath = `users/${res.user.uid}`;
+        await setDoc(doc(db, profilePath), {
+          userId: res.user.uid,
+          userName: name,
+          userEmail: email,
+          userRole,
+          cpfOrRegistration: userCpf,
+          srtUnit: userSrtUnit,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        });
+
+        const initialUserProg: UserProgress = {
+          ...INITIAL_PROGRESS,
+          userName: name,
+          userEmail: email,
+          userRole,
+          cpfOrRegistration: userCpf,
+          srtUnit: userSrtUnit,
+          isRegistered: true,
+          startDate: new Date().toLocaleDateString('pt-BR')
+        };
+        setUserProgress(initialUserProg);
+        await saveProgressToCloudForUser(res.user.uid, initialUserProg);
       }
     } catch (error) {
       console.error('Email Sign-Up Error:', error);
